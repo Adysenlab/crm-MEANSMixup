@@ -1,0 +1,85 @@
+body {
+    font-family: arial;
+    margin: 0;
+}
+
+.demoTable {
+    float: left;
+    margin: 0;
+    vertical-align: top;
+    height: 300px;
+    width: 50%;
+    border-bottom: 1px solid black;
+    padding-right: 21px;
+    padding-bottom: 1px;
+}
+.demoTable2 {
+    float: left;
+    margin: 0;
+    vertical-align: top;
+    height: 225px;
+    width: 100%;
+    /*border-bottom: 1px solid black;*/
+    padding-right: 21px;
+    padding-bottom: 1px;
+}
+
+.demoDetailPane {
+    float: left;
+    border: 1px solid black;
+    margin: 0;
+    width: 40%;
+    height: 50%;
+    background-color: #87cefa;
+    vertical-align: top;
+}
+.demoDetailPaneVert {
+    float: left;
+    border: 1px solid black;
+    margin: 0;
+    width: 20%;
+    height: 70%;
+    background-color: #87cefa;
+    vertical-align: top;
+}
+
+.demoDetailInnerPane {
+    padding: 5px;
+}
+
+
+.demoDetailPaneVert2 {
+    float: left;
+    border: 1px solid black;
+    margin: 0;
+
+    background-color: #87cefa;
+    vertical-align: top;
+}
+
+.demoDetailInnerPane2 {
+    padding: 2px;
+}
+
+
+.demoHeaderColumn {
+    background-color: #cccccc;
+}
+
+.demoHeaderColumnW {
+    background-color: #cccccc;
+    width:130px;
+}
+.demoHeaderColumnW2 {
+    background-color: #cccccc;
+    width:180px;
+}
+.demoHeaderText {
+    display: inline-block;
+}
+.colWide{
+    width:130px;
+}
+.colWide2{
+    width:180px;
+}

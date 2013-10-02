@@ -1,0 +1,161 @@
+p
+    #inside
+    #header
+        h1
+        | Food Inventory - Jade FoodView
+        //{{food}}
+    #main-content
+
+
+
+        .container
+            .span11
+
+            angular-table(model='food',filter-query-model='filterText', default-sort-column='id',class="demoTable")
+                header-row
+                    header-column(sortable='true', sort-field-name='name', class="demoHeaderColumn")
+                        div(style='display: inline-block;') Name
+                        sort-arrow-ascending
+                        sort-arrow-descending
+
+                    header-column(sortable='true', sort-field-name='type', class="demoHeaderColumn")
+                        | Type
+                    header-column(sortable='true', sort-field-name='expiration', class="demoHeaderColumn")
+                        | Expiration
+                    header-column(sortable='true', sort-field-name='quantity', class="demoHeaderColumn")
+                        | Quantity
+                    header-column(sortable='true', sort-field-name='quantity', class="demoHeaderColumn" )
+                        | % Remaining
+                row(on-selected='handleRowSelection(row)', selected-color='#87cefa', even-color='#ffffff', odd-color='#eeeeee',class='demoRow')
+
+                    column {{ row.name }}
+                    column {{ row.type }}
+                    column {{ row.expiration }}
+                    column {{ row.quantity }}
+                    column
+                        .progress
+                            .bar(style="width: {{row.percentRemaining}}%")
+                angular-table(model='food.Details',filter-query-model='filterText', default-sort-column='id',class="demoTable")
+                    header-row
+                        header-column(sortable='true', sort-field-name='name', class="demoHeaderColumn")
+                            div(style='display: inline-block;') Name
+                            sort-arrow-ascending
+                            sort-arrow-descending
+                                header-column(sortable='true', sort-field-name='type', class="demoHeaderColumn")
+                            | Vendor
+                        header-column(sortable='true', sort-field-name='expiration', class="demoHeaderColumn")
+                            | Location
+                        header-column(sortable='true', sort-field-name='quantity', class="demoHeaderColumn")
+                            | FamilyOwned
+
+                    row(on-selected='handleRowSelection(row)', selected-color='#87cefa', even-color='#ffffff', odd-color='#eeeeee',class='demoRow')
+                        column {{ row.Vendor }}
+                        column {{ row.Location }}
+                        column {{ row.FamilyOwned }}
+                        column {{ row.quantity }}
+                        column
+                            .progress
+                                .bar(style="width: {{row.percentRemaining}}%")
+
+
+                .demoDetailPaneVert
+                    .demoDetailInnerPane
+                        p Id: {{ selectedRow.id }}
+                            p
+                                | Name:
+                                input(type='text', ng-model='selectedRow.name')
+                            p
+                                | type:
+                                input(type='text', ng-model='selectedRow.type')
+                            p
+                                | qty:
+                                input(type='text', ng-model='selectedRow.quantity')
+
+                            p
+                                button(ng-click='addRows(1)') Add Row To End
+                            p
+                                button(ng-click='listOfNumbers.pop()') Remove Last Row
+                            p
+                                button(ng-click='listOfNumbers = []') Remove All Rows
+                            p
+                                button(ng-click='addRows(50)') Add 50 Rows.demoDetailPane
+
+                            p
+                                button(ng-click='save()') Save
+
+                                button(ng-click='deleteFood()') Delete
+                                button(ng-click='savedetail()') savedetail
+
+        br
+            //.span12  This is a test
+        .span12
+            a.btn.btn-success(ng-click='toggleForm()', ng-hide='isFormActive') Add One
+            button(ng-click='toggleForm()', ng-show='isFormActive') Hide Form
+
+        form(ng-show='isFormActive',class="demoDetailPane")
+            h1.text-info Food Entry
+
+
+            hr
+            label(for='name') Name:
+            input(name='name', ng-model='editableFood.name')
+            br
+            label(for='type') Type:
+            input(name='type', ng-model='editableFood.type')
+            br
+            label(for='expiration') Expiration
+            input(name='expiration', ng-model='editableFood.expiration')
+            br
+            label(for='quantity') Quantity
+            input(name='quantity', ng-model='editableFood.quantity')
+            br
+            label(for='percentRemaining') Percent Remaining
+            input(name='percentRemaining', ng-model='editableFood.percentRemaining')
+            br
+            .span4.text-right
+                .row
+                    button(ng-click='toggleForm()') Cancel
+                    button(ng-click='addFood()') Add
+    hr
+    | john
+    div
+        | Select a tab by setting active binding to true:
+        br
+        button.btn.btn-small(ng-click='tabs[0].active = true') Select second tab
+        button.btn.btn-small(ng-click='tabs[1].active = true') Select third tab
+        button.btn.btn-small(ng-click='tabs[1].disabled = ! tabs[1].disabled') Enable / Disable third tab
+        hr
+        tabset
+            tab(heading='Static title') Static content
+            tab(ng-repeat='tab in tabs', heading='{{tab.title}}', active='tab.active', disabled='tab.disabled')
+                | {{tab.content}}
+            tab(select='alertMe()')
+                tab-heading
+                    i.icon-bell
+                    | Select me for alert!
+                | I've got an HTML heading, and a select callback. Pretty cool!
+            tab(heading='Static title')
+
+                angular-table(model='selectedRow.Details',class="demoTable")
+                    header-row
+                        header-column(sortable='true', sort-field-name='Vendor', class="demoHeaderColumn")
+                            | Vendor
+                        header-column(sortable='true', sort-field-name='Location', class="demoHeaderColumn")
+                            | Location
+                        header-column(sortable='true', sort-field-name='FamilyOwned', class="demoHeaderColumn")
+                            | FamilyOwned
+                    row(on-selected='handleRowSelectionDetail(row)', selected-color='#87cefa', even-color='#ffffff', odd-color='#eeeeee',class='demoRow')
+                        column {{ row.Vendor }}
+                        column {{ row.Location }}
+                        column {{ row.FamilyOwned }}
+                    hr
+
+        tabset(vertical='true', type='navType')
+                    tab(heading='Vertical 1') Vertical content 1
+                    tab(heading='Vertical 2') Vertical content 2
+    #footer
+        a.copyright(target='_blank', href='http://sailsjs.com') Built with Sails.js
+        //    style(type='text/css')
+        //        label { width: 150px; display:inline-block; text-align:right; }
+        //        button { margin-right: 10px;}
+        //        .text-right { text-align: right;}

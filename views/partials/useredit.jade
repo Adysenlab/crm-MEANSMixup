@@ -1,0 +1,32 @@
+p
+    #inside
+    #header
+        h2 Edit User
+            | - Jade UserEdit
+
+
+
+    form(name='myForm',,class="form-signin")
+            .control-group(ng-class='{error: myForm.name.$invalid}')
+                //.span12
+                label id
+                 | for {{user.ID}}
+                //label Name
+
+                //input(type='text', style='width:300px', name='name', ng-model='user.name', required='required')
+                label username
+                input(type='text', style='width:300px', name='username', ng-model='user.username', required='required')
+
+                label Email
+                textarea(name='Email', ng-model='user.email')
+                br
+                label Title
+                textarea(name='Title', ng-model='user.title')
+                label Role
+                input(type='text', style='width:300px', name='role', ng-model='user.role', required='required')
+                label Password
+                input(type='text', style='width:300px', name='password', ng-model='user.password', required='required')
+
+
+                button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
+

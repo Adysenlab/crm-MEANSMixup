@@ -25,17 +25,158 @@
  * For convenience, you can also connect routes directly to views or external URLs.
  *
  */
-
+var userRoles = require('../assets/linker/js/routingConfig').userRoles;
+console.log('userRoles routes.js',userRoles);
 module.exports.routes = {
-
+ //console.log('rt ',routes)
   // By default, your root route (aka home page) points to a view
   // located at `views/home/index.ejs`
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
+  'post /login': {
+    controller: 'AuthController',
+    action: 'login'
+  },
+  'get /logout': {
+    controller: 'AuthController',
+    action: 'logout'
+  }     ,
   '/': {
     view: 'home/index'
-  }
+    //  view: 'partials/home'
+  } ,
+    '/partials/:file' :
+   { controller : 'foo', action : 'partials'}
 
+
+
+ ,   '/meetings/:lat/:lng/:radius': {
+        controller: 'foo',
+        action: 'test'
+    }
+
+    ,
+    '/partials/meetings/:lat/:lng/:radius': {
+        controller: 'foo',
+        action: 'test2'
+    }
+//    ,
+//
+//    '/users': {
+//    controller: 'UserController',
+//    action: 'index'
+////    httpMethod: 'GET',
+////    middleware: [ensureAuthenticated, ensureAuthorized, UserCtrl.index],
+////    accessLevel: accessLevels.admin
+//},
+//    '/users/:id': {
+//        controller: 'UserController',
+//        action: 'index1'
+////    httpMethod: 'GET',
+////    middleware: [ensureAuthenticated, ensureAuthorized, UserCtrl.index],
+////    accessLevel: accessLevels.admin
+//    }
+
+};
+
+//    ,
+//    '/meetings/:lat/:lng/:radius': {
+//        controller: 'foo',
+//        action: 'test'
+//    }
+
+//   ,
+////    '/partials/:file'           :
+////    { controller : 'foo', action : 'partials'}
+////    ,
+//    '/partials/foodview'           :
+//    { controller : 'foo', action : 'partials'}
+
+//    ,
+//{
+//    path: '/users/:id/distance/:di/first/:first/last/:last/practice/:practice/specialty/:specialty',
+//        httpMethod: 'GET',
+//    middleware: UserCtrl.indexZipQ, // middleware: UserCtrl.indexZipQ,
+//    accessLevel: accessLevels.anon
+//}
+//
+
+//    '/partials/partial1': {
+//    //    view: 'partials/partial1'
+//        controller: 'foo',
+//        action:'index'
+//    } ,
+//    '/partials/partial2': {
+//        view: 'partials/partial2'
+//    } ,
+//    '/partials/home': {
+//        view: 'partials/home'
+//    },
+//    '/:unknownRoute': {
+//        controller: 'foo',
+//        action:'index2'
+//
+//    }
+//    'partials/:name':{
+//        controller: 'foo',
+//          action:'index2'
+//
+//    }
+//    ,
+//    '/partials/:name':{
+//        controller: 'foo',
+//        action:'index2'
+//
+//    },
+//    ':name':{
+//        controller: 'foo',
+//        action:'index2'
+//
+//    }
+
+//    } ,
+//    '/partials/partial2': {
+//        view: 'partials/partial2'
+//    } ,
+//    '/partials/home': {
+//        view: 'partials/home'
+//    }
+/////////////////////////////////////////////////////////////
+//
+//    '/partials/:name':{
+//      controller: 'foo'
+//    },
+//
+//    'partials/:name':{
+//        controller: 'foo'
+//    }
+
+//    '/partials/:name':    function (req,res){
+//
+//        var name = req.params.name;
+//        console.log('req',name)
+//       //view: 'partials/'+name
+//     view: 'partials/partial1'
+//
+//        //controller: 'AllPartial',
+//        //action: 'profile'
+//
+//},
+
+//    '/partials/:name': {
+//        view: 'partials/:name'
+//    }
+    //    ,
+//    '/partials/partial1': {
+//        view: 'partials/partial1'
+//    } ,
+
+
+    /*exports.partials = function (req, res) {
+     console.log('export.partials, user:', req.session.user_id);
+     var name = req.params.name;
+     res.render('partials/' + name,{username: req.session.user_id});
+     };*/
   /*
   // But what if you want your home page to display
   // a signup form located at `views/user/signup.ejs`?
@@ -92,16 +233,11 @@ module.exports.routes = {
   'get /*(^.*)': 'UserController.profile'
 
   */
-};
 
 
 
-/** 
- * (3) Action blueprints
- * These routes can be disabled by setting (in `config/controllers.js`):
- * `module.exports.controllers.blueprints.actions = false`
- *
- * All of your controllers ' actions are automatically bound to a route.  For example:
+
+/** (3) Action blueprints * * These routes can be disabled by setting( in config / controllers.js): * `module.exports.controllers.blueprints.actions = false` * * All of your controllers ' actions are automatically bound to a route.  For example:
  *   + If you have a controller, `FooController`:
  *     + its action `bar` is accessible at `/foo/bar`
  *     + its action `index` is accessible at `/foo/index`, and also `/foo`
@@ -109,7 +245,18 @@ module.exports.routes = {
 
 
 /**
- * (4) Shortcut CRUD blueprints
+ * (4) View blueprints
+ *
+ * These routes can be disabled by setting (in config/controllers.js):
+ *		`module.exports.views.blueprints = false`
+ *
+ * If you have a view file at `/views/foo/bar.ejs`, it will be rendered and served
+ * automatically via the route:  `/foo/bar`
+ *
+ */
+
+/**
+ * (5) Shortcut CRUD blueprints
  *
  * These routes can be disabled by setting (in config/controllers.js)
  *			`module.exports.controllers.blueprints.shortcuts = false`
@@ -127,7 +274,7 @@ module.exports.routes = {
  */
 
 /**
- * (5) REST blueprints
+ * (6) REST blueprints
  *
  * These routes can be disabled by setting (in config/controllers.js)
  *		`module.exports.controllers.blueprints.rest = false`
@@ -146,7 +293,7 @@ module.exports.routes = {
  */
 
 /**
- * (6) Static assets
+ * (7) Static assets
  *
  * Flat files in your `assets` directory- (these are sometimes referred to as 'public')
  * If you have an image file at `/assets/images/foo.jpg`, it will be made available
@@ -157,8 +304,6 @@ module.exports.routes = {
 
 
 /**
- * (7) 404 (not found) handler
- *
  * Finally, if nothing else matched, the default 404 handler is triggered.
  * See `config/404.js` to adjust your app's 404 logic.
  */

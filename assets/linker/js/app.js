@@ -56,7 +56,8 @@
 
   // Simple log function to keep the example simple
   function log () {
-    if (typeof console !== 'undefined') {
+    if (typeof console === 'undefined') {
+    } else {
       console.log.apply(console, arguments);
     }
   }

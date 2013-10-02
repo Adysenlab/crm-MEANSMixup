@@ -1,0 +1,113 @@
+!!!
+html(ng-app='application')
+    head
+        title= title
+
+
+        // Viewport mobile tag for sensible mobile support
+        meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+        //link(href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css', rel='stylesheet')
+        // STYLES
+        link(rel="stylesheet", href="/linker/styles/angular-table.css")
+        link(rel="stylesheet", href="/linker/styles/angular-ui.css")
+        link(rel="stylesheet", href="/linker/styles/animations.css")
+        link(rel="stylesheet", href="/linker/styles/app.css")
+        link(rel="stylesheet", href="/linker/styles/bootstrap-combined.min.css")
+        link(rel="stylesheet", href="/linker/styles/custom.css")
+        link(rel="stylesheet", href="/linker/styles/demo.css")
+        link(rel="stylesheet", href="/linker/styles/ng-grid-2.0.0.7.min.css")
+        link(rel="stylesheet", href="/linker/styles/styles.css")
+        // STYLES END
+
+    body
+        block body
+        //
+        //        Client-side Templates
+        //        ========================
+        //
+        //            HTML templates are important prerequisites of modern, rich client applications.
+        //        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        //        that you load these templates client-side.
+        //
+        //        By default, your Gruntfile is configured to automatically load and precompile
+        //        client-side JST templates in your `assets/linker/templates` folder, then
+        //        include them here automatically.
+        //
+        //        To customize this behavior to fit your needs, just edit your Gruntfile.
+        //        For example, here are a few things you could do:
+        //
+        //            + Import templates from other directories
+        //            + Use a different template engine (handlebars, jade, dust, etc.)
+        //            + Internationalize your templates using a server-side stringfile
+        //                before they're served.
+        //
+
+        // TEMPLATES
+        
+        // TEMPLATES END
+
+
+        //
+        //
+        //        Client-side Javascript
+        //        ========================
+        //
+        //        You can always bring in JS files manually with `script` tags, or asynchronously
+        //        on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+        //        take advantage of Sails' boilerplate asset management.
+        //
+        //        By default, filesin your `assets/linker/js` folder are included here
+        //        automatically.  Both JavaScript (.js) and CoffeeScript (.coffee) are supported.
+        //        In production, your scripts will be minified and concatenated into a single file.
+        //
+        //        To customize any part of the built-in behavior, just edit your Gruntfile.
+        //        For example, here are a few things you could do:
+        //
+        //            + Change the order of your scripts
+        //            + Import scripts from other directories
+        //            + Use a different preprocessor, like TypeScript
+        //
+        //
+
+        script(src='http://code.jquery.com/jquery-2.0.3.min.js')
+        // SCRIPTS
+        script(type="text/javascript", src="/linker/js/socket.io.js")
+        script(type="text/javascript", src="/linker/js/sails.io.js")
+        script(type="text/javascript", src="/linker/js/app.js")
+        script(type="text/javascript", src="/js/lib/angular/angular-1.2.0-rc.2/angular.js")
+        script(type="text/javascript", src="/js/lib/angular/angular-1.2.0-rc.2/angular-route.js")
+        script(type="text/javascript", src="/js/lib/angular/angular-1.2.0-rc.2/angular-resource.js")
+        script(type="text/javascript", src="/js/lib/angular/angular-1.2.0-rc.2/angular-cookies.js")
+        script(type="text/javascript", src="/js/lib/angular-bootstrap/ui-bootstrap-tpls.js")
+        script(type="text/javascript", src="/js/lib/angular/angular-table.js")
+        script(type="text/javascript", src="/js/lib/angular/ng-grid-2.0.7.min.js")
+        script(type="text/javascript", src="/js/lib/angular/ng-grid-layout-plugin.js")
+        script(type="text/javascript", src="/js/lib/underscore.js")
+        script(type="text/javascript", src="/js/lib/angular/angular-ui.js")
+        script(type="text/javascript", src="/js/lib/angular/ng-grid-csv-export.js")
+        script(type="text/javascript", src="/js/lib/angular/ui-multicombo.js")
+        script(type="text/javascript", src="/js/lib/transition.js")
+        script(type="text/javascript", src="/js/lib/jsapi.js")
+        script(type="text/javascript", src="/js/lib/debounce.js")
+        script(type="text/javascript", src="/js/lib/highcharts.js")
+        script(type="text/javascript", src="/js/lib/highcharts-more.js")
+        script(type="text/javascript", src="/js/lib/exporting.js")
+        script(type="text/javascript", src="/js/lib/moment.js")
+        script(type="text/javascript", src="/linker/js/app/animations/listAnimations.js")
+        script(type="text/javascript", src="/linker/js/app/app.js")
+        script(type="text/javascript", src="/linker/js/app/controllers/controllers.js")
+        script(type="text/javascript", src="/linker/js/app/controllers/controllersLogin.js")
+        script(type="text/javascript", src="/linker/js/app/controllers/controllersPO.js")
+        script(type="text/javascript", src="/linker/js/app/controllers/controllersUser.js")
+        script(type="text/javascript", src="/linker/js/app/controllers/controllersVendor.js")
+        script(type="text/javascript", src="/linker/js/app/directives/directives.js")
+        script(type="text/javascript", src="/linker/js/app/filters/filters.js")
+        script(type="text/javascript", src="/linker/js/app/services/services.js")
+        script(type="text/javascript", src="/linker/js/app/services/servicesAcct.js")
+        script(type="text/javascript", src="/linker/js/app/services/servicesPO.js")
+        script(type="text/javascript", src="/linker/js/routingConfig.js")
+        // SCRIPTS END
+        //script(src='js/lib/jsapi.js')
+        script
+            google.load('visualization', '1.0', { 'packages': ['corechart'] });
+

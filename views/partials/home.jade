@@ -1,0 +1,151 @@
+h1 PT Home View
+p
+
+          .form-po
+
+
+          .container
+
+            //           .row
+            //               .well.well-small.pull-left(ng-model='dt')
+            //                   //datepicker(min='minDate', show-weeks='showWeeks')
+            //                   .form-horizontal
+            //                     .control-group
+            //                       label.control-label
+            //                         i.icon-briefcase
+            //                         | Date
+            //                       .controls
+            //                           input(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='dt', is-open='opened', min='minDate', max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)', ng-required='true')
+            //                           button.btn(ng-click='open()')
+            //                               i.icon-calendar
+            //
+            //                       hr
+            //                       button.btn.btn-small.btn-inverse(ng-click='today()') Today
+            //                       button.btn.btn-small.btn-inverse(ng-click='dt = \'2009-08-24\'') 2009-08-24
+            //                       button.btn.btn-small.btn-success(ng-click='toggleWeeks()', tooltip='For inline datepicker') Toggle Weeks
+            //                       button.btn.btn-small.btn-danger(ng-click='clear()') Clear
+            //                       button.btn.btn-small(ng-click='toggleMin()', tooltip='After today restriction') Min date
+           .row
+
+              .span2
+                | email
+              .span8
+                  form
+                      fieldset
+                          legend Contact Us
+                          .control-group
+                              label.control-label
+                                  i.icon-user
+                                  | Name
+                              .controls.controls-row
+                                  input.span3(type='text', placeholder='First Name', required='required')
+                                  input.span3(type='text', placeholder='Last Name', required='required')
+                          .control-group
+                              label.control-label
+                                  i.icon-briefcase
+                                  | Company
+                              .controls
+                                  input.span6(type='text', placeholder='Company')
+                          .control-group
+                              label.control-label
+                                  i.icon-home
+                                  | Address
+                              .controls
+                                  input.span6(type='text', placeholder='Street')
+                              .controls.controls-row
+                                  input.span4(type='text', placeholder='City')
+                                  select.span1(name='state')
+                                      option(value='AK') AK
+                                      option(value='AL') AL
+                                      option(value='AR') AR
+                                      option(value='AZ') AZ
+                                      option(value='CA') CA
+                                      option(value='CO') CO
+                                      option(value='CT') CT
+                                      option(value='DC') DC
+                                      option(value='DE') DE
+                                      option(value='FL') FL
+                                      option(value='GA') GA
+                                      option(value='HI') HI
+                                      option(value='IA') IA
+                                      option(value='ID') ID
+                                      option(value='IL') IL
+                                      option(value='IN') IN
+                                      option(value='KS') KS
+                                      option(value='KY') KY
+                                      option(value='LA') LA
+                                      option(value='MA') MA
+                                      option(value='MD') MD
+                                      option(value='ME') ME
+                                      option(value='MI') MI
+                                      option(value='MN') MN
+                                      option(value='MO') MO
+                                      option(value='MS') MS
+                                      option(value='MT') MT
+                                      option(value='NC') NC
+                                      option(value='ND') ND
+                                      option(value='NE') NE
+                                      option(value='NH') NH
+                                      option(value='NJ') NJ
+                                      option(value='NM') NM
+                                      option(value='NV') NV
+                                      option(value='NY') NY
+                                      option(value='OH') OH
+                                      option(value='OK') OK
+                                      option(value='OR') OR
+                                      option(value='PA') PA
+                                      option(value='RI') RI
+                                      option(value='SC') SC
+                                      option(value='SD') SD
+                                      option(value='TN') TN
+                                      option(value='TX') TX
+                                      option(value='UT') UT
+                                      option(value='VA') VA
+                                      option(value='VT') VT
+                                      option(value='WA') WA
+                                      option(value='WI') WI
+                                      option(value='WV') WV
+                                      option(value='WY') WY
+                                  input.span1(type='text', placeholder='Zip')
+                          .control-group
+                              label.control-label
+                                  i.icon-envelope
+                                  | Email
+                              .controls
+                                  input.span6(type='email', placeholder='email@address.com', required='required')
+                          .row
+                                .well.well-small.pull-left(ng-model='dt2')
+
+                                    .form-horizontal
+                                        .control-group
+                                            label.control-label
+                                                i.icon-briefcase
+                                                | Date
+                                            .controls
+                                                input(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='dt2', is-open='opened', min='minDate', max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)', ng-required='true')
+                                                button.btn(ng-click='open()')
+                                                    i.icon-calendar
+
+                          .row
+                          .control-group
+                              label.control-label
+                                  i.icon-comment
+                                  | Message
+                              textarea.span6(rows='4')
+                          .control-group
+                              label.control-label
+                                  i.icon-time
+                                  | Best Time to Contact
+                              label.checkbox.inline
+                                  input(type='checkbox')
+                                  | Morning
+                              label.checkbox.inline
+                                  input(type='checkbox')
+                                  | Afternoon
+                              label.checkbox.inline
+                                  input(type='checkbox')
+                                  | Evening
+                          br
+                          button.btn.btn-primary(type='submit') Submit
+                          button.btn(type='button') Cancel
+              .span2
