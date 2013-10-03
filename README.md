@@ -14,8 +14,14 @@ Repos used in this project
 #### https://github.com/irlnathan/activityoverlord
 
 
-The AngularJS portion of the app is structured using the following folders:![crm-MEANS App Structure](https://github.com/johntom/crm-MEANS/blob/master/docs/crm-Means2.jpg)
-![crm-MEANS App Structure](https://github.com/johntom/crm-MEANS/blob/master/docs/crm-Means1.jpg)
+The AngularJS portion of the app is structured using the following folders:
+
+![Customer Management App Structure](https://raw.github.com/DanWahlin/CustomerManager/master/CustomerManager/Content/images/appFolders.png)
+
+
+The AngularJS portion of the app is structured using the following folders:
+![crm-MEANS App Structure](https://raw.github.com/johntom/crm-MEANS/blob/master/docs/crm-Means2.jpg)
+![crm-MEANS App Structure](https://raw.github.com/johntom/crm-MEANS/blob/master/docs/crm-Means1.jpg)
 
 
 ## Requirements:
