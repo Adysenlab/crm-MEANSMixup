@@ -2,26 +2,24 @@ MEANS
 =====
 
 Mongo+Express+Angular+Node+Sails
+crm sample
 
 ===============
 
 
 Repos used in this project
 ===============
-https://github.com/DanWahlin/CustomerManagerStandard
+#### https://github.com/DanWahlin/CustomerManagerStandard
 #### https://github.com/fnakstad/angular-client-side-auth
 #### https://github.com/irlnathan/activityoverlord
 
-![Customer Management App](https://raw.github.com/DanWahlin/CustomerManager/master/CustomerManager/Content/images/customerApp.png)
 
-The AngularJS portion of the app is structured using the following folders:
-
-![Customer Management App Structure](https://github.com/johntom/crm-MEANS/blob/master/docs/crm-Means1.jpg)
+The AngularJS portion of the app is structured using the following folders:![crm-MEANS App Structure](https://github.com/johntom/crm-MEANS/blob/master/docs/crm-Means1.jpg)
 
 
 ## Requirements:
 
-###If you're using Node.js/Express/MongoDB/Sails
+###You will be using Node.js/Sails Express/MongoDB...
 
 If you don't already have Node.js on your machine install it from http://nodejs.org. You'll also need to install MongoDB from http://www.mongodb.org if you don't have it already and get it configured and running using the instructions on their site.
 
