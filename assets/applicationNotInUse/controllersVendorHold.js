@@ -1,14 +1,98 @@
 'use strict'
-Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'Vendor','$location', '$http', '$routeParams','mongosailsHelper','Auth','lookupCache',
-    function($rootScope, $scope,Vendor,$location, $http,$routeParams,mongosailsHelper,Auth,lookupCache){
-      $scope.param=  $routeParams.VendorNumber;
-      if ($scope.param == 0) {
-               $scope.mess = ': New Vendor'
+Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'Vendor','$location', '$http', '$routeParams','mongosailsHelper','Auth','lookupCache','$q',
+    function($rootScope, $scope,Vendor,$location, $http,$routeParams,mongosailsHelper,Auth,lookupCache,$q){
+      $scope.param='';
+//      var termKey = "id";
+//
+//      $scope.$watch(function () {
+//        return $location.search();
+//      }, function () {
+//        $scope.param = $location.search()[termKey] ;
+//        console.log('$scope.param ' , $scope.param)
+//      });
+//
+//      $scope.$watch('param', function (param) {
+//        $location.search(termKey, param);
+//
+//        $scope.zip = param;//'07999';
+//        $scope.fetch();
+//      });
+//      $scope.fetch = function () {
+//
+//        //progressbar.start();
+//       // console.log('fetch ', $scope.x);
+//
+//        console.log('$scope.param',$scope.param)
+//        if ($scope.param === undefined) $scope.param = '0';
+//
+//        //Users.find1({id: $scope.zip, di: $scope.miles, first: $scope.first, last: $scope.last, practice: $scope.practice, specialty: $scope.specialty}, function (res) {
+//
+//          console.log('res ', res);//.length);//,Users);
+////          $scope.dentists = res;
+////          progressbar.complete();
+////          $scope.loading = false;
+//        }, function (err) {
+//          //$rootScope.error = "Failed to fetch users.";
+//          //$scope.loading = false;
+//        };
+//
+
+
+//
+//      var deferred = Q.defer();
+//      var vendorlist;
+//      Vendor.find({
+//      }).sort('VendorNumber ASC').done(function (err, vendors) {
+//          if (err) {
+//            deferred.reject(err);
+//            return next(err);
+//          } else {
+//            vendorlist = vendors;//.toArray()
+//            //deferred.resolve(res.json(vendorlist));
+//            deferred.resolve(vendorlist);
+//            console.log('Vendor.find with filter... ', vendorlist[10]);//, res.json(vendorlist[10]));
+//          }
+//        });
+
+//      var deferred = $q.defer();
+//      //var idPromise;
+//      var idPromise=  $routeParams.id(function (err, id)
+//      {
+//          if (err) {
+//            deferred.reject(err);
+//            return next(err);
+//          } else {
+//            idPromise = id;
+//            deferred.resolve(idPromise);
+//            console.log('promise ... ',idPromise);
+//          }
+//        });
+//
+//
+
+      console.log(' VendorEditCtrl ',$scope.param );//,$routeParams.VendorNumber)
+
+
+//    if ($routeParams.VendorNumber) {
+//        console.log('in find1 ')
+//        $scope.vendor = Vendor.find1({id:$routeParams.VendorNumber});
+//        //console.log('in find1 - a  ', $scope.vendor)
+//    }
+
+           $scope.$watch('param', function (param) {
+
+             if ($scope.param == 0) {
+               $scope.mess = 'New Vendor'
              }
              else {
                $scope.mess = ':';
                $scope.vendor = Vendor.find1({id:$routeParams.VendorNumber});
              }
+
+
+           });
+
+
 
     $scope.cancel = function(){
         $location.path('/vendor');
@@ -28,14 +112,12 @@ Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'V
 //    };
       $scope.save = function () {
 
-
-       if ($scope.param==0) {
+        if ($scope.param == 0) {
           console.log('save create ',$scope.vendor)
           Vendor.create(0, ( $scope.vendor), function (success, error) {
-              if (success) {
-                console.log('create success ',success);
-                //var vendorPromise = lookupCache.resetVendors();
-                var vendorPromise = lookupCache.pushVendor($scope.vendor);//success);
+            //console.log('create success ', success, error, success.data.POID);
+            if (success.data.VendorID !== 0) {
+              var vendorPromise = lookupCachePO.resetVendor();// look to refactor
               $location.path('/vendor');
             }
           });
@@ -43,16 +125,17 @@ Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'V
           var id = $scope.vendor.id;
           console.log('uppdate success ', id);//success, error, success.data.POID);
           Vendor.update( {id:$scope.vendor.id}, $scope.vendor, function (success, error) {
-            //console.log('success, error ',success, error)
-            console.log('success ',success);
+            console.log('success, error ',success, error)
             if (success) {
-              var vendorPromise = lookupCache.updateVendor($scope.vendor);
-              // var vendorPromise = lookupCache.resetVendors();'success ',success,' s v ',
+              var vendorPromise = lookupCache.resetVendors();
               $location.path('/vendor');
             }
             });
+
+
         }
       };
+
 
 }]);
 
@@ -120,8 +203,7 @@ Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendo
   // var editrowTemplate = '<a class="icon-edit edit" href="{{\'#/vendor/\'+row.entity.id}}">{{row.entity.id}}</a>';
   //var editrowTemplate = '<a class="icon-edit edit" href="{{\'#/vendor/\'+row.entity.id}}"></a>';
   var displayDateTemplate = ' <div style="width:75;text-align: left" class="ngCellText colt{{$index}}">{{row.getProperty(col.field)}}</div>';
-//  var editrowTemplate = '<a class="icon-edit edit" href="{{\'/vendor/\'+row.entity.id}}"></a>';
-  var editrowTemplate = '<div style="text-align:center;"  class="ngCellText"><a class="icon-edit edit" href="{{\'/vendor/\'+row.entity.id}}"></a></div>';
+  var editrowTemplate = '<a class="icon-edit edit" href="{{\'/vendor/\'+row.entity.id}}"></a>';
 
 
   // this does edit in js
@@ -136,10 +218,9 @@ Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendo
 
   $scope.colDefs = [
     { field: 'edit', displayName: 'Edit', headerClass: 'Edit', width: '60', cellTemplate: editrowTemplate },
-    { field: 'VendorNumber', displayName: 'VendorNumber', groupable: false, width: 60, visible:false },
+    { field: 'VendorNumber', displayName: 'VendorNumber', groupable: false, width: 60 },
     { field: 'CompanyName', displayName: 'CompanyName', groupable: false, width: 200},
     { field: 'Address', displayName: 'Address', groupable: true, width: 200 },
-    { field: 'City', displayName: 'City', groupable: true, width: 160 },
     { field: 'State', displayName: 'State', groupable: true, width: 60 },
     { field: 'ZipCode', displayName: 'ZipCode', width: 100 },
     //        { field: 'DateofLoss', displayName: 'Date of Loss', width: 100  }, //   cellFilter: " moment:'dddd'" hh:mm a ddd Do not display currency symbol},

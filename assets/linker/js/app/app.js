@@ -22,24 +22,23 @@ angular.module('application', ['application.filters', 'application.services', 'a
     var access = routingConfig.accessLevels;
 
     $routeProvider
-
+      // user
       .when('/', {templateUrl: '/partials/home', controller: 'HomeCtrl', access:     access.user})
       .when('/home', {templateUrl: '/partials/home', controller: 'HomeCtrl', access:     access.user})
-      .when('/login', {templateUrl: '/partials/login', controller: 'LoginCtrl', access:  access.anon})
       .when('/logout', {templateUrl: '/partials/login', controller: 'LogoutCtrl', access:  access.user})
-      .when('/view1', {templateUrl: '/partials/partial1', controller: 'MainCtrl',access:  access.anon})
-      .when('/view2', {templateUrl: '/partials/foodview', controller: 'FoodCtrl',access:  access.anon})
       .when('/vendor', {templateUrl: '/partials/vendorview', controller: 'VendorCtrl',access:  access.user})
       .when('/vendor/:VendorNumber', {templateUrl: '/partials/vendorviewedit', controller: 'VendorEditCtrl',access:  access.user})
-
-      .when('/po', {templateUrl: '/partials/poview', controller: 'POCtrl',access:  access.user})
-      .when('/po/:id', {templateUrl: '/partials/poviewedit', controller: 'PoEditCtrl',access:  access.user})
+     .when('/contact', {templateUrl: '/partials/poview', controller: 'POCtrl',access:  access.user})
+      .when('/contact/:id', {templateUrl: '/partials/poviewedit', controller: 'PoEditCtrl',access:  access.user})
 
       // admin
       .when('/user',  {templateUrl:'/partials/user',controller: 'UserCtrl',access: access.user  })
       .when('/user/:id',  {templateUrl:'/partials/useredit',controller: 'UserEditCtrl',access: access.user  })
       .when('/test',  {templateUrl:'/partials/test',controller: 'UserCtrl',access: access.user  })
 
+      // anon
+      .when('/foodview', {templateUrl: '/partials/foodview', controller: 'FoodCtrl',access:  access.anon})
+      .when('/login', {templateUrl: '/partials/login', controller: 'LoginCtrl', access:  access.anon})
 
       .when('/404', {templateUrl: '/partials/404', controller:'', access:  access.anon})
       .otherwise({redirectTo: '/404'});
@@ -117,8 +116,8 @@ angular.module('application', ['application.filters', 'application.services', 'a
         findAll:{method:'GET',isArray:true},   // same as query
         findAllWrapped: {method: 'GET', params: { action: 'findAllWrapped'} },
         find1: {method:'GET',params: {id:'@id'}} ,
-        update:{method:'PUT',params: {id:'@id'} }
-        //,    upsert:  {method:'PUT',params: {id:'@id'} }
+        update:{method:'PUT',params: {id:'@id'} },
+        create: {method: 'POST', params: {id: '@id'} }
       }
     )
   }])

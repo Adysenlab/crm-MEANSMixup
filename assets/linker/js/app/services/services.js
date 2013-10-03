@@ -7,14 +7,7 @@ angular.module('application')
       , userRoles = routingConfig.userRoles;
 //console.log('in service auth')
     $rootScope.user = $cookieStore.get('user') || { username: '', role: userRoles.public};// ,adjusterid:''};
-
-    // $rootScope.user = {"id" : 1, "username" : "user", "password" : "123", "role" : 4    };
-
-
-    //console.log('i $rootScope.user = ', $rootScope.user)
-
     $cookieStore.remove('user');
-
     $rootScope.accessLevels = accessLevels;
     $rootScope.userRoles = userRoles;
 
@@ -121,6 +114,34 @@ angular.module('application')
         // // returns promise to the cache.vendors object
         // return serviceAPI.get('vendors', Vendor, 'VenderID');
       },
+      pushVendor: function(vendor) {
+
+        var thisCache = caches.vendors;
+        console.log('push vendor:',vendor);
+
+        thisCache.data.push(vendor);
+        console.log('thisCache vendor:',thisCache);
+        return thisCache.deferred.promise;
+      },
+
+      updateVendor: function(vendor) {
+
+       var thisCache = caches.vendors;
+       console.log('updateVendor :',vendor);//,'--',vendor);
+
+        var idx = 0;
+
+        //  var match = _.detect(thisCache.data, function (itm) {
+        var match = _.find(thisCache.data, function (itm) {
+          return itm.id === vendor.id || ++idx == thisCache.data.length && (idx = -1);
+        })
+
+        console.log('idx ',idx,' match ',match)
+        thisCache.data[idx]=vendor; // this works also ???
+
+        return thisCache.deferred.promise;
+        // // returns promise to the cache.vendors object //return serviceAPI.get('vendors', Vendor, 'VenderID');
+      },
       resetVendors:function(){
 
         var thisCache = caches.vendors;
@@ -128,7 +149,7 @@ angular.module('application')
         var vendorPromise = serviceAPI.getVendors();
         vendorPromise.then(function(cache) {
         //populateCache('vendors', Vendor, 'VendorID');
-        console.log('in v reset')
+        //console.log('in v reset')
         return thisCache.deferred.promise;
         })
       }

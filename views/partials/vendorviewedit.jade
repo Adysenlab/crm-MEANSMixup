@@ -1,8 +1,9 @@
 form(name='myForm',,class="form-signin")
     .control-group(ng-class='{error: myForm.name.$invalid}')
         //.span12
-        h1  id
-         | for {{vendor.VendorID}}
+        h1  Vendor
+         | {{mess}}
+         | {{vendor.CompanyName}}
         label Name
 
         input(type='text', style='width:300px', name='name', ng-model='vendor.CompanyName', required)

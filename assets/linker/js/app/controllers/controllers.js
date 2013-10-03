@@ -34,6 +34,10 @@ Application.Controllers.controller('HomeCtrl', ['$scope', function($scope){
     $scope.foo = [{'id':'homebooyah'},{'id':'gahead'},{'id':'bakobus'}];
 
     console.log(' assets js home ',  $scope.foo)
+
+
+
+
 }]);
 
 Application.Controllers.controller('navController', ['$scope', function($scope){
