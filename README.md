@@ -14,16 +14,16 @@ Repos used in this project
 #### https://github.com/irlnathan/activityoverlord
 
 
+
+The Sails portion of the app is structured using the following folders:
+![crm-MEANS App Structure]
+(docs/crm-Means2.jpg))
+
 The AngularJS portion of the app is structured using the following folders:
+![crm-MEANS App Structure]
+(docs/crm-Means1.jpg)
 
-![Customer Management App Structure](https://raw.github.com/DanWahlin/CustomerManager/master/CustomerManager/Content/images/appFolders.png)
 
-
-The AngularJS portion of the app is structured using the following folders:
-![crm-MEANS App Structure](https://raw.github.com/johntom/crm-MEANS/blob/master/docs/crm-Means2.jpg)
-![crm-MEANS App Structure](https://raw.github.com/johntom/crm-MEANS/blob/master/docs/crm-Means1.jpg)
-
-![crm-MEANS App Structure](docs/crm-Means1.jpg)
 ## Requirements:
 
 ###You will be using Node.js/Sails Express/MongoDB...
