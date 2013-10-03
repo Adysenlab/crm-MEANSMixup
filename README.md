@@ -15,11 +15,11 @@ Repos used in this project
 
 
 
-The Sails portion of the app is structured using the following folders:
+###The Sails portion of the app is structured using the following folders:
 ![crm-MEANS App Structure]
 (docs/crm-Means2.jpg))
 
-The AngularJS portion of the app is structured using the following folders:
+###The AngularJS portion of the app is structured using the following folders:
 ![crm-MEANS App Structure]
 (docs/crm-Means1.jpg)
 
