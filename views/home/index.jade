@@ -14,6 +14,10 @@ block body
                             img.logo(src="/linker/images/people.png")
                         li(data-access-level='{{ accessLevels.anon }}', active-nav)
                             a(href='/login') Log in
+
+                        li(data-access-level='{{ accessLevels.anon }}', active-nav)
+                            a(href='/home') Home
+
                         //li(data-access-level='{{ accessLevels.anon }}', active-nav)
                             a(href='/view1') View1
 
@@ -21,8 +25,7 @@ block body
                             a(href='/vendor') Vendors
                         li(data-access-level='{{ accessLevels.user }}', active-nav)
                             a(href='/contact') Contacts
-                        li(data-access-level='{{ accessLevels.user }}', active-nav)
-                            a(href='/home') Home
+
                         li(data-access-level='{{ accessLevels.admin }}', active-nav)
                             a(href='/user') Users
                         li(data-access-level='{{ accessLevels.anon }}', active-nav)

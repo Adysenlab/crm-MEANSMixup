@@ -27,11 +27,14 @@
  */
 var userRoles = require('../assets/linker/js/routingConfig').userRoles;
 console.log('userRoles routes.js',userRoles);
+//  , EmailCtrl = require('./controllers/Email')
+
+
 module.exports.routes = {
  //console.log('rt ',routes)
   // By default, your root route (aka home page) points to a view
   // located at `views/home/index.ejs`
-  // 
+  //
   // (This would also work if you had a file at: `/views/home.ejs`)
   'post /login': {
     controller: 'AuthController',
@@ -42,7 +45,9 @@ module.exports.routes = {
     action: 'logout'
   }     ,
   '/': {
-    view: 'home/index'
+//    view: 'home/index'
+    view: 'home'
+
     //  view: 'partials/home'
   } ,
     '/partials/:file' :
@@ -54,7 +59,13 @@ module.exports.routes = {
         controller: 'foo',
         action: 'test'
     }
-
+//  ,
+//
+//  '/email':{
+//  controller:'Email',
+//  action:'Register'
+//  }
+//
     ,
     '/partials/meetings/:lat/:lng/:radius': {
         controller: 'foo',
@@ -209,7 +220,7 @@ module.exports.routes = {
   // If you want to set up a route only for one in particular
   // (GET, POST, PUT, DELETE, etc.), just specify the verb before the path.
   // For example, if you have a `UserController` with a `signup` action,
-  // and somewhere else, you're serving a signup form looks like: 
+  // and somewhere else, you're serving a signup form looks like:
   //
   //		<form action="/signup">
   //			<input name="username" type="text"/>
@@ -307,4 +318,3 @@ module.exports.routes = {
  * Finally, if nothing else matched, the default 404 handler is triggered.
  * See `config/404.js` to adjust your app's 404 logic.
  */
- 

@@ -12,30 +12,30 @@ p
               //.span2
                 | email
               .span8
-                  form
+                  form(name='myForm', novalidate)
                       fieldset
-                          legend Contact Us
+                          legend Contact Us {{mess}}
                           .control-group
                               label.control-label
                                   i.icon-user
                                   | Name
                               .controls.controls-row
-                                  input.span3(type='text', placeholder='First Name', required='required')
-                                  input.span3(type='text', placeholder='Last Name', required='required')
+                                  input.span3(type='text', placeholder='First Name', ng-model='form.First',required)
+                                  input.span3(type='text', placeholder='Last Name', ng-model='form.Last',required)
                           .control-group
                               label.control-label
                                   i.icon-briefcase
                                   | Company
                               .controls
-                                  input.span6(type='text', placeholder='Company')
+                                  input.span6(type='text', placeholder='Company', ng-model='form.Company')
                           .control-group
                               label.control-label
                                   i.icon-home
                                   | Address
                               .controls
-                                  input.span6(type='text', placeholder='Street')
+                                  input.span6(type='text', placeholder='Street', ng-model='form.Street')
                               .controls.controls-row
-                                  input.span4(type='text', placeholder='City')
+                                  input.span4(type='text', placeholder='City', ng-model='form.City')
                                   select.span1(name='state')
                                       option(value='AK') AK
                                       option(value='AL') AL
@@ -88,19 +88,19 @@ p
                                       option(value='WI') WI
                                       option(value='WV') WV
                                       option(value='WY') WY
-                                  input.span1(type='text', placeholder='Zip')
+                                  input.span1(type='text', placeholder='Zip', ng-model='form.Zip')
                           .control-group
                               label.control-label
                                   i.icon-envelope
                                   | Email
                               .controls
-                                  input.span6(type='email', placeholder='email@address.com', required='required')
+                                  input.span6(type='email', placeholder='email@address.com', ng-model='form.Email', required)
                                 .row
                           .control-group
                               label.control-label
                                   i.icon-comment
                                   | Message
-                              textarea.span6(rows='4')
+                              textarea.span6(rows='4', ng-model='form.Comment')
                           .control-group
                               label.control-label
                                   i.icon-time
@@ -115,6 +115,6 @@ p
                                   input(type='checkbox')
                                   | Evening
                           br
-                          button.btn.btn-primary(type='submit()') Submit
+                          button.btn.btn-primary(ng-click='submit()') Submit
                           button.btn(type='button') Cancel
               .span2

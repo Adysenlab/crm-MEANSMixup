@@ -14,6 +14,8 @@ Repos used in this project
 #### https://github.com/irlnathan/activityoverlord
 
 
+Additional repos and references
+##### http://ryanlanciaux.github.io/blog/2013/06/04/learning-angularjs/
 
 ###The Sails portion of the app is structured using the following folders:
 ![crm-MEANS App Structure]
