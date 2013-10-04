@@ -46,8 +46,14 @@ block body
                         //strong {{ user.adjusterid }}&nbsp;
                         span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
         .container
-          div(data-ng-view='ng-view')
-          .alert.alert-error(data-ng-bind="error", data-ng-show="error")
+            .slide-animation(data-ng-view='ng-view')
+            .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
 
+                 // .slide-animation(data-ng-view='ng-view')
+
+                            div(data-wc-overlay='', data-wc-overlay-delay='600')
+                                br
+                                img(src='/linker/images/spinner.gif')
+                                | Loading
 

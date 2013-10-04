@@ -66,6 +66,10 @@ module.exports = function (grunt) {
     'js/lib/angular/angular-1.2.0-rc.2/angular-route.js',
     'js/lib/angular/angular-1.2.0-rc.2/angular-resource.js',
     'js/lib/angular/angular-1.2.0-rc.2/angular-cookies.js',
+
+    'js/lib/angular/angular-1.2.0-rc.2/angular-animate.js',
+
+
 //
 //    'js/lib/angular/angular-1.0.8/angular.js',
 //    'js/lib/angular/angular-1.0.8/angular-route.js',
@@ -88,6 +92,8 @@ module.exports = function (grunt) {
     'js/lib/highcharts-more.js',
     'js/lib/exporting.js',
     'js/lib/moment.js',
+
+    'js/lib/tweenMax.min.js',
 
     // All of the rest of your app scripts imported here
     'linker/**/*.js'
