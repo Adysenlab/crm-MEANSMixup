@@ -6,7 +6,7 @@ crm sample
 
 ===============
 # Demo Site
-http://sample4.gtz.com:8001/
+#### http://sample4.gtz.com:8001/
 
 ================================
 Repos used in this project
