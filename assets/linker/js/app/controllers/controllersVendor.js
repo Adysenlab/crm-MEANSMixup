@@ -14,10 +14,6 @@ Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'V
         $location.path('/vendor');
     };
 
-
-
-
-
 //$scope.save = function() {
 //        console.log('in save  ', $scope.vendor)
 //        var tmp = mongosailsHelper.deleteID($scope.vendor);
@@ -27,8 +23,6 @@ Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'V
 //       $location.path('/vendor');
 //    };
       $scope.save = function () {
-
-
        if ($scope.param==0) {
           console.log('save create ',$scope.vendor)
           Vendor.create(0, ( $scope.vendor), function (success, error) {
