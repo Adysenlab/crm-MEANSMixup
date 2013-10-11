@@ -1,0 +1,127 @@
+h1 CRM MeanSails/Email
+p
+
+          .form-po
+
+
+          .container
+
+
+           .row
+
+              //.span2
+                | email
+              .span8
+                  form(name='myForm', novalidate)
+                      fieldset
+                          legend Contact Us {{mess}}
+                          .control-group
+                              label.control-label
+                                  i.icon-user
+                                  | Name
+                              .controls.controls-row
+                                  input.span3(type='text', placeholder='First Name', ng-model='form.First',required)
+                                  input.span3(type='text', placeholder='Last Name', ng-model='form.Last',required)
+                          .control-group
+                              label.control-label
+                                  i.icon-briefcase
+                                  | Company
+                              .controls
+                                  input.span6(type='text', placeholder='Company', ng-model='form.Company')
+                          .control-group
+                              label.control-label
+                                  i.icon-home
+                                  | Address
+                              .controls
+                                  input.span6(type='text', placeholder='Street', ng-model='form.Street')
+                              .controls.controls-row
+                                  input.span4(type='text', placeholder='City', ng-model='form.City')
+                                  select.span1(name='state')
+                                      option(value='AK') AK
+                                      option(value='AL') AL
+                                      option(value='AR') AR
+                                      option(value='AZ') AZ
+                                      option(value='CA') CA
+                                      option(value='CO') CO
+                                      option(value='CT') CT
+                                      option(value='DC') DC
+                                      option(value='DE') DE
+                                      option(value='FL') FL
+                                      option(value='GA') GA
+                                      option(value='HI') HI
+                                      option(value='IA') IA
+                                      option(value='ID') ID
+                                      option(value='IL') IL
+                                      option(value='IN') IN
+                                      option(value='KS') KS
+                                      option(value='KY') KY
+                                      option(value='LA') LA
+                                      option(value='MA') MA
+                                      option(value='MD') MD
+                                      option(value='ME') ME
+                                      option(value='MI') MI
+                                      option(value='MN') MN
+                                      option(value='MO') MO
+                                      option(value='MS') MS
+                                      option(value='MT') MT
+                                      option(value='NC') NC
+                                      option(value='ND') ND
+                                      option(value='NE') NE
+                                      option(value='NH') NH
+                                      option(value='NJ') NJ
+                                      option(value='NM') NM
+                                      option(value='NV') NV
+                                      option(value='NY') NY
+                                      option(value='OH') OH
+                                      option(value='OK') OK
+                                      option(value='OR') OR
+                                      option(value='PA') PA
+                                      option(value='RI') RI
+                                      option(value='SC') SC
+                                      option(value='SD') SD
+                                      option(value='TN') TN
+                                      option(value='TX') TX
+                                      option(value='UT') UT
+                                      option(value='VA') VA
+                                      option(value='VT') VT
+                                      option(value='WA') WA
+                                      option(value='WI') WI
+                                      option(value='WV') WV
+                                      option(value='WY') WY
+                                  input.span1(type='text', placeholder='Zip', ng-model='form.Zip')
+                          .control-group
+                              label.control-label
+                                  i.icon-envelope
+                                  | Email
+                              .controls
+                                  input.span6(type='email', placeholder='email@address.com', ng-model='form.Email', required)
+                                .row
+
+
+
+
+                          .control-group
+                                            label.control-label
+                                                i.icon-comment
+                                                | Message
+                                            textarea.span6(rows='4', ng-model='form.Comment')
+                          .control-group
+                              label.control-label
+                                i.icon-time
+                                | Best Time to Contact
+                              label.checkbox.inline(ng-repeat='option in table_properties.client_status')
+                                | {{option}}
+                                input(type='checkbox', ng-model='form.client_status', bs-checkbox='form_client_status', value='{{option}}', ng-click='search()')
+                              //pre(ng-bind='form | json').
+                          .control-group
+                               label.radio.inline(ng-repeat='option in table_properties.client_status')
+                                 | {{option}}
+                                 input(type='radio', value='{{option}}', ng-model='form.client_status', name='option')
+
+
+
+
+                          br
+                          button.btn.btn-primary(ng-click='submit()') Submit
+                          button.btn(type='button') Cancel
+              .span2

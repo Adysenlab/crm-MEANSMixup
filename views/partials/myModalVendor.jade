@@ -1,0 +1,83 @@
+p
+
+     .modal-header
+        h1 Vendor: {{vendor.VendorID}}
+
+     .modal-body
+       form(name='myForm',,class="form-signin")
+        .control-group(ng-class='{error: myForm.name.$invalid}')
+            //label id
+                | for {{vendor.VendorID}}
+            label Name
+
+            input(type='text', style='width:300px', name='name', ng-model='vendor.CompanyName', required='required')
+
+
+            label Address
+            textarea(name='Address', ng-model='vendor.Address')
+            br
+            label City
+            input(name='City', ng-model='vendor.City')
+            br
+            label State
+            select.span2(name='state',ng-model='vendor.State')
+                option(value='AK') AK
+                option(value='AL') AL
+                option(value='AR') AR
+                option(value='AZ') AZ
+                option(value='CA') CA
+                option(value='CO') CO
+                option(value='CT') CT
+                option(value='DC') DC
+                option(value='DE') DE
+                option(value='FL') FL
+                option(value='GA') GA
+                option(value='HI') HI
+                option(value='IA') IA
+                option(value='ID') ID
+                option(value='IL') IL
+                option(value='IN') IN
+                option(value='KS') KS
+                option(value='KY') KY
+                option(value='LA') LA
+                option(value='MA') MA
+                option(value='MD') MD
+                option(value='ME') ME
+                option(value='MI') MI
+                option(value='MN') MN
+                option(value='MO') MO
+                option(value='MS') MS
+                option(value='MT') MT
+                option(value='NC') NC
+                option(value='ND') ND
+                option(value='NE') NE
+                option(value='NH') NH
+                option(value='NJ') NJ
+                option(value='NM') NM
+                option(value='NV') NV
+                option(value='NY') NY
+                option(value='OH') OH
+                option(value='OK') OK
+                option(value='OR') OR
+                option(value='PA') PA
+                option(value='RI') RI
+                option(value='SC') SC
+                option(value='SD') SD
+                option(value='TN') TN
+                option(value='TX') TX
+                option(value='UT') UT
+                option(value='VA') VA
+                option(value='VT') VT
+                option(value='WA') WA
+                option(value='WI') WI
+                option(value='WV') WV
+                option(value='WY') WY
+            br
+            label Zip
+            input(name='ZipCode', ng-model='vendor.ZipCode')
+
+
+     .modal-footer
+            //button.btn.btn-primary(ng-click='ok()') OK
+            button.btn.btn-primary(ng-click='ok(vendor)', ng-disabled='isClean() || myForm.$invalid') Save
+            button.btn.btn-warning(ng-click='cancel()') Cancel

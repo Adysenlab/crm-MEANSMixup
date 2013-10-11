@@ -44,6 +44,55 @@ angular.module('application').directive('activeNav', ['$location', function(loca
             });
         };
     })
+
+
+
+  .directive('bsCheckbox', function () {
+    var checkbox_groups = {};
+    return {
+      restrict: 'A',
+      scope: true,
+      require: '?ngModel',
+      compile: function (elem, attrs) {
+
+        if( !attrs.ngModel )
+          throw new Error('bs-checkbox directive is missing ngModel');
+        if( !attrs.bsCheckbox )
+          throw new Error('bs-checkbox directive is missing bsCheckbox');
+
+        attrs.$set('bsNgModel', attrs.ngModel);
+        attrs.$set('ngModel', 'selection');
+
+        return function (scope, lElement, attr) { // link
+
+          function set_object_value_by_string(object, string_dot_notation, value) {
+            string_dot_notation = string_dot_notation.split(".");
+            while (string_dot_notation.length > 1)
+              object = object[string_dot_notation.shift()];
+            return object[string_dot_notation.shift()] = value;
+          }
+
+          scope.selection = scope.selection || {};
+
+          scope.$watch(attr.ngModel, function(value) {
+            checkbox_groups[attrs.bsCheckbox] = checkbox_groups[attrs.bsCheckbox] || [];
+            if( typeof value === 'boolean' && value ){
+              checkbox_groups[attrs.bsCheckbox].push(attr.value);
+              checkbox_groups[attrs.bsCheckbox] = jQuery.unique(checkbox_groups[attrs.bsCheckbox]);
+            }else{
+              checkbox_groups[attrs.bsCheckbox].splice( $.inArray(attr.value, checkbox_groups[attrs.bsCheckbox]), 1 );
+            }
+            set_object_value_by_string(scope.$parent.$parent, attrs.bsNgModel, checkbox_groups[attrs.bsCheckbox]);
+          });
+        };
+      }
+    };
+  })
+
+
+
+
+
 // google pie chart
     .directive('qnPiechart', [
         function() {

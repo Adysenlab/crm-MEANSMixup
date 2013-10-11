@@ -16,17 +16,41 @@ p
                 //input(type='text', style='width:300px', name='name', ng-model='user.name', required='required')
                 label username
                 input(type='text', style='width:300px', name='username', ng-model='user.username', required='required')
+                .control-group
+                    label.control-label
+                        i.icon-envelope
+                        | Email
+                    .controls
+                        input.span6(type='email', placeholder='user@address.com', ng-model='user.email', required)
 
-                label Email
-                textarea(name='Email', ng-model='user.email')
-                br
+
+
+
                 label Title
-                textarea(name='Title', ng-model='user.title')
+                input(name='Title', ng-model='user.title')
+                //label Role
+
+                 .control-group
+                    label.radio.inline(ng-repeat='role in roles.role_status')
+                        | {{role}}
+                        input(type='radio', value='{{role}}', ng-model='user.role_status', name='option')
+                .row
+                br
                 label Role
-                input(type='text', style='width:300px', name='role', ng-model='user.role', required='required')
+
+                .control-group
+                    label.radio.inline(ng-repeat='role in roles2')
+                        | {{role.name}}
+                        input(type='radio', value='{{role.i}}', ng-model='user.role', name='option')
+
+
+
+
+                .control-group
                 label Password
-                input(type='text', style='width:300px', name='password', ng-model='user.password', required='required')
 
+                input(type='password', style='width:300px', name='password', ng-model='user.password', required='required')
 
+                .row
                 button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
 

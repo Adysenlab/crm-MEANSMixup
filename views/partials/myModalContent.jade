@@ -1,0 +1,20 @@
+p
+    #inside
+    #header
+        h1 Delete Confirmation
+    #main-content
+
+
+
+
+        .modal-header
+            h3 press Ok to delete {{items}}
+        //.modal-body
+           ul
+               li(ng-repeat='item in items')
+                   a(ng-click='selected.item = item') {{ item }}
+           | Selected:
+           b {{ selected.item }}
+        .modal-footer
+            button.btn.btn-primary(ng-click='ok()') OK
+            button.btn.btn-warning(ng-click='cancel()') Cancel
