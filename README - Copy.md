@@ -8,8 +8,6 @@ crm sample
 # Demo Site
 #### http://sample4.gtz.com:8001/
 
-# Slides
-####https://docs.google.com/presentation/d/1HqhG2jtlsqNk3ozqesQctKLOycVpuWX8Vixy4qwp62o/edit?usp=sharing
 ================================
 Repos used in this project
 ===============
