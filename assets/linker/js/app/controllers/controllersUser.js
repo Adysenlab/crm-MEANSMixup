@@ -1,75 +1,115 @@
 'use strict'
-Application.Controllers.controller('UserEditCtrl', ['$rootScope', '$scope', 'User', '$location', '$http', '$routeParams', 'mongosailsHelper', '$resource',
-  function ($rootScope, $scope, User, $location, $http, $routeParams, mongosailsHelper, $resource) {
-    console.log(' UserEditCtrl ', $routeParams.id)
-   //
-   $scope.table_properties = {
-      client_status: ["Morning", "Afternoon","Evening"]
-   };
+Application.Controllers.controller('UserEditCtrl', ['$rootScope', '$scope', 'User', '$location', '$http', '$routeParams', 'mongosailsHelper',
+  '$resource', 'lookupCacheUser', function ($rootScope, $scope, User, $location, $http, $routeParams, mongosailsHelper, $resource, lookupCacheUser) {
 
-   // 1,2,3,4
+    $scope.param = $routeParams.id;//POID;
+
+    console.log(' UserEditCtrl ', $scope.param, $routeParams.id)
+
+        $scope.cancel = function () {
+            //var poPromise = lookupCachePO.resetPO();
+            $location.path('/user');
+
+        };
+    $scope.table_properties = {
+      client_status: ["Morning", "Afternoon", "Evening"]
+    };
+
+    // 1,2,3,4
 
     $scope.roles = {
-      role_status: ["clerk","user","supervisor","admin"]
+      role_status: ["clerk", "user", "supervisor", "admin"]
     };
 
 
-    $scope.roles2 = [{ name: "clerk", i: 1},
-      { name: "user", i: 2 },
-      { name: "supervisor", i: 3 },{ name: "admin", i: 4 }
-      ];
+    $scope.roles2 = [
+      { name: "clerk", id: 1},
+      { name: "user", id: 2 },
+      { name: "supervisor", id: 3 },
+      { name: "admin", id: 4 }
+    ];
 
 
-
-    if ($routeParams.id) {
-      console.log(' before UserEditCtrl in  find1 ')
+    if ( $scope.param !== 0) {
+      console.log(' before UserEditCtrl in  find1 ', $routeParams.id !== 0)
       $scope.user = User.find1({id: $routeParams.id});
       console.log(' after find1   ', $scope.user)
+    } else {
+      console.log('new');
+      $scope.user = {};
+
     }
+
     $scope.cancel = function () {
       $location.path('/user');
     };
     $scope.save = function (success, error) {
-      console.log('in save  ', $scope.user)
-      //var tmp = mongosailsHelper.deleteID($scope.user);
-      ///console.log('back  - tmp ', tmp);//.id);
-      console.log('back  ,$scope.user- ', $scope.user);
-      //User.update ({id:$scope.user.id},tmp ); // updates json without the id
-      //  User.create ({id:$scope.user});//,tmp );
-      //    User.create({id: $scope.zip,di:$scope.miles,first:$scope.first,last:$scope.last,practice:$scope.practice,specialty:$scope.specialty}, function (res) {
-//        $http.post('/meetings/10/11/12',   $scope.colors).success(function(status){
+      console.log('in save  ', $scope.user, $scope.param,$scope.param == 0,$scope.param == '0')
+        var hUser={};// do a depp copy
+        angular.copy( $scope.user,hUser)
+      if ( $scope.param == 0) {
 
-//            if (status.status='success') {
-//                console.log ('status ',status.status);
-//                //  $location.path('/froiprint');
-//            } }).error(error);
-//    }
-      //User.create({id: $scope.zip,di:$scope.miles,first:$scope.first,last:$scope.last,practice:$scope.practice,specialty:$scope.specialty}, function (res) {
-//        var s = '/user/create?username='+$scope.user.username+'&name='+$scope.user.name+'&email='+$scope.user.email+'&password='+$scope.user.password+'&role=4';//+$scope.user.role;
+//        var s = '/user/create?username=' + $scope.user.username + '&email=' + $scope.user.email + '&password=' + $scope.user.password + '&role=' + $scope.user.role;
+//        console.log(s);
+//        console.log('back  ,$scope.user- ', $scope.user);
+//        console.log("$scope.user.id == 'undefined' ", $routeParams.id === 0, $scope.user.id === undefined);
+//        //     }
+//        //   else
+//        //   {
+//       http://localhost:1337/user/update/522de9476b16c2383d000004?username=JOEM
+//        //     var s = '/user/update?username=' + $scope.user.username + '&email=' + $scope.user.email + '&password=' + $scope.user.password + '&role='+$scope.user.role;
+//        //   }
+//        $http.post(s, $scope.user).success(function (status) {
+//          console.log('status ', status);
+//          if (status.status = 'success') {
+//            console.log('status ', status.status);
+//            //$location.path('/user');
+//          }
+//        }).error(error);
 
-//      {
-//        "_id" : ObjectId("522de5ea535dbd3a9a22c151"),
-//        "id" : 1,
-//        "username" : "MAT",
-//        "role" : 4,
-//        "title" : "vpres",
-//        "email" : "mat@gtz.com",
-//        "password" : "$2a$10$4gcsFOtX/5YRUJctT2XohujxXEYmRGuRgWK7mzHVHqI5EhODtWj2C"
-//      }
-
-      var s = '/user/create?username=' + $scope.user.username + '&email=' + $scope.user.email + '&password=' + $scope.user.password + '&role='+$scope.user.role;
-
-      console.log(s);
-
-      $http.post(s, $scope.user).success(function (status) {
-        if (status.status = 'success') {
-          console.log('status ', status.status);
-          $location.path('/user');
-        }
-      }).error(error);
+       // console.log('in sav 1');
 
 
-      //,function()
+          User.create($scope.user, function (success, error) {
+          //  User.createDefault($scope.user, function (success, error) {
+          //console.log('success, error ',success, error)
+          console.log('success:create: ', success);
+          if (success) {
+            var userPromise = lookupCacheUser.pushUser(success.data);// push created object with key and not hUser);
+
+          }
+        });
+     //   console.log('in sav 2');
+//
+//        var userPromise = lookupCacheUser.resetUsers();
+//        userPromise.then(function (cache) {
+//          $scope.users = cache.data;
+//          //$scope.accountIndex = cache.combo;
+//          //console.log(' $scope.account ', $scope.account)
+//        })
+//          .catch(function (err) {
+//            console.error('users', err)
+//          });
+      } else {
+
+        var id = $scope.user.id;
+
+
+
+        User.update({id: id}, $scope.user, function (success, error) {
+          if (success) {
+            var userPromise = lookupCacheUser.updateUsers(hUser);
+
+          }
+        });
+
+
+
+      }
+
+
+      $location.path('/user');
+      //,function()   console.error('update u', $scope.user)
 //      var newUser = User.create({$scope.user} {
 //
 //      })     ;
@@ -118,24 +158,23 @@ Application.Controllers.controller('UserEditCtrl', ['$rootScope', '$scope', 'Use
 //  });
 //}
 
-Application.Controllers.controller('UserCtrl', ['$rootScope', '$scope', 'User', '$location','$modal', '$log', function ($rootScope, $scope, User, $location,$modal, $log) {
+Application.Controllers.controller('UserCtrl', ['$rootScope', '$scope', 'User', '$location', '$modal', '$log', 'lookupCacheUser' , function ($rootScope, $scope, User, $location, $modal, $log, lookupCacheUser) {
   console.log(' UserCtrl js home ')
   /*var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
-
    $scope.items = items;
    $scope.selected = {
    item: $scope.items[0]
    };
-
    $scope.ok = function () {
    $modalInstance.close($scope.selected.item);
    };
-
    $scope.cancel = function () {
    $modalInstance.dismiss('cancel');
    };
    };*/
 //  $scope.items = ['item1', 'item2', 'item3'];
+
+
   $scope.edit = function (user) {
     $rootScope.userid = user.id;
     console.log('  controllerUser \ $rootScope.userid  ', $rootScope.userid);
@@ -151,8 +190,8 @@ Application.Controllers.controller('UserCtrl', ['$rootScope', '$scope', 'User', 
   };
 // http://localhost:1337/user/destroy/522e1a34784c1d1c5d000001 manual way to delete
   $scope.delete = function (user) {
-    console.log('user  ', user, user.id);// user[0]);//.id);
-    $scope.items = user.username+' '+user.id;//'You are about to delete ',
+    console.log('delete user  ', user, user.id);// user[0]);//.id);
+    $scope.items = user.username + ' ' + user.id;//'You are about to delete ',
     //alert( 'user  '+ user.id)
     // User.destroy( {id:user.id}, user, function (success, error) {
     var modalInstance = $modal.open({
@@ -169,18 +208,22 @@ Application.Controllers.controller('UserCtrl', ['$rootScope', '$scope', 'User', 
       User.destroy({id: user.id}, function (success, error) {
 
         if (success) {
-          console.log('success ', success.data === 'success');
-          User.findAll(function (res) {
-            console.log('res ', res);
-            $scope.users = res;
-            $scope.loading = false;
-          }, function (err) {
-            $rootScope.error = "Failed to fetch users.";
-            $scope.loading = false;
-          });
+          console.log('success ', success,success.data === 'success');
+          $scope.reset();
+          //          User.findAll(function (res) {
+          //            console.log('res ', res);
+          //            $scope.users = res.data;
+          //            $scope.loading = false;
+          //          }, function (err) {
+          //            $rootScope.error = "Failed to fetch users.";
+          //            $scope.loading = false;
+          //          });
+
+
+
         }
       });
-      alert('Record is deleted: ' + result);
+      //alert('Record is deleted: ' + result);
 
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
@@ -192,6 +235,7 @@ Application.Controllers.controller('UserCtrl', ['$rootScope', '$scope', 'User', 
     $scope.users.push({'username': 'fillname'});
     console.log('  controllerUser \ $rootScope.userid  ', $rootScope.userid);
     $location.path('/user/' + $rootScope.userid);
+    $scope.reset();
 //        User.find1(function (res) {
 //            console.log('controllerUser res ', res);
 //
@@ -203,14 +247,40 @@ Application.Controllers.controller('UserCtrl', ['$rootScope', '$scope', 'User', 
   };
 
 
-  User.findAll(function (res) {
-    console.log('res ', res);
-    $scope.users = res;
-    $scope.loading = false;
-  }, function (err) {
-    $rootScope.error = "Failed to fetch users.";
-    $scope.loading = false;
-  });
+  $scope.reset = function () {
+    lookupCacheUser.resetUsers();
+    var userPromise = lookupCacheUser.getUsers();
+    userPromise.then(function (cache) {
+      $scope.users = cache.data;
+      //$scope.accountIndex = cache.combo;
+      //console.log(' $scope.account ', $scope.account)
+    })
+      .catch(function (err) {
+        console.error('users', err)
+      });
+  }
+  var userPromise = lookupCacheUser.getUsers();
+  userPromise.then(function (cache) {
+    $scope.users = cache.data;
+    //$scope.accountIndex = cache.combo;
+    //console.log(' $scope.account ', $scope.account)
+  })
+    .catch(function (err) {
+      console.error('users', err)
+    });
+
+
+  //$scope.users ={};
+  /*
+   User.findAll(function (res) {
+   console.log('res ', res);
+   $scope.users = res;
+   $scope.loading = false;
+   }, function (err) {
+   $rootScope.error = "Failed to fetch users.";
+   $scope.loading = false;
+   });
+   */
   // $scope.myData = $scope.users;
   var displayDateTemplate = ' <div style="width:75;text-align: left" class="ngCellText colt{{$index}}">{{row.getProperty(col.field)}}</div>';
   var editrowTemplate = '<a class="icon-edit edit" href="{{\'/user/\'+row.entity.id}}"></a>';
@@ -220,50 +290,32 @@ Application.Controllers.controller('UserCtrl', ['$rootScope', '$scope', 'User', 
     filterText: '',          //filteringText
     useExternalFilter: false
   };
-
-//    $scope.colDefs = [
-//        { field: 'edit', displayName: 'Edit', headerClass: 'Edit', width: '60', cellTemplate: editrowTemplate },
-//        { field: 'VendorNumber', displayName: 'VendorNumber', groupable: false, width: 60 },
-//        { field: 'CompanyName', displayName: 'CompanyName', groupable: false, width: 200},
-//        { field: 'Address', displayName: 'Address', groupable: true, width: 200 },
-//        { field: 'State', displayName: 'State', groupable: true, width: 60 },
-//        { field: 'ZipCode', displayName: 'ZipCode', width: 100 },
-//        //        { field: 'DateofLoss', displayName: 'Date of Loss', width: 100  }, //   cellFilter: " moment:'dddd'" hh:mm a ddd Do not display currency symbol},
-//        { field: 'Country', displayName: 'Country', width: 100, groupable: true },
-//        { field: 'Type', displayName: 'Type', width: 60 },
-//        { field: 'CompanyAddition', displayName: 'CompanyAddition', groupable: true, width: 20},
-//        { field: 'AccountID', displayName: 'AccountID', groupable: false, width: 200},
-//        { field: 'VendorAccountId', displayName: 'VendorAccountId', groupable: false, width: 75},
-//        { field: 'contacts', displayName: 'contacts', groupable: false, width: 75, visible: false}
-//    ]
-
-//
-  $scope.colDefs = [
-    { field: 'edit', displayName: 'Edit', headerClass: 'Edit', width: '60', cellTemplate: editrowTemplate },
-    { field: 'username', displayName: 'username', groupable: false, width: 100 },
-    { field: 'email', displayName: 'email', groupable: false, width: 100},
-    { field: 'role', displayName: 'role', groupable: true, width: 30 },
-    { field: 'title', displayName: 'title', groupable: true, width: 100 }
-  ]
-
-  $scope.gridOptions1 = {
-    data: 'users',
-    multiSelect: false,
-    primaryKey: 'id',
-    filterOptions: $scope.filterOptions,
-    //  beforeSelectionChange: self.selectionchanging,
-    columnDefs: 'colDefs',
-    selectedItems: $scope.selections,
-    enableRowReordering: false,
-    showGroupPanel: true,
-    showColumnMenu: true,
-    maintainColumnRatios: false,
-    groups: [],
-    showFooter: true,
-    enableColumnResize: true,
-    enableColumnReordering: true
-  };
-
+  /*
+   $scope.colDefs = [
+   { field: 'edit', displayName: 'Edit', headerClass: 'Edit', width: '60', cellTemplate: editrowTemplate },
+   { field: 'username', displayName: 'username', groupable: false, width: 100 },
+   { field: 'email', displayName: 'email', groupable: false, width: 100},
+   { field: 'role', displayName: 'role', groupable: true, width: 30 },
+   { field: 'title', displayName: 'title', groupable: true, width: 100 }
+   ]
+   $scope.gridOptions1 = {
+   data: 'users',
+   multiSelect: false,
+   primaryKey: 'id',
+   filterOptions: $scope.filterOptions,
+   //  beforeSelectionChange: self.selectionchanging,
+   columnDefs: 'colDefs',
+   selectedItems: $scope.selections,
+   enableRowReordering: false,
+   showGroupPanel: true,
+   showColumnMenu: true,
+   maintainColumnRatios: false,
+   groups: [],
+   showFooter: true,
+   enableColumnResize: true,
+   enableColumnReordering: true
+   };
+   */
 
 }]);
 //Application.Controllers.controller('UserCtrl', ['$rootScope', '$scope', 'User', '$location','$modal', '$log', function ($rootScope, $scope, User, $location,$modal, $log) {

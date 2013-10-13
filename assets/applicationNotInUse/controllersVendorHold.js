@@ -1,123 +1,96 @@
 'use strict'
-Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'Vendor','$location', '$http', '$routeParams','mongosailsHelper','Auth','lookupCache','$q',
-    function($rootScope, $scope,Vendor,$location, $http,$routeParams,mongosailsHelper,Auth,lookupCache,$q){
-      $scope.param='';
-//      var termKey = "id";
+Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'Vendor','$location', '$http', '$routeParams','mongosailsHelper','Auth','Food','lookupCache',
+    function($rootScope, $scope,Vendor,$location, $http,$routeParams,mongosailsHelper,Auth,Food,lookupCache){
+   // console.log(' VendorEditCtrl ');//,$routeParams.VendorNumber)
+
+
+    //$scope.color = $scope.colors[2]; // red
+    //console.log('col ' ,  $scope.color )
+
+//    $scope.selTeamMember = undefined;
 //
-//      $scope.$watch(function () {
-//        return $location.search();
-//      }, function () {
-//        $scope.param = $location.search()[termKey] ;
-//        console.log('$scope.param ' , $scope.param)
-//      });
+//    $scope.addTeamMember = function() {
+//        if($scope.selTeamMember) {
+//            $scope.vendor.contacts.push($scope.selTeamMember);
+//            $scope.selTeamMember = undefined;
+//        }
+//    };
 //
-//      $scope.$watch('param', function (param) {
-//        $location.search(termKey, param);
-//
-//        $scope.zip = param;//'07999';
-//        $scope.fetch();
-//      });
-//      $scope.fetch = function () {
-//
-//        //progressbar.start();
-//       // console.log('fetch ', $scope.x);
-//
-//        console.log('$scope.param',$scope.param)
-//        if ($scope.param === undefined) $scope.param = '0';
-//
-//        //Users.find1({id: $scope.zip, di: $scope.miles, first: $scope.first, last: $scope.last, practice: $scope.practice, specialty: $scope.specialty}, function (res) {
-//
-//          console.log('res ', res);//.length);//,Users);
-////          $scope.dentists = res;
-////          progressbar.complete();
-////          $scope.loading = false;
-//        }, function (err) {
-//          //$rootScope.error = "Failed to fetch users.";
-//          //$scope.loading = false;
-//        };
-//
+// show how to use another dataset for combo
+   // $scope.foods = Food.query();
+   // $scope.food =  $scope.foods[1];
 
-
-//
-//      var deferred = Q.defer();
-//      var vendorlist;
-//      Vendor.find({
-//      }).sort('VendorNumber ASC').done(function (err, vendors) {
-//          if (err) {
-//            deferred.reject(err);
-//            return next(err);
-//          } else {
-//            vendorlist = vendors;//.toArray()
-//            //deferred.resolve(res.json(vendorlist));
-//            deferred.resolve(vendorlist);
-//            console.log('Vendor.find with filter... ', vendorlist[10]);//, res.json(vendorlist[10]));
-//          }
-//        });
-
-//      var deferred = $q.defer();
-//      //var idPromise;
-//      var idPromise=  $routeParams.id(function (err, id)
-//      {
-//          if (err) {
-//            deferred.reject(err);
-//            return next(err);
-//          } else {
-//            idPromise = id;
-//            deferred.resolve(idPromise);
-//            console.log('promise ... ',idPromise);
-//          }
-//        });
-//
-//
-
-      console.log(' VendorEditCtrl ',$scope.param );//,$routeParams.VendorNumber)
-
-
-//    if ($routeParams.VendorNumber) {
-//        console.log('in find1 ')
-//        $scope.vendor = Vendor.find1({id:$routeParams.VendorNumber});
-//        //console.log('in find1 - a  ', $scope.vendor)
-//    }
-
-           $scope.$watch('param', function (param) {
-
-             if ($scope.param == 0) {
-               $scope.mess = 'New Vendor'
-             }
-             else {
-               $scope.mess = ':';
-               $scope.vendor = Vendor.find1({id:$routeParams.VendorNumber});
-             }
-
-
-           });
-
-
-
+    if ($routeParams.VendorNumber) {
+        // console.log('in find1 ')
+        $scope.vendor = Vendor.find1({id:$routeParams.VendorNumber});
+        //console.log('in find1 - a  ', $scope.vendor)
+    }
     $scope.cancel = function(){
         $location.path('/vendor');
     };
 
 
-
-
-
-//$scope.save = function() {
-//        console.log('in save  ', $scope.vendor)
-//        var tmp = mongosailsHelper.deleteID($scope.vendor);
-//        console.log('back  - ', tmp);
-//        Vendor.update ({id:$scope.vendor.id},tmp ); // updates json without the id
+//    $scope.addContact = function() {
+//        //if($scope.selTeamMember) {
+//        // $scope.editableFood.$save();
+//        // $scope.food.push($scope.editableFood);
+//        //    $scope.vendor.contacts.push('jrt');//$scope.selContact);
+//        alert( $scope.selContact);
+//     //   $scope.vendor.contacts.push($scope.color);//selContact);
+//        $scope.vendor.contacts.push({'name':$scope.selContact});
 //
-//       $location.path('/vendor');
-//    };
-      $scope.save = function () {
+//        // $scope.vendor.contacts.push($scope.selContact);
+//           // $scope.selContact = undefined;
+//        }
+//    $scope.addColor = function() {
+//
+//        alert( $scope.color.name);
+//        //$scope.vendor.contacts.push($scope.color);
+//        $scope.vendor.colors.push($scope.color);
+//        // $scope.vendor.contacts.push($scope.selContact);
+//        // $scope.selContact = undefined;
+//    }
+//        $scope.addFood = function() {
+//
+//            alert( 'adding food ' + $scope.food.name);
+//          if (!angular.isArray($scope.vendor.foods)) {
+//            $scope.vendor.foods = [];
+//          }
+//          $scope.vendor.foods.push({ 'name' : $scope.food.name });
+//
+//        }
+//      $scope.save = function () {
+//
+//        if ($scope.param == 0) {
+//          // console.log('save create ',$scope.vendor)
+//          Vendor.create(0, ( $scope.vendor), function (success, error) {
+//              // console.log('create success ', success, error, success.data.POID);
+//            if (success.data.VendorID !== 0) {
+//              // var vendorPromise = lookupCachePO.resetVendor();// look to refactor
+//              var vendorPromise = lookupCache.pushVendor($scope.vendor);//success);
+//
+//              $location.path('/vendor');
+//            }
+//          });
+//        } else {
+//          var id = $scope.vendor.id;
+//          console.log('uppdate success ', id);//success, error, success.data.POID);
+//          Vendor.update( {id:$scope.vendor.id}, $scope.vendor);
+//          //var vendorPromise = lookupCache.resetVendor();
+//          var vendorPromise = lookupCache.updateVendor($scope.vendor);
+//          $location.path('/vendor');
+//        }
+//      };
+//}]);
 
-        if ($scope.param == 0) {
+      $scope.save = function () {
+        if ($scope.param==0) {
           console.log('save create ',$scope.vendor)
           Vendor.create(0, ( $scope.vendor), function (success, error) {
-            //console.log('create success ', success, error, success.data.POID);
-            if (success.data.VendorID !== 0) {
-              var vendorPromise = lookupCachePO.resetVendor();// look to refactor
+            if (success) {
+              console.log('create success ',success);
+              //var vendorPromise = lookupCache.resetVendors();
+              var vendorPromise = lookupCache.pushVendor($scope.vendor);//success);
               $location.path('/vendor');
             }
           });
@@ -125,57 +98,93 @@ Application.Controllers.controller('VendorEditCtrl', ['$rootScope', '$scope', 'V
           var id = $scope.vendor.id;
           console.log('uppdate success ', id);//success, error, success.data.POID);
           Vendor.update( {id:$scope.vendor.id}, $scope.vendor, function (success, error) {
-            console.log('success, error ',success, error)
+            //console.log('success, error ',success, error)
+            console.log('success ',success);
             if (success) {
-              var vendorPromise = lookupCache.resetVendors();
+              var vendorPromise = lookupCache.updateVendor($scope.vendor);
+              // var vendorPromise = lookupCache.resetVendors();'success ',success,' s v ',
               $location.path('/vendor');
             }
-            });
-
-
+          });
         }
       };
 
-
-}]);
-
+    }]);
 
 
 
 
-
-Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendor','$location', '$http','Auth','lookupCache', function($rootScope, $scope,Vendor,$location, $http,Auth,lookupCache){
-    console.log(' VendorCtrl ')
-
-  $scope.new = function (user) {
-    //$location.path('/vendor/'+row.id);
-    $location.path('/vendor/0');
-  };
-    $scope.testRoute = function(success, error) {
-        console.log ('testRoute ');//,status.status);
-        $http.post('/meetings/10/11/12',   $scope.colors).success(function(status){
-                    if (status.status='success') {
-                       console.log ('status ',status.status);
-                        //  $location.path('/froiprint');
-                    } }).error(error);
-    }
+Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendor','$location', '$http','Auth','lookupCache','lookupCachePO', function($rootScope, $scope,Vendor,$location, $http,Auth,lookupCache,lookupCachePO){
+//    console.log(' VendorCtrl ')
+//    $scope.colors = [
+//        {name:'black', shade:'dark'},
+//        {name:'white', shade:'light'},
+//        {name:'red', shade:'dark'},
+//        {name:'blue', shade:'dark'},
+//        {name:'yellow', shade:'light'}
+//    ];
+//
+//    $scope.testRoute = function(success, error) {
+//        console.log ('testRoute ');//,status.status);
+//        $http.post('/meetings/10/11/12',   $scope.colors).success(function(status){
+//                    if (status.status='success') {
+//                       console.log ('status ',status.status);
+//                        //  $location.path('/froiprint');
+//                    } }).error(error);
+//    }
 
     $scope.myData = [];
     $scope.showGrid = true;
     $scope.mySelections = [];
     $scope.navType = 'pills';
 
-  console.log('Vendor1')
+
+ // $scope.findPO = function(vendor){
+
+
+    $scope.editrow = function (row){
+//        alert (row)
+//        $location.path('/vendor/'+row.id);// 5206742a1e8a8530c80c172b');
+//
+//    }
+    var poPromise = lookupCachePO.getPOs();
+    poPromise.then(function (val) {
+//   13594 vendorid   $scope.po = val.data;
+
+   //   var id = vendor.VendorID;//'13594';//
+      var id = row.VendorID;//'13594';//
+      console.log('id ',id)
+      var events = _.filter(val.data, function(itm) {
+        return itm.VendorID==id
+
+          })
+
+  //    var events  = _.all(_.zip(a, b), function(x) {
+  //      return x[0] === x[1];
+  //    });
+//           var events = _.where(val.data, {VendorID:id});
+
+
+      console.log('events ',events)
+      $scope.po = events;
+      console.log('$scope.po ',$scope.po)
+    })
+      .catch(function (err) {
+        console.error('po failed', err)
+      });
+
+  }
   var vendorPromise = lookupCache.getVendors();
   vendorPromise.then(function(cache) {
-    console.log('VendorCtrl::inside lookup.then', cache)
+    // console.log('VendorCtrl::inside lookup.then', cache)
     $scope.vendor = cache.data;
-    console.log('11111')
+
   });
 
     $scope.prevRow ='';
     $scope.selectedRow = {};
     $scope.isFormActive = false;
+
     $scope.toggleForm = function(){
         if ($scope.isFormActive){
             $scope.isFormActive = false;
@@ -194,48 +203,43 @@ Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendo
     $scope.deletevendor =  function(row) {
         Vendor.delete ({id:$scope.selectedRow.id});
         $scope.vendor.splice( $scope.vendor.indexOf( $scope.selectedRow) ,1) ;
-
     };
 
 
-   //   var editrowTemplatex = '<i class="icon-edit edit" ng-click="openDialog(row.entity)"></i>';
-   // this does edit in html
+  //   var editrowTemplatex = '<i class="icon-edit edit" ng-click="openDialog(row.entity)"></i>';
+  // this does edit in html
   // var editrowTemplate = '<a class="icon-edit edit" href="{{\'#/vendor/\'+row.entity.id}}">{{row.entity.id}}</a>';
   //var editrowTemplate = '<a class="icon-edit edit" href="{{\'#/vendor/\'+row.entity.id}}"></a>';
+  // this does edit in js
+  //  $scope.filteringText = '';
   var displayDateTemplate = ' <div style="width:75;text-align: left" class="ngCellText colt{{$index}}">{{row.getProperty(col.field)}}</div>';
   var editrowTemplate = '<a class="icon-edit edit" href="{{\'/vendor/\'+row.entity.id}}"></a>';
 
-
-  // this does edit in js
-  //   var editrowTemplate = '<i class="icon-edit edit" ng-click="editrow(row.entity)"></i>';
+  var editrowTemplatePOS = '<i class="icon-edit edit" ng-click="editrow(row.entity)"></i>';
 
 
-//  $scope.filteringText = '';
+
   $scope.filterOptions = {
-    filterText: '',          //filteringText
+    filterText: '',   //filteringText
     useExternalFilter: false
   };
 
   $scope.colDefs = [
     { field: 'edit', displayName: 'Edit', headerClass: 'Edit', width: '60', cellTemplate: editrowTemplate },
+    { field: 'findPOS', displayName: 'po\'s', headerClass: 'po', width: '60', cellTemplate: editrowTemplatePOS },
     { field: 'VendorNumber', displayName: 'VendorNumber', groupable: false, width: 60 },
     { field: 'CompanyName', displayName: 'CompanyName', groupable: false, width: 200},
     { field: 'Address', displayName: 'Address', groupable: true, width: 200 },
     { field: 'State', displayName: 'State', groupable: true, width: 60 },
     { field: 'ZipCode', displayName: 'ZipCode', width: 100 },
     //        { field: 'DateofLoss', displayName: 'Date of Loss', width: 100  }, //   cellFilter: " moment:'dddd'" hh:mm a ddd Do not display currency symbol},
-//    { field: 'Country', displayName: 'Country', width: 100, groupable: true },
-//    { field: 'Type', displayName: 'Type', width: 60 },
-//    { field: 'CompanyAddition', displayName: 'CompanyAddition', groupable: true, width: 20},
-//    { field: 'AccountID', displayName: 'AccountID', groupable: false, width: 200},
-//    { field: 'VendorAccountId', displayName: 'VendorAccountId', groupable: false, width: 75},
-//    { field: 'contacts', displayName: 'contacts', groupable: false, width: 75, visible: false}
+    { field: 'Country', displayName: 'Country', width: 100, groupable: true },
+    { field: 'Type', displayName: 'Type', width: 60 },
+    { field: 'CompanyAddition', displayName: 'CompanyAddition', groupable: true, width: 20},
+    { field: 'AccountID', displayName: 'AccountID', groupable: false, width: 200},
+    { field: 'VendorAccountId', displayName: 'VendorAccountId', groupable: false, width: 75},
+    { field: 'contacts', displayName: 'contacts', groupable: false, width: 75, visible: false}
   ]
-
-
-
-
-//  console.log(' $scope.vendor ',  $scope.myData, $scope.vendor)
     $scope.save = function(){
         angular.forEach(Object.keys($scope.vendor[0]), function(key){
             //    $scope.colDefs.push({ field: key });
@@ -245,7 +249,6 @@ Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendo
 
 
   $scope.gridOptions1 = {
-
 
     data: 'vendor',
     multiSelect: false,
@@ -269,19 +272,14 @@ Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendo
 
   $scope.changeGrid = function (row){
     $scope.colDefs = $scope.colDefs2;
-//     $scope.colDefs.pop();
-//    $scope.colDefs[1].visible=false;
-//    $scope.colDefs[1].visible=false;
-
-
+//     $scope.colDefs.pop();//    $scope.colDefs[1].visible=false;//    $scope.colDefs[1].visible=false;
   }
 
-  $scope.editrow = function (row){
-    // im using the html href
-        alert (row)
-        $location.path('/vendor/'+row.id);// 5206742a1e8a8530c80c172b');
-
-    }
+//  $scope.editrow = function (row){
+//        alert (row)
+//        $location.path('/vendor/'+row.id);// 5206742a1e8a8530c80c172b');
+//
+//    }
 
 //    angular.forEach(Object.keys($scope.myData[0]), function(key){
 //        // $scope.colDefs.push({ field: key });
@@ -304,30 +302,6 @@ Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendo
 //]
 //        $scope.myData = $scope.vendor;
 //        $scope.gridOptions1.columnDefs= 'myDefs';
-
-//    $scope.gridOptions1 = {
-//        data: 'myData',
-//        multiSelect: false,
-//        //primaryKey: 'ID',
-//        //filterOptions: $scope.filterOptions,
-//        beforeSelectionChange: self.selectionchanging,
-//        //columnDefs: 'colDefs',
-//        selectedItems: $scope.selections,
-//        enableRowReordering: false,
-//        showGroupPanel: true,
-//        showColumnMenu: true,
-//        //groups: ['SeasonCode', 'Vendor']
-//        // enablePinning: true,
-//        maintainColumnRatios: false,
-//        groups: [],
-//        //plugins: [new ngGridCsvExportPlugin(csvOpts)],
-//        showFooter: true,
-//        enableColumnResize: true,
-//        enableColumnReordering: true,
-//        //sortInfo: $scope.sortInfo
-//    };
-
-
 //
 //
 //    $scope.handleRowSelection = function(row) {
@@ -345,7 +319,6 @@ Application.Controllers.controller('VendorCtrl', ['$rootScope', '$scope', 'Vendo
 //
 //    $scope.handleRowSelectionDetail = function(row) {
 //    };
-
 //
 //    $scope.savedetail = function(){
 //

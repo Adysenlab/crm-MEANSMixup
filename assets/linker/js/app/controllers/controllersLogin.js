@@ -52,7 +52,9 @@ Application.Controllers.controller('LoginCtrl', ['$rootScope', '$scope', '$locat
                     rememberme: $scope.rememberme
                 },
                 function(res) {
-                    $location.path('/');
+                    //$location.path('/');
+                  console.log('in logged')
+                  $location.path('/vendor');
                 },
                 function(err) {
                     $rootScope.error = "Failed to login!";
@@ -82,7 +84,8 @@ Application.Controllers.controller('LogoutCtrl', ['$rootScope', '$scope', '$loca
             rememberme: $scope.rememberme
           },
           function(res) {
-            $location.path('/');
+            //$location.path('/');
+            $location.path('/vendor');
           },
           function(err) {
             $rootScope.error = "Failed to login";

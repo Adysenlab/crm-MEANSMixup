@@ -1,0 +1,148 @@
+p
+        h2 Purchase Order {{po1.POID}}
+        form.form-horizontal(ng-submit="login()",class="form-po",novalidate, name="myForm")
+            .control-group(style='height:5px')
+            .control-group(ng-class='{error: myForm.name.$invalid}')
+                pre.
+                     {{mess}}
+                    .well.well-small.pull-left(ng-model='po1.Date')
+                    .form-horizontal
+                    label.control-label(for='inputDate') Date
+                    .controls(style='height:15px')
+                        input#inputDate(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='po1.Date', is-open='opened',      max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)',required)
+                            //    input#inputDate(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='po1.Date', is-open='opened', min='minDate', max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)',required)
+                        button.btn(ng-click='open()' )
+                          i.icon-calendar
+            .control-group(style='height:15px')
+                label.control-label(for="currentVendor") CompanyName
+                .controls
+                    select#vendor(ng-model='currentVendor',style='width:350px', ng-options='v.CompanyName for v in vendor', ng-change='setCurrentVendor(currentVendor)',required)
+            .control-group(style='height:15px')
+                label.control-label(for="setCurrentAccount") Acct
+                .controls
+                    select#account(ng-model='currentAccount',style='width:350px', ng-options='a.Desc for a in account', ng-change='setCurrentAccount(currentAccount)')
+            .control-group(style='height:30px')
+                label.control-label(for='inputComments') Comments
+                .controls
+                    textarea#inputComments(name='inputComments', rows='2',style='margin-top: 25px;', ng-model='po1.Comments',style='width:450px', placeholder='Comments',required)
+            .control-group(style='height:30px')
+                label.control-label(for='inputComments')
+                .controls
+            .control-group(style='height:5px')
+                input(ng-model='detail.desc',placeholder='Enter Description', style='width:170px')
+                input(ng-model='detail.qty',placeholder='Enter qty',style='width:50px')
+                input(ng-model='detail.unitprice',placeholder='Enter price',style='width:70px')
+                select(ng-model='currentAccountDetail',style='width:220px', ng-options='a.Desc for a in account',ng-change='setCurrentAccountDetail(currentAccountDetail)')
+                button.btn.btn-primary(ng-click='addDetail()') Add Line Item
+            .control-group
+              angular-table(model='po1.details',class="demoTable2",default-sort-column="desc",style="padding-bottom: 1px;")
+                    header-row
+                        header-column(sortable='true', sort-field-name='Desc', style='width:170px')
+
+
+                            | Desc
+                            sort-arrow-ascending
+                            sort-arrow-descending
+                        header-column(sortable='true', sort-field-name='Qty', style='width:50px')
+                            | Qty
+                            sort-arrow-ascending
+                            sort-arrow-descending
+                        header-column(sortable='true', sort-field-name='UnitPrice', style='width:70px')
+                            | UnitPrice
+                            sort-arrow-ascending
+                            sort-arrow-descending
+                        header-column(sortable='true', sort-field-name='AccountID',style='width:70px')
+                            | Account
+                            sort-arrow-ascending
+                            sort-arrow-descending
+                        header-column(sortable='true', sort-field-name='AccountName', class="demoHeaderColumnW")
+                            | AccountName
+                            sort-arrow-ascending
+                            sort-arrow-descending
+                        header-column(sortable='false', class="demoHeaderColumnW2")
+                            | Commands
+
+                    //row( selected-color='#87cefa', even-color='#ffffff', odd-color='#eeeeee',class='demoRow')
+                    row(on-selected='handleRowSelectionDetail(row)', selected-color='#87cefa', even-color='#ffffff', odd-color='#eeeeee',class='demoRow')
+
+                        column(class='colWide') {{ row.Desc }}
+                        column(style='width:20px') {{ row.Quantity }}
+                        column(style='width:50px') {{ row.UnitPrice }}
+                        column(style='width:35px') {{ row.LineItemTax }}
+                        column(style='width:35px') {{ row.LineItemTot }}
+                        column(style='width:50px') {{ row.AccountID }}
+                        column(style='width:250px')  {{ row.AccountName }}
+                        column(class='colWide2')
+                            a.btn.btn-sm.btn-primary(ng-click='new2()') New
+
+                            a.btn.btn-sm.btn-warning(ng-click='edit(row)') Edit
+
+                            a.btn.btn-sm.btn-danger(ng-click='edit()') Del
+
+
+
+
+            .row
+                //.span1
+                //.span3
+                .span2
+                    .demoDetailPaneVert2
+                      .demoDetailInnerPane2
+                            //p Id: {{ selectedRow.id }}
+
+
+                            p
+
+                                .control-group(style='height:10px')
+                                    label.control-label(for="po1.SubTotal") SubTotal
+                                    .controls
+                                        input(type="text",style='width:100px;text-align:right;', ng-model="po1.SubTotal", placeholder="SubTotal", name="SubTotal", required)
+                            p
+
+                                .control-group(style='height:10px')
+                                    label.control-label(for="po1.TaxPcnt") TaxPcnt
+                                    .controls
+                                        input(type="text",style='width:100px;text-align:right;', ng-model="po1.TaxPcnt", placeholder="Freight", name="TaxPcnt", required)
+                            p
+
+                                .control-group(style='height:10px')
+                                    label.control-label(for="po1.TaxAmount") TaxAmount
+                                    .controls
+                                        input(type="text",style='width:100px;text-align:right;', ng-model="po1.TaxAmount", placeholder="TaxAmount", name="TaxAmount", required)
+                            p
+
+                                .control-group(style='height:10px')
+                                   label.control-label(for="po1.Freight") Freight
+                                   .controls
+                                     input(type="text",style='width:100px;text-align:right;', ng-model="po1.Freight", placeholder="Freight", name="Freight", required)
+
+                            p
+
+                                  //.greenPO(type='text',value='{{total()| currency}}') {{total()| currency}}
+                                .control-group(style='height:10px')
+                                    label.control-label(for="po1.POTotal") Total
+                                    .controls
+                                        input(type="text", style='width:100px;color: green;text-align:right;' ,ng-model='po1.POTotal',placeholder="POTotal", name="POTotal")
+                                        //input(type="text", style='width:100px;color: green;' ,value='{{total()| currency}}') {{total()| currency}}
+                            p
+
+            .row
+
+
+
+
+
+
+
+            .row
+            .control-group
+                     button.btn.btn-warning(ng-click='cancel()') Cancel
+                     button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
+                     button.btn.btn-danger(ng-click='destroy()', ng-show='project.$id') Delete
+                    //.control-group
+                          header-column(sortable='true', sort-field-name='Qty', class="demoHeaderColumn",style="width:40px")
+                                    .controls span(column {{ row.Desc }},style="width:180px") column(style="width:130px") {{ row.AccountName }}
+                                       label(for="rememberme").checkbox
+                                           input(type="checkbox", data-ng-model="rememberme", name="rememberme")
+                                           | Remember me
+

@@ -1,0 +1,65 @@
+form(name='myForm')
+    .control-group(ng-class='{error: myForm.name.$invalid}')
+       .span12
+        label id
+         | for {{vendor.VendorID}}
+        label Name
+
+        input(type='text', style='width:300px', name='name', ng-model='vendor.CompanyName', required='required')
+        //            span.help-inline(ng-show='myForm.name.$error.required')
+        //                | Required
+        //            .control-group(ng-class='{error: myForm.site.$invalid}')
+        //                label Website
+        //                input(type='url', name='site', ng-model='vendor.site', required='required')
+        //                span.help-inline(ng-show='myForm.site.$error.required')
+        //                    | Required
+        //                span.help-inline(ng-show='myForm.site.$error.url')
+        //                    | Not a URL
+
+        label Address
+        textarea(name='Address', ng-model='vendor.Address')
+        br
+        label City
+        textarea(name='City', ng-model='vendor.City')
+        br
+        label State
+        textarea(name='State', ng-model='vendor.State')
+        br
+        label Zip
+        textarea(name='ZipCode', ng-model='vendor.ZipCode')
+        br
+        label contacts
+        textarea(name='contacts', ng-model='vendor.contacts')
+        br
+        label contacts 2 add
+        textarea(name='contacts', ng-model='selContact')
+        br
+        label color
+        select(ng-model='color', ng-options='c.name for c in colors')
+            option(value='') -- chose color --
+        br
+        label food
+        select(ng-model='food', ng-options='f.name for f in foods')
+            option(value='') -- chose food --
+
+       .span12
+            a.btn(href='/vendor') Cancel
+            button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
+            button.btn.btn-danger(ng-click='destroy()', ng-show='project.$id') Delete
+            button.btn.btn-primary(ng-click='addContact()') Add Contact
+            button.btn.btn-primary(ng-click='addColor()')  addColor
+            button.btn.btn-primary(ng-click='addFood()')  addFood
+       .span12
+         angular-table(model='vendor.contacts',class="demoTable")
+            header-row
+                header-column(sortable='true', sort-field-name='name', class="demoHeaderColumn")
+                    | name
+                header-column(sortable='true', sort-field-name='shade', class="demoHeaderColumn")
+                    | shade
+
+            row(on-selected='handleRowSelectionDetail(row)', selected-color='#87cefa', even-color='#ffffff', odd-color='#eeeeee',class='demoRow')
+                column {{ row.name }}
+                column {{ row.shade }}
+
+
+

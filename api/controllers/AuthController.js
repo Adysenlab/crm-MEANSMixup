@@ -6,15 +6,20 @@ var passport = require('passport');
 module.exports = {
     login: function(req, res, next) {
         console.log('in login of AuthContoller.js ')//,req)
+
         passport.authenticate('local', function(err, user) {
             console.log('passport.authenticate  user:',user,err)
             if(err)     { return next(err); }
             if(!user)   { return res.send(400); }
             req.logIn(user, function(err) {
+                console.log(' after pp ', user)
                 if(err) {
                     return next(err);
                 }
                 if(req.body.rememberme) req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
+               //user.online=true;
+               // console.log(' user.online', user.online)
+               // res.json(200, { "role": user.role, "username": user.username ,"online":true});
                 res.json(200, { "role": user.role, "username": user.username });
             });
         })(req, res, next);

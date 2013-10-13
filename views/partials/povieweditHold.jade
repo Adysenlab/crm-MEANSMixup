@@ -1,0 +1,86 @@
+h2 PO
+
+form.form-horizontal(name='myForm',class="form-signin")
+    .control-group(ng-class='{error: myForm.name.$invalid}')
+
+        input(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='po.Date', is-open='opened', min='minDate', max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)', ng-required='true')
+
+        a.btn.btn-primary(ng-click='open()')
+            i.icon-calendar.icon-white
+        br
+        label.control-label(for='inputEmail') ID
+        .controls
+            input#inputvendorName(type='text',ng-model='po.POID', placeholder='vendorName',readonly='true')
+
+        label.control-label(for='inputvendorName') vendorName
+        .controls
+            input#inputvendorName(type='text',ng-model='po.vendorName', placeholder='vendorName')
+
+        label.control-label(for='inputComments') Comments
+        .controls
+            textarea(type='text', rows='3', ng-model='po.Comments',style='width:360px', placeholder='Comments')
+
+        label.control-label(for='inputPONumber') PONumber
+        .controls
+            input#inputPONumber(type='text',ng-model='po.PONumber', placeholder='PONumber')
+
+        label.control-label(for='inputDate') Date
+        .controls
+            input(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='po.Date', is-open='opened', min='minDate', max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)', ng-required='true')
+            i.icon-calendar
+            button.btn-primary(ng-click='open()')
+
+        hr
+
+
+
+        label.control-label(for='inputSubTotal') SubTotal
+        .controls
+            input#inputSubTotal(type='text',ng-model='po.SubTotal', placeholder='SubTotal')
+
+        label.control-label(for='inputTaxPcnt') TaxPcnt
+        .controls
+            input#inputTaxPcnt(type='text',ng-model='po.TaxPcnt', placeholder='TaxPcnt')
+
+        label.control-label(for='inputTaxAmount') TaxAmount
+        .controls
+            input#inputTaxAmount(type='text',ng-model='po.TaxAmount', placeholder='TaxAmount')
+
+
+
+        label.control-label(for='inputFreight') Freight
+        .controls
+                input#inputFreight(type='text',ng-model='po.Freight', placeholder='Freight')
+
+
+        label.control-label(for='inputPOTotal') POTotal
+        .controls
+                input#inputPOTotal(type='text',ng-model='po.POTotal', placeholder='POTotal')
+
+
+
+
+        .span12
+            a.btn(href='/po') Cancel
+            button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
+            button.btn.btn-danger(ng-click='destroy()', ng-show='project.$id') Delete
+            button.btn.btn-primary(ng-click='addContact()') Add Contact
+            button.btn.btn-primary(ng-click='addColor()')  addColor
+            button.btn.btn-primary(ng-click='addFood()')  addFood
+        .span12
+            angular-table(model='po.contacts',class="demoTable")
+                header-row
+                    header-column(sortable='true', sort-field-name='name', class="demoHeaderColumn")
+                        | name
+                    header-column(sortable='true', sort-field-name='shade', class="demoHeaderColumn")
+                        | shade
+
+                row(on-selected='handleRowSelectionDetail(row)', selected-color='#87cefa', even-color='#ffffff', odd-color='#eeeeee',class='demoRow')
+                    column {{ row.name }}
+                    column {{ row.shade }}
+                //        a.btn.btn-primary(href='#')
+                       //            i.icon-user.icon-white
+                       //            | User
+                       //        br
+
+

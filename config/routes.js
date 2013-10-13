@@ -27,9 +27,6 @@
  */
 var userRoles = require('../assets/linker/js/routingConfig').userRoles;
 console.log('userRoles routes.js',userRoles);
-//  , EmailCtrl = require('./controllers/Email')
-
-
 module.exports.routes = {
  //console.log('rt ',routes)
   // By default, your root route (aka home page) points to a view
@@ -45,32 +42,47 @@ module.exports.routes = {
     action: 'logout'
   }     ,
   '/': {
-//    view: 'home/index'
-    view: 'home'
-
+    view: 'home/index'
     //  view: 'partials/home'
   } ,
     '/partials/:file' :
    { controller : 'foo', action : 'partials'}
 
+// this is how to route custom ,
+//  'post /user': {
+//    controller: 'UserController',/
+//  or
+// controller: 'User',
+//    action: 'createSpecial'
+//  },
 
 
- ,   '/meetings/:lat/:lng/:radius': {
-        controller: 'foo',
-        action: 'test'
-    }
-//  ,
 //
-//  '/email':{
-//  controller:'Email',
-//  action:'Register'
+// ,   '/meetings/:lat/:lng/:radius': {
+//        controller: 'foo',
+//        action: 'test'
+//    }
+//
+//    ,
+//    '/partials/meetings/:lat/:lng/:radius': {
+//        controller: 'foo',
+//        action: 'test2'
+//    },
+//
+//  '/partials/users/destroy/:id': {
+//    controller: 'User',
+//    action: 'destroy'
 //  }
+////
+// ,
 //
-    ,
-    '/partials/meetings/:lat/:lng/:radius': {
-        controller: 'foo',
-        action: 'test2'
-    }
+//  '/partials/users/create/:id': {
+//    controller: 'User',
+//    action: 'create'
+//  }
+
+
+
 //    ,
 //
 //    '/users': {

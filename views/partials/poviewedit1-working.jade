@@ -1,0 +1,71 @@
+
+form(name='myForm',class="form-signin", novalidate)
+    .control-group(ng-class='{error: myForm.name.$invalid}')
+    .span7
+       .control-group
+        pre.
+             {{mess}}
+            .well.well-small.pull-left(ng-model='po1.Date')
+            .form-horizontal
+            label.control-label(for='inputDate') Date
+              .controls
+                input#inputDate(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='po1.Date', is-open='opened',
+                max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)',required)
+                button.btn(ng-click='open()' ,style='margin-bottom: 15px;')
+                    i.icon-calendar
+    .span7
+    span.error(ng-show='myForm.input.$error.required') Required!
+    br
+    | Comments:
+    input(name='input', ng-model='po1.Comments', required='required')
+    span.error(ng-show='myForm.input.$error.required') Required!
+    br
+    | SubTotal:
+    input(name='input', ng-model='po1.SubTotal', required='required')
+    span.error(ng-show='myForm.input.$error.required') Required!
+    br
+    | TaxPcnt:
+    input(name='input', ng-model='po1.TaxPcnt', required='required')
+    span.error(ng-show='myForm.input.$error.required') Required!
+    br
+    | TaxAmount:
+    input(name='input', ng-model='po1.TaxAmount', required='required')
+    span.error(ng-show='myForm.input.$error.required') Required!
+    br
+    | Freight:
+    input(name='input', ng-model='po1.Freight', required='required')
+    span.error(ng-show='myForm.input.$error.required') Required!
+    br
+    | Vendor:
+    select#vendor(ng-model='currentVendor', ng-options='v.CompanyName for v in vendor', ng-change='setCurrentVendor(currentVendor)',required)
+    br
+    | Acct:
+    select#account(ng-model='currentAccount', ng-options='a.Desc for a in account', ng-change='setCurrentAccount(currentAccount)')
+
+
+
+
+
+
+
+    .span9
+        input(ng-model='detail.desc',placeholder='Enter Description')
+        input(ng-model='detail.qty',placeholder='Enter qty',style='width:60px')
+        input(ng-model='detail.unitprice',placeholder='Enter price',style='width:75px')
+        select(ng-model='detail.account', ng-options='a.Desc for a in account')
+        button.btn.btn-primary(ng-click='addContact()') Add Line Item
+
+    .span7
+        //{{myForm.$invalid}}
+        // a.btn(href='/po',ng-click='cancel()') Cancel
+        // a.btn(ng-click='cancel()') Cancel
+        button.btn.btn-warning(ng-click='cancel()') Cancel
+        button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
+        //button.btn.btn-primary(ng-click='create()') Create
+        // button.btn.btn-primary(ng-click='save()', ng-disabled='myForm.$invalid' ) Save
+        // button.btn.btn-primary(ng-click='save()') Save
+        button.btn.btn-danger(ng-click='destroy()', ng-show='project.$id') Delete
+        button.btn.btn-primary(ng-click='addContact()') Add Contact
+
+
+

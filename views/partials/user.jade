@@ -1,45 +1,59 @@
 h1 Users
 p This view is visible to users with the administrator role.
-        //     .bs-docs-grid
-        //        .row-fluid.show-grid
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
-        //            .span1 1
+
+             //     .bs-docs-grid
+             //        .row-fluid.show-grid
+             //            .span1 1
+             //            .span1 1
+#main-content
+    input.search-query(style='width:100px', type='text', ng-model='filterText', placeholder='Filter')
+    a.btn.btn-sm.btn-primary(ng-click='reset()') reset
+
+//script#myModalContent.html(type='text/ng-template')
+    .modal-header
+        h3 I'm a modal!
+    .modal-body
+            ul
+                li(ng-repeat='item in items')
+                    a(ng-click='selected.item = item') {{ item }}
+            | Selected:
+            b {{ selected.item }}
+    .modal-footer
+            button.btn.btn-primary(ng-click='ok()') OK
+            button.btn.btn-warning(ng-click='cancel()') Cancel
  .span11
     table.table.table-striped(data-ng-hide="loading")
 
         thead
+                col(style='width: 5%;')
                 col(style='width: 15%;')
-                col(style='width: 15%;')
-                col(style='width: 15%;')
-                col(style='width: 25%;')
+                col(style='width: 10%;')
+                col(style='width: 35%;')
                 col(style='width: 10%;')
                 col(style='width: 10%;')
                 col(style='width: 5%;')
                 col(style='width: 5%;')
                 col(style='width: 5%;')
             tr
+                th status
                 th #
-                th Username
+                th User
                 th Name
                 th Email
                 th Role
                 th Title
-                th c1
-                th c1
-                th c1
+
+
+
 
         tbody
-            tr(data-ng-repeat="user in users")
+            //{{users}}
+            tr(data-ng-repeat="user in users | filter:filterText | orderBy:username ")
+
+                td
+                    img(src='/linker/images/icon-online.png' ,data-ng-show="user.online === true")
+                    img(src='/linker/images/icon-offline.png' ,data-ng-show="user.online === false")
+
                 td {{ user.id }}
                 td
                    i.icon-twitter(data-ng-show="user.provider === 'twitter'")
@@ -49,7 +63,7 @@ p This view is visible to users with the administrator role.
                 td {{ user.name }}
                 td {{ user.email }}
                 td
-                    span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
+                    span.label(data-ng-class='{"label-info": user.role == userRoles.user,"label-warning": user.role == userRoles.supervisor, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
                 td {{ user.title }}
                 td
                     a.btn.btn-sm.btn-primary(ng-click='new()') New
@@ -57,6 +71,7 @@ p This view is visible to users with the administrator role.
 
                     a.btn.btn-sm.btn-warning(ng-click='edit(user)') Edit
                 td
-                    a.btn.btn-sm.btn-danger(href='/user/edit') Delete
+                    a.btn.btn-sm.btn-danger(ng-click='delete(user)') Delete
+                    //a.btn.btn-sm.btn-danger(href='/user/delete') Delete
 
   //      div(style='width: 100%; height: 350px;',class="gridStyle", ng-grid='gridOptions1')

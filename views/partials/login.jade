@@ -1,11 +1,16 @@
 .hero-unit
-    h1 crm-MEANS Log in
+    //h1 MAS Log in
+    h1 meansCRM
+     //p This site is an example of how one can implement role based authentication in Angular applications as outlined in
+        a(href="http://www.frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/")  this blogpost
+        | . All the code can be found in
+        a(href="https://github.com/fnakstad/angular-client-side-auth")  this GitHub repository
+        | . You can either register a new user, log in with one of the two predefined users...
+    p This site is for meansCRM. All users must login to use the system
 
-    p This site is for crm-MEANS. All user must login to use the system
-
-        ul
-            li JRT admin/123 -
-            li MAT user/123 -
+        //    ul
+        //        li JRT admin/123 -
+        //        li MAT user/123 -
     form.form-horizontal(ng-submit="login()", name="loginForm")
         .control-group
             label.control-label(for="username") Username

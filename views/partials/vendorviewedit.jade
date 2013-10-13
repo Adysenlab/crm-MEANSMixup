@@ -1,12 +1,11 @@
 form(name='myForm',,class="form-signin")
     .control-group(ng-class='{error: myForm.name.$invalid}')
         //.span12
-        h1  Vendor
-         | {{mess}}
-         | {{vendor.CompanyName}}
+        label id
+         | for {{vendor.VendorID}}
         label Name
 
-        input(type='text', style='width:300px', name='name', ng-model='vendor.CompanyName', required)
+        input(type='text', style='width:300px', name='name', ng-model='vendor.CompanyName', required='required')
         //            span.help-inline(ng-show='myForm.name.$error.required')
         //                | Required
         //            .control-group(ng-class='{error: myForm.site.$invalid}')
@@ -21,20 +20,98 @@ form(name='myForm',,class="form-signin")
         textarea(name='Address', ng-model='vendor.Address')
         br
         label City
-        input(type='text',name='City', ng-model='vendor.City')
+        input(name='City', ng-model='vendor.City')
         br
         label State
-        input(type='text',name='State', ng-model='vendor.State')
+        //input(name='State', ng-model='vendor.State')
+        select.span1(name='state',ng-model='vendor.State')
+            option(value='AK') AK
+            option(value='AL') AL
+            option(value='AR') AR
+            option(value='AZ') AZ
+            option(value='CA') CA
+            option(value='CO') CO
+            option(value='CT') CT
+            option(value='DC') DC
+            option(value='DE') DE
+            option(value='FL') FL
+            option(value='GA') GA
+            option(value='HI') HI
+            option(value='IA') IA
+            option(value='ID') ID
+            option(value='IL') IL
+            option(value='IN') IN
+            option(value='KS') KS
+            option(value='KY') KY
+            option(value='LA') LA
+            option(value='MA') MA
+            option(value='MD') MD
+            option(value='ME') ME
+            option(value='MI') MI
+            option(value='MN') MN
+            option(value='MO') MO
+            option(value='MS') MS
+            option(value='MT') MT
+            option(value='NC') NC
+            option(value='ND') ND
+            option(value='NE') NE
+            option(value='NH') NH
+            option(value='NJ') NJ
+            option(value='NM') NM
+            option(value='NV') NV
+            option(value='NY') NY
+            option(value='OH') OH
+            option(value='OK') OK
+            option(value='OR') OR
+            option(value='PA') PA
+            option(value='RI') RI
+            option(value='SC') SC
+            option(value='SD') SD
+            option(value='TN') TN
+            option(value='TX') TX
+            option(value='UT') UT
+            option(value='VA') VA
+            option(value='VT') VT
+            option(value='WA') WA
+            option(value='WI') WI
+            option(value='WV') WV
+            option(value='WY') WY
         br
         label Zip
-        input(type='text',name='ZipCode', ng-model='vendor.ZipCode')
-
+        input(name='ZipCode', ng-model='vendor.ZipCode')
+        //        br
+        //        label contacts
+        //        textarea(name='contacts', ng-model='vendor.contacts')
+        //        br
+        //        label contacts 2 add
+        //        textarea(name='contacts', ng-model='selContact')
         //        br
         //        label color
         //        select(ng-model='color', ng-options='c.name for c in colors')
         //            option(value='') -- chose color --
+        //        br
+        //        label food
+        //        select(ng-model='food', ng-options='f.name for f in foods')
+        //            option(value='') -- chose food --
 
        .span12
             a.btn(href='/vendor') Cancel
             button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
             button.btn.btn-danger(ng-click='destroy()', ng-show='project.$id') Delete
+            //button.btn.btn-primary(ng-click='addContact()') Add Contact
+            //button.btn.btn-primary(ng-click='addColor()')  addColor
+            //button.btn.btn-primary(ng-click='addFood()')  addFood
+            //       .span12
+            //         angular-table(model='vendor.contacts',class="demoTable")
+            //            header-row
+            //                header-column(sortable='true', sort-field-name='name', class="demoHeaderColumn")
+            //                    | name
+            //                header-column(sortable='true', sort-field-name='shade', class="demoHeaderColumn")
+            //                    | shade
+            //
+            //            row(on-selected='handleRowSelectionDetail(row)', selected-color='#87cefa', even-color='#ffffff', odd-color='#eeeeee',class='demoRow')
+            //                column {{ row.Quantity }}
+            //                column {{ row.Desc }}
+
+
+

@@ -22,34 +22,46 @@ var bcrypt = require('bcrypt');
 //    }
 //];
 module.exports = {
- // only accpet what in schema : true,
-  attributes: {
+    // only accpet what in schema : true,
+    attributes: {
 
-    username: {
-      type: 'string',
-      required: true,
-      unique: true
-    },
-    password: {
-      type: 'string',
-      required: true
-    },
-    role: {
-      type: 'INTEGER',
-      required: true
-    },
+        username: {
+            type: 'string',
+            required: true,
+            unique: true
+        },
+        password: {
+            type: 'string',
+            required: true
+        },
+        role: {
+            type: 'INTEGER',
+            required: true
+        },
 
-    toJSON: function() {
-      // this gives you an object with the current values
-      var obj = this.toObject();
-      // Remove the password object value
-       delete obj.password;
-      // return the new object without password
-      return obj;
+
+        email: {
+            type: 'string',
+            required: true
+        },name: {
+            type: 'string',
+            required: true
+        },
+      title: {
+        type: 'string',
+        required: true
+    },
+        toJSON: function() {
+            // this gives you an object with the current values
+            var obj = this.toObject();
+            // Remove the password object value
+            delete obj.password;
+            // return the new object without password
+            return obj;
+        }
     }
-  }
 //bcyrpt
-,
+    ,
     beforeCreate: function(user, cb) {
         console.log(' user.password = hash ', user);
         bcrypt.genSalt(10, function(err, salt) {

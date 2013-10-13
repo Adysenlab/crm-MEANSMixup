@@ -60,6 +60,8 @@ passport.use(new LocalStrategy(
                   bcrypt.compare(password, user.password, function(err, res) {          //  pasword is whats entered in form ; user.password is   encryptedPassword
                     if (!res) return done(null, false, { message: 'Invalid Password'});
                     // var returnUser = { username: user.username, createdAt: user.createdAt, id: user.id };
+                    user.online=true;
+                    console.log('passport ',user)
                     var returnUser = user;
                     //console.log('returnUser ',returnUser)
                     return done(null, returnUser, { message: 'Logged In Successfully'} );

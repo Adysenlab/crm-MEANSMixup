@@ -5,13 +5,60 @@
  * @description	:: Contains logic for handling requests.
  */
 
-module.exports = {
+//module.exports = {
 //  see foo
 //  partials: function (req,res) {
 //        console.log('ven partials... ',req.param('file'));
 //        res.render('partials/' + req.param('file'))
 //
 //    },
+//{
+//  "_id" : ObjectId("5206742a1e8a8530c80c1a2c"),
+//  "VendorID" : "13594",
+//  "VendorNumber" : "13594",
+//  "CompanyName" : "MICHAEL STAPLETON",
+//  "Address" : "9 MURRAY Street",
+//  "City" : "NY",
+//  "State" : "NY",
+//  "ZipCode" : "10077",
+//  "Country" : null,
+//  "Type" : 1,
+//  "CompanyAddition" : null,
+//  "Terms" : 0,
+//  "AccountID" : 0,
+//  "VendorAccountId" : 0,
+//  "contacts" : []
+//}
+  var VendorController;
+VendorController = {
+   create: function(req, res, next) {
+  console.log('VendorController::create... ');
+  Vendor.create({
+    AccountID : 0,
+    Address : req.param("Address"),
+    City : req.param("City"),
+    CompanyAddition : "",
+    CompanyName : req.param("CompanyName"),
+    Country : req.param("Country"),
+    State : req.param("State"),
+    Terms : 0,
+    Type : 0,
+    VendorAccountId : 0,
+    VendorID : '999999',//req.param("City"),
+    VendorNumber: '999999',
+    ZipCode : req.param("ZipCode"),
+    contacts : []
+  })
+    .then(function (vendor) {
+      console.log("Vendor created::", vendor);
+      return res.json({ data: vendor });
+    })
+    .catch(function (err) {
+      // console.error('er ',err)
+      // return next(err);
+    })
+
+},
   sayHello: function (req, res) {
     res.send('hello world!');
   }
@@ -25,7 +72,14 @@ module.exports = {
         return res.json({ data: vendors });
       });
   }
-    // this is an overide for index which I thing is findAll
+
+
+};
+
+module.exports = VendorController;
+
+
+// this is an overide for index which I thing is findAll
 //    ,index: function (req, res, next) {
 //      console.log('VendorContoller:index... ');
 //        // Get an array of all users in the Vendor collection(e.g. table) sorted by VendorNumber
@@ -78,4 +132,4 @@ module.exports = {
 //      req. res.send('hello world!');
 //  }
 
-};
+

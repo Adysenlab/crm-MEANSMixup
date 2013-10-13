@@ -5,6 +5,10 @@ Application.Controllers.controller('PoEditCtrl', ['$rootScope', '$scope', '$loca
     // PO comes from app  .factory('PO', ['$resource', function ($resource) {
     //var param = $routeParams.id;//POID;
     $scope.param = $routeParams.id;//POID;
+
+
+    console.log(' PoEditCtrl ', $scope.param)
+
     $scope.thisisnotdup=null;
     //if ( (param==0) || (param===' 0') )
     if ($scope.param == 0) {
@@ -35,6 +39,10 @@ Application.Controllers.controller('PoEditCtrl', ['$rootScope', '$scope', '$loca
       $scope.po = val.data;
       var po1 = _.find(val.data, function (po1) {
         return po1.id == $scope.param ;
+ //       return po1.POID == $scope.param ;
+
+
+
       });
 
       $scope.po1 = po1;
@@ -82,6 +90,8 @@ Application.Controllers.controller('PoEditCtrl', ['$rootScope', '$scope', '$loca
         // lets delete added fields here
         if ($scope.param!=0){
         $scope.poOrigAll = angular.copy($scope.po1);
+
+      console.log(' $scope.po1 ', $scope.po1)
 
       delete $scope.po1.vendorName;
       delete $scope.po1.acctDesc;
@@ -266,8 +276,11 @@ Application.Controllers.controller('PoEditCtrl', ['$rootScope', '$scope', '$loca
       //$scope.checkV();
       if ($scope.param == 0) {
           console.log('save create ',$scope.po1)
-          PO.create(0, ( $scope.po1), function (success, error) {
-          //console.log('create success ', success, error, success.data.POID);
+//          PO.create(0, ( $scope.po1), function (success, error) {
+            PO.create(( $scope.po1), function (success, error) {
+
+
+              //console.log('create success ', success, error, success.data.POID);
           if (success.data.POID !== 0) {
             var poPromise = lookupCachePO.resetPO();// look to refactor
             $location.path('/po');
@@ -453,7 +466,7 @@ Application.Controllers.controller('PoEditCtrl', ['$rootScope', '$scope', '$loca
 Application.Controllers.controller('POCtrl', ['$rootScope', '$scope', 'PO', '$location', '$http', 'Auth', 'comboHelper' ,
   'Vendor' , '$q', 'lookupCache', 'lookupCachePO', 'lookupCacheAcct',
   function ($rootScope, $scope, PO, $location, $http, Auth, comboHelper, Vendor, $q, lookupCache, lookupCachePO, lookupCacheAcct) {
-    //console.log(' This is POCtrl 6')
+    console.log(' This is POCtrl 6')
     //$scope.myData = [];
     $scope.showGrid = true;
     $scope.setCurrentPO = [];
@@ -579,6 +592,8 @@ Application.Controllers.controller('POCtrl', ['$rootScope', '$scope', 'PO', '$lo
     // var editrowTemplate = '<a class="icon-edit edit" href="{{\'#/vendor/\'+row.entity.id}}">{{row.entity.id}}</a>';
     //var editrowTemplate = '<a class="icon-edit edit" href="{{\'#/vendor/\'+row.entity.id}}"></a>';
     var displayDateTemplate = ' <div style="width:75;text-align: left" class="ngCellText colt{{$index}}">{{row.getProperty(col.field)}}</div>';
+
+
     var editrowTemplate = '<div style="text-align:center;"  class="ngCellText"><a class="icon-edit edit" href="{{\'/po/\'+row.entity.id}}"></a></div>';
 
 

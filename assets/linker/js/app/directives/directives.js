@@ -44,52 +44,48 @@ angular.module('application').directive('activeNav', ['$location', function(loca
             });
         };
     })
+//http://jsfiddle.net/beamstyle_thomas/BP3qb/9/
+.directive('bsCheckbox', function () {
+  var checkbox_groups = {};
+  return {
+    restrict: 'A',
+    scope: true,
+    require: '?ngModel',
+    compile: function (elem, attrs) {
 
+      if( !attrs.ngModel )
+        throw new Error('bs-checkbox directive is missing ngModel');
+      if( !attrs.bsCheckbox )
+        throw new Error('bs-checkbox directive is missing bsCheckbox');
 
+      attrs.$set('bsNgModel', attrs.ngModel);
+      attrs.$set('ngModel', 'selection');
 
-  .directive('bsCheckbox', function () {
-    var checkbox_groups = {};
-    return {
-      restrict: 'A',
-      scope: true,
-      require: '?ngModel',
-      compile: function (elem, attrs) {
+      return function (scope, lElement, attr) { // link
 
-        if( !attrs.ngModel )
-          throw new Error('bs-checkbox directive is missing ngModel');
-        if( !attrs.bsCheckbox )
-          throw new Error('bs-checkbox directive is missing bsCheckbox');
+        function set_object_value_by_string(object, string_dot_notation, value) {
+          string_dot_notation = string_dot_notation.split(".");
+          while (string_dot_notation.length > 1)
+            object = object[string_dot_notation.shift()];
+          return object[string_dot_notation.shift()] = value;
+        }
 
-        attrs.$set('bsNgModel', attrs.ngModel);
-        attrs.$set('ngModel', 'selection');
+        scope.selection = scope.selection || {};
 
-        return function (scope, lElement, attr) { // link
-
-          function set_object_value_by_string(object, string_dot_notation, value) {
-            string_dot_notation = string_dot_notation.split(".");
-            while (string_dot_notation.length > 1)
-              object = object[string_dot_notation.shift()];
-            return object[string_dot_notation.shift()] = value;
+        scope.$watch(attr.ngModel, function(value) {
+          checkbox_groups[attrs.bsCheckbox] = checkbox_groups[attrs.bsCheckbox] || [];
+          if( typeof value === 'boolean' && value ){
+            checkbox_groups[attrs.bsCheckbox].push(attr.value);
+            checkbox_groups[attrs.bsCheckbox] = jQuery.unique(checkbox_groups[attrs.bsCheckbox]);
+          }else{
+            checkbox_groups[attrs.bsCheckbox].splice( $.inArray(attr.value, checkbox_groups[attrs.bsCheckbox]), 1 );
           }
-
-          scope.selection = scope.selection || {};
-
-          scope.$watch(attr.ngModel, function(value) {
-            checkbox_groups[attrs.bsCheckbox] = checkbox_groups[attrs.bsCheckbox] || [];
-            if( typeof value === 'boolean' && value ){
-              checkbox_groups[attrs.bsCheckbox].push(attr.value);
-              checkbox_groups[attrs.bsCheckbox] = jQuery.unique(checkbox_groups[attrs.bsCheckbox]);
-            }else{
-              checkbox_groups[attrs.bsCheckbox].splice( $.inArray(attr.value, checkbox_groups[attrs.bsCheckbox]), 1 );
-            }
-            set_object_value_by_string(scope.$parent.$parent, attrs.bsNgModel, checkbox_groups[attrs.bsCheckbox]);
-          });
-        };
-      }
-    };
-  })
-
-
+          set_object_value_by_string(scope.$parent.$parent, attrs.bsNgModel, checkbox_groups[attrs.bsCheckbox]);
+        });
+      };
+    }
+  };
+})
 
 
 

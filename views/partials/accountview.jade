@@ -1,0 +1,42 @@
+vendorview.jade
+p
+    #inside
+    #header
+        h2 Accounts 13594
+            //| - Jade VendorView
+
+    #main-content
+
+        //h2 ng-grid
+        input.search-query(style='width:100px', type='text', ng-model='gridOptions1.filterOptions.filterText', placeholder='Filter')
+        a.btn.btn-sm.btn-primary(ng-click='new()') New
+
+        div(style='width: 100%; height: 350px;',class="gridStyle", ng-grid='gridOptions1')
+    hr
+    tabset
+            tab(heading='Accounts', height='300px')
+
+                .span11
+                    table.table.table-striped(data-ng-hide="loading")
+                        thead
+                            col(style='width: 15%;')
+                            col(style='width: 35%;')
+                            col(style='width: 25%;')
+                            col(style='width: 25%;')
+                            tr
+                                th #
+                                th PONumber
+                                th acctDesc
+                                th POTotal
+                                th VendorInvNum
+                        tbody
+                            tr(data-ng-repeat="po in pords")
+                                td {{ po.POID }}
+                                td {{ po.PONumber }}
+                                td {{ po.acctDesc }}
+                                td {{ po.POTotal }}
+                                td {{ po.VendorInvNum }}
+                                td
+                                   a.btn.btn-sm.btn-warning(ng-click='editPO(po)') Edit
+    #footer
+        a.copyright(target='_blank', href='http://sailsjs.com') Built with Sails.js

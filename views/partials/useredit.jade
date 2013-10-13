@@ -2,7 +2,7 @@ p
     #inside
     #header
         h2 Edit User
-            | - Jade UserEdit
+            | - Jade UserEdit z@z.com
 
 
 
@@ -21,11 +21,12 @@ p
                         i.icon-envelope
                         | Email
                     .controls
-                        input.span6(type='email', placeholder='user@address.com', ng-model='user.email', required)
+                        input.span6(type='email', placeholder='user@email.com', ng-model='user.email', required)
 
 
 
-
+                label Name
+                input(name='name', ng-model='user.name')
                 label Title
                 input(name='Title', ng-model='user.title')
                 //label Role
@@ -41,7 +42,7 @@ p
                 .control-group
                     label.radio.inline(ng-repeat='role in roles2')
                         | {{role.name}}
-                        input(type='radio', value='{{role.i}}', ng-model='user.role', name='option')
+                        input(type='radio', value='{{role.id}}', ng-model='user.role', name='option')
 
 
 
@@ -53,4 +54,5 @@ p
 
                 .row
                 button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
+                button.btn.btn-primary(ng-click='cancel()') Close
 

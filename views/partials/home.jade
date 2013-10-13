@@ -1,4 +1,4 @@
-h1 CRM MeanSails/Email
+h1 meansCRM/Email
 p
 
           .form-po
@@ -112,7 +112,7 @@ p
                               label.checkbox.inline(ng-repeat='option in table_properties.client_status')
                                 | {{option}}
                                 input(type='checkbox', ng-model='form.client_status', bs-checkbox='form_client_status', value='{{option}}', ng-click='search()')
-                              //pre(ng-bind='form | json').
+                            //pre(ng-bind='form | json').
                           .control-group
                                label.radio.inline(ng-repeat='option in table_properties.client_status')
                                  | {{option}}

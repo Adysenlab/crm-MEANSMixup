@@ -1,0 +1,26 @@
+form(name='myForm',,class="form-signin")
+    .control-group(ng-class='{error: myForm.name.$invalid}')
+        //.span12
+        label id
+         | for {{account.AccountID}}
+        label Name
+
+        input(type='text', style='width:300px', name='name', ng-model='account.Desc', required='required')
+
+
+        label Desc
+        textarea(name='Desc', ng-model='account.Desc')
+        br
+        label Budget
+        input(name='Budget', ng-model='account.Budget')
+        br
+        label Zip
+        input(name='Actual', ng-model='account.Actual')
+
+       .span12
+            a.btn(href='/vendor') Cancel
+            button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || myForm.$invalid') Save
+            button.btn.btn-danger(ng-click='destroy()', ng-show='project.$id') Delete
+
+
+

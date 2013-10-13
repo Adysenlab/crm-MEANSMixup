@@ -14,26 +14,26 @@ block body
                             img.logo(src="/linker/images/people.png")
                         li(data-access-level='{{ accessLevels.anon }}', active-nav)
                             a(href='/login') Log in
-
-                        li(data-access-level='{{ accessLevels.anon }}', active-nav)
-                            a(href='/home') Home
-
                         //li(data-access-level='{{ accessLevels.anon }}', active-nav)
                             a(href='/view1') View1
-
-                        li(data-access-level='{{ accessLevels.user }}', active-nav)
-                            a(href='/vendor') Vendors
-                        li(data-access-level='{{ accessLevels.user }}', active-nav)
-                            a(href='/contact') Contacts
-
-                        li(data-access-level='{{ accessLevels.admin }}', active-nav)
-                            a(href='/user') Users
                         li(data-access-level='{{ accessLevels.anon }}', active-nav)
                             a(href='/foodview') FoodView
                         li(data-access-level='{{ accessLevels.user }}', active-nav)
+                            a(href='/vendor') VendorView
+                        li(data-access-level='{{ accessLevels.user }}', active-nav)
+                            a(href='/contacts') Contacts
+                        li(data-access-level='{{ accessLevels.user }}', active-nav)
+                            a(href='/events') Events
+                        //li(data-access-level='{{ accessLevels.user }}', active-nav)
+                            a(href='/po') PoView
+                        li(data-access-level='{{ accessLevels.anon }}', active-nav)
+                            a(href='/home') Home
+                        li(data-access-level='{{ accessLevels.admin }}', active-nav)
+                            a(href='/user') Users
+                        li(data-access-level='{{ accessLevels.user }}', active-nav)
                             a(href="/logout")   Log out
                         //li(data-access-level='{{ accessLevels.user }}', active-nav)
-                            a(href="/test")   Food
+                            a(href="/test")   test
                         //li(data-access-level='{{ accessLevels.user }}', active-nav)
                             a(href='#/vendor') VendorView3
                         //li(data-access-level='{{ accessLevels.user }}' )
@@ -46,14 +46,8 @@ block body
                         //strong {{ user.adjusterid }}&nbsp;
                         span.label(data-ng-class='{"label-info": user.role == userRoles.user, "label-success": user.role == userRoles.admin}') {{ getUserRoleText(user.role) }}
         .container
-            .slide-animation(data-ng-view='ng-view')
-            .alert.alert-error(data-ng-bind="error", data-ng-show="error")
+          div(data-ng-view='ng-view')
+          .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
 
-                 // .slide-animation(data-ng-view='ng-view')
-
-                            div(data-wc-overlay='', data-wc-overlay-delay='600')
-                                br
-                                img(src='/linker/images/spinner.gif')
-                                | Loading
 

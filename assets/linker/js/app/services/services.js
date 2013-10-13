@@ -7,7 +7,14 @@ angular.module('application')
       , userRoles = routingConfig.userRoles;
 //console.log('in service auth')
     $rootScope.user = $cookieStore.get('user') || { username: '', role: userRoles.public};// ,adjusterid:''};
+
+    // $rootScope.user = {"id" : 1, "username" : "user", "password" : "123", "role" : 4    };
+
+
+    console.log('i $rootScope.user = ', $rootScope.user)
+
     $cookieStore.remove('user');
+
     $rootScope.accessLevels = accessLevels;
     $rootScope.userRoles = userRoles;
 
@@ -28,7 +35,8 @@ angular.module('application')
       login: function (user, success, error) {
         $http.post('/login', user).success(function (user) {
           $rootScope.user = user;
-          //console.log ('login user ',user)
+
+          console.log ('login user ',user)
           success(user);
         }).error(error);
       },
@@ -84,7 +92,6 @@ angular.module('application')
           console.log('getting vendor data from server')
 
           thisCache.data = response.data;
-          console.log('data ',thisCache.data)
           thisCache.combo = comboHelper.buildIndex(thisCache.data, comboProperty);
           thisCache.deferred.resolve(thisCache);
         })
@@ -113,6 +120,9 @@ angular.module('application')
         return thisCache.deferred.promise;
         // // returns promise to the cache.vendors object
         // return serviceAPI.get('vendors', Vendor, 'VenderID');
+
+
+
       },
       pushVendor: function(vendor) {
 
@@ -126,8 +136,8 @@ angular.module('application')
 
       updateVendor: function(vendor) {
 
-       var thisCache = caches.vendors;
-       console.log('updateVendor :',vendor);//,'--',vendor);
+        var thisCache = caches.vendors;
+        console.log('updateVendor :',vendor);//,'--',vendor);
 
         var idx = 0;
 
@@ -148,9 +158,9 @@ angular.module('application')
         thisCache.deferred = null;
         var vendorPromise = serviceAPI.getVendors();
         vendorPromise.then(function(cache) {
-        //populateCache('vendors', Vendor, 'VendorID');
-        //console.log('in v reset')
-        return thisCache.deferred.promise;
+          //populateCache('vendors', Vendor, 'VendorID');
+          //console.log('in v reset')
+          return thisCache.deferred.promise;
         })
       }
     };
