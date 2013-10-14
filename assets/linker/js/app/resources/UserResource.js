@@ -38,9 +38,9 @@ angular.module('application')
       createDefault:{method:'POST'},         // auto post object built in sails rest service
 
       update:{method:'PUT',params: {id:'@id'} },
-      remove :{method:'DELETE',params: {id:'@id'} },
+   //   remove :{method:'DELETE',params: {id:'@id'} },
       destroy :{method:'DELETE',params: {id:'@id'} },
-      delete: {  method: 'DELETE',  isArray:true, params: {    id1:"@id"  }}
+   //   delete: {  method: 'DELETE',  isArray:true, params: {    id1:"@id"  }}
     }
   )
 }])

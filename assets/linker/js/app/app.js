@@ -11,7 +11,6 @@ Application.Controllers = angular.module('application.controllers', []);
 Application.Filters = angular.module('application.filters', []);
 Application.Directives = angular.module('application.directives', []);
 //Application.angulartable = angular.module('angular-table', []);
-
 //angular.module('angular-client-side-auth', ['ngCookies','angular-client-side-auth.filters' ,'ui' , 'ngGrid','ui.bootstrap','ExperimentsModule','angular-table']) 'application.constants',
 
 angular.module('application', ['application.filters', 'application.services', 'application.directives',
@@ -35,7 +34,10 @@ angular.module('application', ['application.filters', 'application.services', 'a
       .when('/foodview', {templateUrl: '/partials/foodview', controller: 'FoodCtrl', access: access.anon})
 
       .when('/vendor', {templateUrl: '/partials/vendorview', controller: 'VendorCtrl',access:  access.user})
-      //using modal .when('/vendor/:VendorNumber', {templateUrl: '/partials/vendorviewedit', controller: 'VendorEditCtrl',access:  access.user})
+      .when('/event', {templateUrl: '/partials/eventview', controller: 'EventCtrl',access:  access.user})
+
+
+        //using modal .when('/vendor/:VendorNumber', {templateUrl: '/partials/vendorviewedit', controller: 'VendorEditCtrl',access:  access.user})
 
 
       .when('/account', {templateUrl: '/partials/accountview', controller: 'AccountCtrl',access:  access.user})
@@ -51,11 +53,8 @@ angular.module('application', ['application.filters', 'application.services', 'a
       .when('/user/:id',  {templateUrl:'/partials/useredit',controller: 'UserEditCtrl',access: access.user  })
 
      //  .when('/useredit/:id',  {templateUrl:'/partials/useredit',controller: 'UserEditCtrl',access: access.user  })
-
       //.when('/user/destroy/:id',  {templateUrl:'/partials/user',controller: 'UserCtrl',access: access.user  })
       //.when('/user/:id',  {templateUrl:'/partials/useredit',controller: 'UserEditCtrl',access: access.user  })
-
-
       //.when('/test',  {templateUrl:'/partials/test',controller: 'UserCtrl',access: access.user  })
 
 

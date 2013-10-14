@@ -1,0 +1,36 @@
+
+h1 Events
+p
+#main-content
+    input.search-query(style='width:100px', type='text', ng-model='filterText', placeholder='Filter')
+        // a.btn.btn-sm.btn-primary(ng-click='reset()') reset
+    .span12
+        table.table.table-striped(data-ng-hide="loading")
+            thead
+                col(style='width: 15%;')
+                col(style='width: 30%;')
+                col(style='width: 30%;')
+                col(style='width: 25%;')
+                tr
+
+                    th name
+                    th loc City
+                    th loc Addr
+                    th contacts
+            tbody
+                tr(data-ng-repeat="event in events")
+                    td {{ event.name }}
+                    td {{ event.location.City }}
+                    td {{ event.location.street }}
+
+                    td
+
+                     ul
+                        li(ng-repeat='contact in event.contacts')
+                         {{ contact.FirstName }} {{ contact.LastName }}
+
+                     td
+                        a.btn.btn-sm.btn-warning(ng-click='popup(event)') Edit
+
+#footer
+    a.copyright(target='_blank', href='http://sailsjs.com') Built with Sails.js

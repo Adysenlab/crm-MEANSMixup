@@ -6,7 +6,7 @@ p This view is visible to users with the administrator role.
     input.search-query(style='width:100px', type='text', ng-model='filterText', placeholder='Filter')
     a.btn.btn-sm.btn-primary(ng-click='reset()') reset
 
- .span11
+ .span12
     table.table.table-striped(data-ng-hide="loading")
 
         thead
@@ -57,3 +57,5 @@ p This view is visible to users with the administrator role.
                     a.btn.btn-sm.btn-warning(ng-click='edit(user)') Edit
                 td
                     a.btn.btn-sm.btn-danger(ng-click='delete(user)') Delete
+ #footer
+    a.copyright(target='_blank', href='http://sailsjs.com') Built with Sails.js
