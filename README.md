@@ -1,8 +1,8 @@
-add .MEANS
+MEANS
 =====
 
 Mongo+Express+Angular+Node+Sails
-crm sample
+crm wedding planner example
 
 ===============
 # Demo Site
@@ -10,6 +10,11 @@ crm sample
 
 # Slides
 ####https://docs.google.com/presentation/d/1HqhG2jtlsqNk3ozqesQctKLOycVpuWX8Vixy4qwp62o/edit?usp=sharing
+
+
+# Handout Documentation
+####https://docs.google.com/document/d/1TIHCdm9PGrqLFlwZu3m1TJGZnSKb7Hk5Yic5M33gbp4/edit?usp=sharing
+
 ================================
 Repos used in this project
 ===============
