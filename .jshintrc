@@ -19,5 +19,6 @@
   "smarttabs": true,
   "browser": true,
   "globals": {
+    "sails": false
   }
 }

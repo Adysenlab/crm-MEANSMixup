@@ -19,6 +19,13 @@
   "smarttabs": true,
   "browser": true,
   "globals": {
-    "_": false
+    "Email": false,
+    "Event": false,
+    "Food": false,
+    "Tenant": false,
+    "User": false,
+    "Vendor": false,
+
+    "EmailService": false
   }
 }

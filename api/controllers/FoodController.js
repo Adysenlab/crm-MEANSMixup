@@ -1,10 +1,8 @@
 /*---------------------
-	:: Food 
-	-> controller
----------------------*/
+ :: Food
+ -> controller
+ ---------------------*/
 var FoodController = {
-
-
 
 };
 module.exports = FoodController;

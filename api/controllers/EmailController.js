@@ -20,49 +20,47 @@
 
 var EmailController;
 EmailController = {
-  create: function (req, res, next) {
-    console.log('--email ctrl req.body---------------------\n', req.body.Last, '--\n', req.body)
+  create: function(req, res, next) {
+    console.log('--email ctrl req.body---------------------\n', req.body.Last, '--\n', req.body);
     //   res.json(200, { "status": "success"} );
 
-    First = req.param("First");
-    Last = req.param("Last");
-    Company = req.param("Company");
-    Street = req.param("Street");
-    City = req.param("City");
-    State = req.param("State");
-    Zip = req.param("Zip");
-    Emailaddr = req.param("Email");
-
-    Comment = req.param("Comment");
-
-    status = req.param("client_status");
+    var First = req.param('First');
+    var Last = req.param('Last');
+    var Company = req.param('Company');
+    var Street = req.param('Street');
+    var City = req.param('City');
+    var State = req.param('State');
+    var Zip = req.param('Zip');
+    var Emailaddr = req.param('Email');
+    var Comment = req.param('Comment');
+    var status = req.param('client_status');
 
     Email.create({
-      First: req.param("First"),
-      Last: req.param("Last"),
-      Company: req.param("Company"),
-      Street: req.param("Street"),
-      City: req.param("City"),
-      State: req.param("State"),
-      Zip: req.param("Zip"),
-      Email: req.param("Email"),
-      Comment: req.param("Comment"),
-      status: req.param("client_status")
+      First: req.param('First'),
+      Last: req.param('Last'),
+      Company: req.param('Company'),
+      Street: req.param('Street'),
+      City: req.param('City'),
+      State: req.param('State'),
+      Zip: req.param('Zip'),
+      Email: req.param('Email'),
+      Comment: req.param('Comment'),
+      status: req.param('client_status')
     })
-      .then(function (Email) {
-        console.log("Email created::", Email);
+      .then(function(Email) {
+        console.log('Email created::', Email);
         //  return res.json({ data: po });
       })
-      .catch(function (err) {
-        // console.error('er ',err)
-        // return next(err);
-      })
+      .catch (function(err) {
+      // console.error('er ',err)
+      // return next(err);
+    });
 
 
     //console.log('name ',First,Last);
     /////////////////////////////////////
     var data = req.body;
-    style = '<!DOCTYPE html> <html lang="en">';//'';//
+    var style = '<!DOCTYPE html> <html lang="en">';
     style += '<head>';
     style += '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=us-ascii">';
     style += '<style type="text/css">';
@@ -73,7 +71,7 @@ EmailController = {
     style += '</head>';
     var newdata = style + '<br/><br/><div id="alternate-rows"><table cellspacing="0">';
     newdata += '<tbody>';
-    newdata += "<tr><td></td><td><b>Contact Info</b></td></tr>";
+    newdata += '<tr><td></td><td><b>Contact Info</b></td></tr>';
 
     newdata += '<tr><td>Last Name: </td><td>' + Last + '</td></tr>';
     newdata += '<tr><td>First:  </td><td>' + First + '</td></tr>';
@@ -85,19 +83,19 @@ EmailController = {
     newdata += '<tr><td>Email: </td><td>' + Emailaddr + '</td></tr>';
     newdata += '<tr><td>Comment:  </td><td>' + Comment + '</td></tr>';
     newdata += '<tr><td>BestTime:  </td><td>' + status + '</td></tr>';
-    newdata += "</tbody>";// only for alt rows
-    newdata += "</table>";
+    newdata += '</tbody>';// only for alt rows
+    newdata += '</table>';
 
     var mailOptions = {
       from: Email,
-      to: "jrt@gtz.com", //+ Other_preparers_Email_address,
-      subject: "Crm email contact from " + First + ' ' + Last,
-      text: "test\r ",
+      to: 'jrt@gtz.com', //+ Other_preparers_Email_address,
+      subject: 'Crm email contact from ' + First + ' ' + Last,
+      text: 'test\r ',
       html: newdata,
       name: First + ' ' + Last
-    }
+    };
     EmailService.sendEmail(mailOptions);//{email: 'test@test.com', name: 'test'});
-    res.json(200, { "status": "success"});
+    res.json(200, { 'status': 'success'});
   }
 };
 module.exports = EmailController;

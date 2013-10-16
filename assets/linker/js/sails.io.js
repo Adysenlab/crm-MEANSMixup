@@ -6,7 +6,7 @@
  * It reduces the amount of browser code necessary to send and receive messages
  * to & from Sails by simulating a REST client interface on top of socket.io.
  * It models its API after the pattern in jQuery you might be familiar with.
- * 
+ *
  * So to switch from using AJAX to Socket.io, instead of:
  *    `$.post( url, [data], [cb] )`
  *
@@ -17,10 +17,10 @@
  * http://sailsjs.org/#documentation
  */
 
-(function (io) {
+(function(io) {
 
 
-  // We'll be adding methods to `io.SocketNamespace.prototype`, the prototype for the 
+  // We'll be adding methods to `io.SocketNamespace.prototype`, the prototype for the
   // Socket instance returned when the browser connects with `io.connect()`
   var Socket = io.SocketNamespace;
 
@@ -31,12 +31,12 @@
    * e.g.
    *    `socket.get('/user/3', Stats.populate)`
    *
-   * @param {String} url    ::    destination URL
-   * @param {Object} params ::    parameters to send with the request [optional]
-   * @param {Function} cb   ::    callback function to call when finished [optional]
+   * @param {String} url    ::    destination URL.
+   * @param {Object} params ::    parameters to send with the request [optional].
+   * @param {Function} cb   ::    callback function to call when finished [optional].
    */
 
-  Socket.prototype.get = function (url, data, cb) {
+  Socket.prototype.get = function(url, data, cb) {
     return this.request(url, data, cb, 'get');
   };
 
@@ -47,12 +47,12 @@
    * e.g.
    *    `socket.post('/event', newMeeting, $spinner.hide)`
    *
-   * @param {String} url    ::    destination URL
-   * @param {Object} params ::    parameters to send with the request [optional]
-   * @param {Function} cb   ::    callback function to call when finished [optional]
+   * @param {String} url    ::    destination URL.
+   * @param {Object} params ::    parameters to send with the request [optional].
+   * @param {Function} cb   ::    callback function to call when finished [optional].
    */
 
-  Socket.prototype.post = function (url, data, cb) {
+  Socket.prototype.post = function(url, data, cb) {
     return this.request(url, data, cb, 'post');
   };
 
@@ -63,12 +63,12 @@
    * e.g.
    *    `socket.post('/event/3', changedFields, $spinner.hide)`
    *
-   * @param {String} url    ::    destination URL
-   * @param {Object} params ::    parameters to send with the request [optional]
-   * @param {Function} cb   ::    callback function to call when finished [optional]
+   * @param {String} url    ::    destination URL.
+   * @param {Object} params ::    parameters to send with the request [optional].
+   * @param {Function} cb   ::    callback function to call when finished [optional].
    */
 
-  Socket.prototype.put = function (url, data, cb) {
+  Socket.prototype.put = function(url, data, cb) {
     return this.request(url, data, cb, 'put');
   };
 
@@ -79,12 +79,12 @@
    * e.g.
    *    `socket.delete('/event', $spinner.hide)`
    *
-   * @param {String} url    ::    destination URL
-   * @param {Object} params ::    parameters to send with the request [optional]
-   * @param {Function} cb   ::    callback function to call when finished [optional]
+   * @param {String} url    ::    destination URL.
+   * @param {Object} params ::    parameters to send with the request [optional].
+   * @param {Function} cb   ::    callback function to call when finished [optional].
    */
 
-  Socket.prototype['delete'] = function (url, data, cb) {
+  Socket.prototype['delete'] = function(url, data, cb) {
     return this.request(url, data, cb, 'delete');
   };
 
@@ -97,7 +97,7 @@
    */
 
   Socket.prototype.request = request;
-  function request (url, data, cb, method) {
+  function request(url, data, cb, method) {
 
     var socket = this;
 
@@ -112,12 +112,12 @@
     method = method || 'get';
 
 
-    if ( typeof url !== 'string' ) {
+    if (typeof url !== 'string') {
       throw new Error('Invalid or missing URL!\n' + usage);
     }
 
     // Allow data arg to be optional
-    if ( typeof data === 'function' ) {
+    if (typeof data === 'function') {
       cb = data;
       data = {};
     }
@@ -130,28 +130,28 @@
 
 
     // Send the message over the socket
-    socket.emit(method, json, function afterEmitted (result) {
+    socket.emit(method, json, function afterEmitted(result) {
 
       var parsedResult = result;
       try {
         parsedResult = window.io.JSON.parse(result);
       } catch (e) {
         if (typeof console !== 'undefined') {
-          console.warn("Could not parse:", result, e);
+          console.warn('Could not parse:', result, e);
         }
-        throw new Error("Server response could not be parsed!\n" + result);
+        throw new Error('Server response could not be parsed!\n' + result);
       }
 
       // TODO: Handle errors more effectively
-      if (parsedResult === 404) throw new Error("404: Not found");
-      if (parsedResult === 403) throw new Error("403: Forbidden");
-      if (parsedResult === 500) throw new Error("500: Server error");
+      if (parsedResult === 404) throw new Error('404: Not found');
+      if (parsedResult === 403) throw new Error('403: Forbidden');
+      if (parsedResult === 500) throw new Error('500: Server error');
 
       cb && cb(parsedResult);
 
     });
   }
-  
+
 
 
 

@@ -47,12 +47,12 @@ module.exports.adapters = {
 //
 //
   mongo: {
-    module   : 'sails-mongo',
-    host     : 'localhost',
-    port     : 27017,
+    module: 'sails-mongo',
+    host: 'localhost',
+    port: 27017,
 //    user     : '',
 //    password : '',
-    database : 'crm',
+    database: 'crm',
     schema: true
   }
 

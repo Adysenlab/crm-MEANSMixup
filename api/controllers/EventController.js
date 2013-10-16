@@ -15,22 +15,22 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-  var EventController;
-  EventController = {
+var EventController;
+EventController = {
 
 
-index: function (req, res, next) {
+  index: function(req, res, next) {
     console.log('EventController index... ');
     Event.find({
     }).sort('name ASC').done(function(err, events) {
-            if (err) return next(err);
-            // pass the array down to the /views/vendor.ejs page
-            //res.json(users);
-            res.json({data:events});
+        if (err) return next(err);
+        // pass the array down to the /views/vendor.ejs page
+        //res.json(users);
+        res.json({data: events});
 
-            console.log('user index after res.json... ');
-        });
-}
+        console.log('user index after res.json... ');
+      });
+  }
 
 
 };

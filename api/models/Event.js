@@ -9,14 +9,14 @@ module.exports = {
 
   attributes: {
 
-      "name" : "string",
-      "location" : "json",
+    'name' : 'string',
+    'location' : 'json',
 
-      "contacts" : "array",
-      "vendors" : "array"
+    'contacts' : 'array',
+    'vendors' : 'array'
 
 
-    
+
   }
 
 };
