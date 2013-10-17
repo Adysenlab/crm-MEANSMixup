@@ -68,7 +68,7 @@ angular.module('crmApp')
 
   .controller('AppCtrl', ['$rootScope', '$scope', '$location' , 'Auth',
     function($rootScope, $scope, $location, Auth) {
-      //console.log(' AppCtrl ') //,$routeParams.VendorNumber)
+      console.log(' AppCtrl ') //,$routeParams.VendorNumber)
 
       $scope.getUserRoleText = function(role) {
         return _.invert(Auth.userRoles)[role];

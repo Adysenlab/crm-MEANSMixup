@@ -4,8 +4,7 @@
  * creating namespaces and moduled for controllers, filters, services, and directives.
  */
 
-angular.module('crmApp', ['application.filters', 'application.services', 'application.directives',
-    'application.controllers', 'ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies'])
+angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies'])
 
   .config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 
