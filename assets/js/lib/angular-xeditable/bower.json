@@ -1,0 +1,42 @@
+{
+  "name": "angular-xeditable",
+  "version": "0.1.5",
+  "description": "Edit in place for AngularJS",
+  "author": {
+    "name": "https://github.com/vitalets"
+  },
+  "license": "MIT",
+  "homepage": "http://vitalets.github.io/angular-xeditable",
+  "main": [
+    "dist/css/xeditable.css",
+    "dist/js/xeditable.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "playground",
+    "test",
+    "libs",
+    "docs",
+    "zip",
+    "src",
+    "starter",
+    "Gruntfile.js",
+    "index.html",
+    "jsdoc.conf.json",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "~1.x"
+  },
+  "devDependencies": {},
+  "gitHead": "dfa84a861a1578023b97905f5544fcdc61d6b664",
+  "readme": "# Angular-xeditable\r\nEdit in place for AnguarJS\r\n\r\n## Overview\r\nThis library allows you to create editable elements in [AngularJS](http://angularjs.org) project.  \r\nIt is based on ideas of [x-editable](http://vitalets.github.io/x-editable) but was written from scratch \r\nto use power of angular and support complex forms / editable grids.\r\n\r\n## Demo and docs\r\n**http://vitalets.github.io/angular-xeditable**\r\n\r\n## Installation\r\n#### Bower\r\n````\r\nbower install angular-xeditable\r\n````\r\n#### Manual\r\nDownload latest version from [project homepage](http://vitalets.github.io/angular-xeditable).\r\n\r\n## Dependencies\r\nIt does not depend on any libraries except angular itself.  \r\nFor themes you may need to include [Twitter Bootstrap](http://getbootstrap.com) CSS.\r\n\r\n## jsFiddle / plunker\r\nPlease use these live templates to demonstrate issues:  \r\nhttp://jsfiddle.net/NfPcH/3  \r\nhttp://plnkr.co/edit/BjWwXIlYyyLvRnVwO8m8?p=preview\r\n\r\n## Roadmap\r\n\r\n* date\r\n* select2\r\n* checklist\r\n* comodate\r\n* popup mode\r\n\r\n## License\r\nMIT",
+  "readmeFilename": "readme.md",
+  "_id": "angular-xeditable@0.1.5",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vitalets/angular-xeditable.git"
+  }
+}

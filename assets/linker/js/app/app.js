@@ -4,8 +4,16 @@
  * creating namespaces and moduled for controllers, filters, services, and directives.
  */
 
-angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies'])
+angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies','xeditable'])
+    .run(function(editableOptions,editableThemes) {
+        //editableOptions.buttons = 'no',
+        editableOptions.blur = 'ignore',
+            // editableOptions.theme = 'bs3'; //'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+            editableOptions.theme = 'bs3';
+        // overwrite submit button template
+      //  editableThemes['default'].submitTpl = '<button type="submit">ok</button>';
 
+    })
   .config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 
     var access = routingConfig.accessLevels;
@@ -25,6 +33,7 @@ angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstra
       .when('/vendor', {templateUrl: '/partials/vendorview', controller: 'VendorCtrl', access: access.user})
       .when('/event', {templateUrl: '/partials/eventview', controller: 'EventCtrl', access: access.user})
 
+      .when('/daily',{templateUrl:'/partials/daily',controller: 'DailyCtrl',access: access.user})
 
       // using modal .when('/vendor/:VendorNumber', {templateUrl: '/partials/vendorviewedit', controller: 'VendorEditCtrl',access:  access.user})
 

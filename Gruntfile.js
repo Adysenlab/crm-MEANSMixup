@@ -68,7 +68,7 @@ module.exports = function (grunt) {
     'js/lib/angular/angular-1.2.0-rc.2/angular-cookies.js',
 
     'js/lib/angular/angular-1.2.0-rc.2/angular-animate.js',
-
+    'js/lib/angular-xeditable/dist/js/xeditable.js',
 
 //
 //    'js/lib/angular/angular-1.0.8/angular.js',

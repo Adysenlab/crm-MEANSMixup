@@ -1,0 +1,65 @@
+p
+    #inside
+    #header
+
+    #main-content
+
+    .span12
+     h2 DailyTimeSheet
+
+    table.table.table-bordered.table-hover.table-condensed
+        tr(style='font-weight: bold;')
+            td(style='width: 10%;') claim
+            td(style='width: 20%;') service
+            td(style='width: 10%;') date
+            td(style='width: 16%;') expense
+            td(style='width: 25%;') work desc
+            td(style='width: 7%;') time
+            td(style='width: 7%;') mileage
+            td(style='width: 5%;') Edit
+
+        tr(ng-repeat='daily in dailies')
+            td
+                span(e-style="width:110px",editable-select='daily.CLAIM_NO', e-name='CLAIM_NO', e-form='rowform', e-ng-options='c.CLAIM_NO as c.CLAIM_NO  for c in claims', e-required)
+                | {{ showClaim(daily) }}
+            td
+
+                span(e-style="width:180px",editable-select='daily.SERVICE_ID', e-name='SERVICE_ID', e-form='rowform', e-ng-options='s.id as s.name for s in services')
+                | {{ showService(daily) }}
+            td
+                span(e-style="width:100px",editable-bsdate="daily.WORK_DATE", e-datepicker-popup="dd-MMMM-yyyy", e-name='date', e-form='rowform', e-required)
+                | {{ daily.WORK_DATE || 'empty' }}
+            td
+                span(e-style="width:180px",editable-select='daily.EXPENSE', e-name='EXPENSE', e-form='rowform', e-ng-options='e.id as e.name for e in expenses')
+                | {{ showExpesne(daily) }}
+            td
+                span(e-style="width:200px",editable-textarea="daily.WORK_DESCRIPTION" ,e-rows="3" ,e-cols="50", e-name='name', e-form='rowform',  e-required)
+                | {{ daily.WORK_DESCRIPTION || 'empty' }}
+            td
+                span(e-style="width:30px",editable-text='daily.WORK_TIME', e-name='WORK_TIME', e-form='rowform',  e-required)
+                | {{ daily.WORK_TIME || 'empty' }}
+
+            td
+                span(e-style="width:30px",editable-text='daily.MILEAGE', e-name='name', e-form='rowform', e-required)
+                    | {{ daily.MILEAGE || 'empty' }}
+            td(style='white-space: nowrap;')
+                form.form-buttons.form-inline(editable-form='rowform', name='rowform', onbeforesave='saveDaily($data, daily.SERVICE_ID)', ng-show='rowform.$visible', ng-init='(inserted == daily) && rowform.$show()')
+                    button.btn.btn-primary(type='submit', ng-disabled='rowform.$waiting') save
+
+                    button.btn.btn-warning(type='button', ng-disabled='rowform.$waiting', ng-click='rowform.$hide()') cancel
+                .buttons(ng-show='!rowform.$visible')
+                    button.btn.btn-primary(ng-click='rowform.$show()') edit
+                    button.btn.btn-danger(ng-click='removeUser($index)') del
+        button.btn.btn-default(ng-click='addUser()') Add row
+
+
+
+
+    .span12
+    a.btn.btn-success(ng-click='postDaily()',ng-disabled='currentDaily.AR_ID!="null"',ng-hide='currentDaily.AR_ID!=="null"')  Save Daily »
+    a.btn.btn-success(ng-click='postBatch()')  Submit Batch »
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    a.btn.btn-primary(ng-href='/claim')  Close
+
+
+

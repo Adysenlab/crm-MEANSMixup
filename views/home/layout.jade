@@ -6,7 +6,8 @@ html(ng-app='crmApp')
 
         // Viewport mobile tag for sensible mobile support
         meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
-        //link(href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css', rel='stylesheet')
+         //link(href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css', rel='stylesheet')
+        //link(href="//netdna.bootstrapcdn.com/twitter-bootstrap/3.0.0/css/bootstrap.css", rel="stylesheet")
         // STYLES
         link(rel="stylesheet", href="/linker/styles/angular-table.css")
         link(rel="stylesheet", href="/linker/styles/angular-ui.css")
@@ -17,7 +18,9 @@ html(ng-app='crmApp')
         link(rel="stylesheet", href="/linker/styles/demo.css")
         link(rel="stylesheet", href="/linker/styles/ng-grid-2.0.0.7.min.css")
         link(rel="stylesheet", href="/linker/styles/styles.css")
+        link(rel="stylesheet", href="/linker/styles/xeditable.css")
         // STYLES END
+
 
     body
         block body
@@ -79,6 +82,7 @@ html(ng-app='crmApp')
         script(type="text/javascript", src="/js/lib/angular/angular-1.2.0-rc.2/angular-resource.js")
         script(type="text/javascript", src="/js/lib/angular/angular-1.2.0-rc.2/angular-cookies.js")
         script(type="text/javascript", src="/js/lib/angular/angular-1.2.0-rc.2/angular-animate.js")
+        script(type="text/javascript", src="/js/lib/angular-xeditable/dist/js/xeditable.js")
         script(type="text/javascript", src="/js/lib/angular-bootstrap/ui-bootstrap-tpls.js")
         script(type="text/javascript", src="/js/lib/angular/angular-table.js")
         script(type="text/javascript", src="/js/lib/angular/ng-grid-2.0.7.min.js")
@@ -97,6 +101,7 @@ html(ng-app='crmApp')
         script(type="text/javascript", src="/js/lib/tweenMax.min.js")
         script(type="text/javascript", src="/linker/js/app/animations/listAnimations.js")
         script(type="text/javascript", src="/linker/js/app/app.js")
+        script(type="text/javascript", src="/linker/js/app/controllers/DailyCtrl.js")
         script(type="text/javascript", src="/linker/js/app/controllers/EventCtrl.js")
         script(type="text/javascript", src="/linker/js/app/controllers/FoodCtrl.js")
         script(type="text/javascript", src="/linker/js/app/controllers/HomeCtrl.js")
@@ -105,6 +110,7 @@ html(ng-app='crmApp')
         script(type="text/javascript", src="/linker/js/app/controllers/VendorCtrl.js")
         script(type="text/javascript", src="/linker/js/app/directives/directives.js")
         script(type="text/javascript", src="/linker/js/app/filters/filters.js")
+        script(type="text/javascript", src="/linker/js/app/resources/DailyResource.js")
         script(type="text/javascript", src="/linker/js/app/resources/EmailResource.js")
         script(type="text/javascript", src="/linker/js/app/resources/EventResource.js")
         script(type="text/javascript", src="/linker/js/app/resources/UserResource.js")
