@@ -4,7 +4,7 @@
  * creating namespaces and moduled for controllers, filters, services, and directives.
  */
 
-angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies','xeditable'])
+angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies','xeditable','angular-form-ui'])
     .run(function(editableOptions,editableThemes) {
         //editableOptions.buttons = 'no',
         editableOptions.blur = 'ignore',

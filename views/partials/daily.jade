@@ -52,12 +52,13 @@ p
                     button.btn.btn-danger(ng-click='removeUser($index)') del
         button.btn.btn-default(ng-click='addUser()') Add row
 
-
-
-
     .span12
     a.btn.btn-success(ng-click='postDaily()',ng-disabled='currentDaily.AR_ID!="null"',ng-hide='currentDaily.AR_ID!=="null"')  Save Daily »
     a.btn.btn-success(ng-click='postBatch()')  Submit Batch »
+    button(busy-button='busy-button', busy-text='Saving...', ng-click='postBatch()')
+    | Click me to Submit Batch »
+
+
     &nbsp;&nbsp;&nbsp;&nbsp;
     a.btn.btn-primary(ng-href='/claim')  Close
 
