@@ -6,7 +6,7 @@ crm wedding planner example
 
 ===============
 # Demo Site
-#### http://sample3.gtz.com:8001/
+#### http://sample4.gtz.com:8001/
 
 # Slides
 ####https://docs.google.com/presentation/d/1HqhG2jtlsqNk3ozqesQctKLOycVpuWX8Vixy4qwp62o/edit?usp=sharing
