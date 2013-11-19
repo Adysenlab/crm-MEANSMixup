@@ -1,10 +1,11 @@
-angular.module('angular-form-ui').
+
     /**
      * <button busy-button busy-text="Saving..." ng-click="save()">Save</button>
      * Required attribute: ng-click="[expression]"
      * Optional attribute: busy-text="[string]"
      */
-    directive('busyButton', function () {
+  /*  angular.module('angular-form-ui').
+        directive('busyButton', function () {
         return {
             restrict: 'A',
             controller: ['$scope', '$element', function ($scope, $element) {
@@ -63,4 +64,4 @@ angular.module('angular-form-ui').
                 });
             }
         };
-    });
+    }); */

@@ -45,15 +45,15 @@ function DailyCtrl($scope, $rootScope,    $q,  $location, $routeParams,$filter) 
 //        {
 //            alert(num.CLAIM_NO +' '+num.WORK_DESCRIPTION)
 //        } );
-
-        VendorResource.create(0, ($scope.vendor), function(success, error) {
-            if (success) {
-                console.log('create success ', success);
-                //var vendorPromise = lookupCache.resetVendors();
-                var vendorPromise = lookupCache.pushVendor($scope.vendor);//success);
-                $location.path('/vendor');
-            }
-        });
+        alert('thanks for summitting batch')
+//        VendorResource.create(0, ($scope.vendor), function(success, error) {
+//            if (success) {
+//                console.log('create success ', success);
+//                //var vendorPromise = lookupCache.resetVendors();
+//                var vendorPromise = lookupCache.pushVendor($scope.vendor);//success);
+//                $location.path('/vendor');
+//            }
+//        });
     };
 
 

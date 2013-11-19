@@ -2,9 +2,10 @@
 /**
  * The application file bootstraps the angular app by  initializing the main module and
  * creating namespaces and moduled for controllers, filters, services, and directives.
+ 'angular-form-ui'
  */
 
-angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies','xeditable','angular-form-ui'])
+angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies','xeditable'  ])
     .run(function(editableOptions,editableThemes) {
         //editableOptions.buttons = 'no',
         editableOptions.blur = 'ignore',
