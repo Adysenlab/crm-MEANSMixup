@@ -39,7 +39,10 @@ module.exports = {
       required: true
     },
 
-
+    online: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     email: {
       type: 'string',
       required: true

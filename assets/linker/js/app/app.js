@@ -5,16 +5,26 @@
  'angular-form-ui'
  */
 
-angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies','xeditable'  ])
-    .run(function(editableOptions,editableThemes) {
-        //editableOptions.buttons = 'no',
-        editableOptions.blur = 'ignore',
-            // editableOptions.theme = 'bs3'; //'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-            editableOptions.theme = 'bs3';
-        // overwrite submit button template
-      //  editableThemes['default'].submitTpl = '<button type="submit">ok</button>';
+angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstrap', 'ngGrid', 'ngCookies', 'xeditable', 'btford.socket-io'])
 
-    })
+  // set up socket.io
+  .run(function(socket) {
+    // subscribe to the user model
+    socket.get('/user/subscribe');
+
+    // forward any socket messages we might want onto the $rootScope
+    socket.forward('userChange');
+  })
+
+  .run(function(editableOptions,editableThemes) {
+    //editableOptions.buttons = 'no',
+    editableOptions.blur = 'ignore',
+      // editableOptions.theme = 'bs3'; //'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+      editableOptions.theme = 'bs3';
+    // overwrite submit button template
+    //  editableThemes['default'].submitTpl = '<button type="submit">ok</button>';
+
+  })
   .config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 
     var access = routingConfig.accessLevels;

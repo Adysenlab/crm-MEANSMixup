@@ -17,16 +17,36 @@ module.exports = {
           return next(err);
         }
         if (req.body.rememberme) req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
-        //user.online=true;
-        // console.log(' user.online', user.online)
-        // res.json(200, { "role": user.role, "username": user.username ,"online":true});
-        res.json(200, { 'role': user.role, 'username': user.username });
+
+        User.update(user.id, {
+          online: true
+        }, function(err) {
+          if (err) return next(err);
+
+          // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
+          User.publishUpdate(user.id, {
+            online: true,
+            id: user.id,
+            username: user.username,
+            action: 'login'
+          });
+
+          res.json(200, { 'role': user.role, 'username': user.username });
+        });
       });
     })(req, res, next);
   },
 
   logout: function(req,res) {
     req.logout();
+
+    // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged out
+    User.publishUpdate(user.id, {
+      online: true,
+      id: user.id,
+      username: user.username,
+      action: 'logout'
+    });
     res.send('logout successful');
   }
 

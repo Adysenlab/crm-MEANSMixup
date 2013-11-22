@@ -9,7 +9,7 @@ module.exports = {
 
   // This loads the sign-up page --> new.ejs
   'new': function(req, res) {
-    console.log('creste new user ');
+    console.log('render new user signup page');
     res.view();
   },
 
@@ -48,7 +48,6 @@ module.exports = {
   // render the profile view (e.g. /views/show.ejs)
   show: function(req, res, next) {
     User.findOne(req.param('id'), function foundUser(err, user) {
-      console.log('matt debug', user);
       if (err) return next(err);
       if (!user) return next();
       res.view({
@@ -88,6 +87,11 @@ module.exports = {
         // return res.redirect('/user');
         return res.json({ data: user });
       }
+
+      // Let other subscribed sockets know that the user was created.
+      user.action = 'create';
+      User.publishCreate(user);
+
       return res.json({ data: user });
       // After successfully creating the user
       // redirect to the show action
@@ -149,11 +153,37 @@ module.exports = {
       User.destroy(req.param('id'), function userDestroyed(err) {
         if (err) return next(err);
 
+        // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
+        User.publishUpdate(user.id, {
+          username: user.username,
+          action: 'destroy'
+        });
+
       });
 
       //  res.redirect('/user');
       return res.json({ data: 'success' });
     });
-  }
+  },
 
+  // This action works with socket.get('/user/subscribe') to
+  // subscribe to the User model classroom and instances of the user
+  // model
+  subscribe: function(req, res, next) {
+
+    // Find all current users in the user model
+    User.find(function foundUsers(err, users) {
+      if (err) return next(err);
+
+      // subscribe this socket to the User model classroom
+      User.subscribe(req.socket);
+
+      // subscribe this socket to the user instance rooms
+      User.subscribe(req.socket, users);
+
+      // This will avoid a warning from the socket for trying to render
+      // html over the socket.
+      res.send(200);
+    });
+  }
 };

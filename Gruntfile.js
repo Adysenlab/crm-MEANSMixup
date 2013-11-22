@@ -59,7 +59,9 @@ module.exports = function (grunt) {
 
     // A simpler boilerplate library for getting you up and running w/ an
     // automatic listener for incoming messages from Socket.io.
-    'linker/js/app.js',
+//    'linker/js/app.js',
+
+    'linker/js/routingConfig.js',
 
      // *->    put other dependencies here angular-1.2.0-rc.2  <-*
     'js/lib/angular/angular-1.2.0-rc.2/angular.js',
@@ -95,8 +97,10 @@ module.exports = function (grunt) {
 
     'js/lib/tweenMax.min.js',
 
+    'js/lib/angular-socket-io/socket.js',
+
     // All of the rest of your app scripts imported here
-    'linker/**/*.js'
+    'linker/js/app/**/*.js'
   ];
 
 
