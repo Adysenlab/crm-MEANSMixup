@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('crmApp')
-  .factory('Auth', function($http, $rootScope, $cookieStore) {
+  .factory('Auth', function($http, $rootScope, $cookieStore, $log) {
     /* jshint bitwise:false */
 
     var accessLevels = routingConfig.accessLevels;
@@ -42,11 +42,17 @@ angular.module('crmApp')
         }).error(error);
       },
       logout: function(success, error) {
-        $http.post('/logout').success(function() {
-          $rootScope.user.username = '';
-          $rootScope.user.role = userRoles.public;
-          success();
-        }).error(error);
+        console.log('logging out');
+        $http.get('/logout')
+          .success(function() {
+            $rootScope.user.username = '';
+            $rootScope.user.role = userRoles.public;
+            success();
+          })
+          .error(function() {
+            console.error('error in logout');
+            error();
+          });
       },
       accessLevels: accessLevels,
       userRoles: userRoles

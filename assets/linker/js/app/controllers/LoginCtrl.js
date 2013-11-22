@@ -1,65 +1,38 @@
 'use strict';
 
 angular.module('crmApp')
-  .controller('LoginCtrl', ['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
+  .controller('LoginCtrl', ['$rootScope', '$scope', '$location', '$window', 'Auth', '$log', function($rootScope, $scope, $location, $window, Auth, $log) {
 
-    console.log(' LoginCtrl '); //,$routeParams.VendorNumber)
-    $scope.rememberme = false;// true;
+    // do logout if routed to /logout
+    if ($location.path() === '/logout') {
+      Auth.logout(function() {
+//        $log.debug('LoginCtrl::logout success');
+      }, function() {
+//        $log.debug('LoginCtrl::logout error');
+      });
+    }
+
+
+    console.log('LoginCtrl');
+    $scope.rememberme = false;
     $scope.username = 'MAT';
     $scope.password = '123456';
-    $scope.login = function() {
 
+    $scope.login = function() {
       Auth.login({
-          username: $scope.username,//.toUpperCase(),
+          username: $scope.username,
           password: $scope.password,
-          // adjusterid :$scope.adjusterid,
           rememberme: $scope.rememberme
-        },
-        function(res) {
-          //$location.path('/');
-          console.log('in logged');
+        }, function(res) {
           $location.path('/vendor');
-        },
-        function(err) {
+        }, function(err) {
           $rootScope.error = 'Failed to login!';
         });
-      //  alert(scope.username);//.uppercase());
     };
-
 //        $scope.loginOauth = function(provider) {
 //            $window.location.href = '/auth/' + provider;
 //        };
   }])
-
-
-  .controller('LogoutCtrl', ['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
-
-    Auth.logout(function() {},function() {});// fake out sucess fail
-    $scope.rememberme = false;// true;
-    $scope.username = 'MAT';//'JRT';
-    $scope.password = '123456';//brm901';//123';
-    $scope.login = function() {
-      //  alert(scope.username);//.uppercase());  //console.log('$scope.username ',$scope.usernamec;
-      Auth.login({
-          username: $scope.username.toUpperCase(),
-          password: $scope.password,
-          adjusterid: $scope.adjusterid,
-          rememberme: $scope.rememberme
-        },
-        function(res) {
-          //$location.path('/');
-          $location.path('/vendor');
-        },
-        function(err) {
-          $rootScope.error = 'Failed to login';
-        });
-    };
-
-    $scope.loginOauth = function(provider) {
-      $window.location.href = '/auth/' + provider;
-    };
-  }])
-
 
 
 
@@ -68,7 +41,7 @@ angular.module('crmApp')
 
   .controller('AppCtrl', ['$rootScope', '$scope', '$location' , 'Auth',
     function($rootScope, $scope, $location, Auth) {
-      console.log(' AppCtrl ') //,$routeParams.VendorNumber)
+      console.log('AppCtrl');
 
       $scope.getUserRoleText = function(role) {
         return _.invert(Auth.userRoles)[role];

@@ -1,4 +1,4 @@
-'use strict';
+  'use strict';
 
 angular.module('crmApp')
   .factory('UserResource', ['$resource', function($resource) {

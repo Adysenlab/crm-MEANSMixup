@@ -12,6 +12,10 @@ angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstra
     // subscribe to the user model
     socket.get('/user/subscribe');
 
+    socket.on('message', function(message) {
+      console.log("Here's the message: ", message);
+    });
+
     // forward any socket messages we might want onto the $rootScope
     socket.forward('userChange');
   })
@@ -36,9 +40,10 @@ angular.module('crmApp', ['ngResource', 'ngRoute', 'angular-table', 'ui.bootstra
       .when('/', {templateUrl: '/partials/login', controller: 'LoginCtrl', access: access.anon})
 
       .when('/home', {templateUrl: '/partials/home', controller: 'HomeCtrl', access: access.anon})
-      .when('/login', {templateUrl: '/partials/login', controller: 'LoginCtrl', access: access.anon})
 
-      .when('/logout', {templateUrl: '/partials/login', controller: 'LogoutCtrl', access: access.user})
+      .when('/login', {templateUrl: '/partials/login', controller: 'LoginCtrl', access: access.anon})
+      .when('/logout', {templateUrl: '/partials/login', controller: 'LoginCtrl', access: access.user})
+
       .when('/foodview', {templateUrl: '/partials/foodview', controller: 'FoodCtrl', access: access.anon})
 
       .when('/vendor', {templateUrl: '/partials/vendorview', controller: 'VendorCtrl', access: access.user})

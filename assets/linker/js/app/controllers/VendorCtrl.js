@@ -153,7 +153,6 @@ angular.module('crmApp')
     vendorPromise.then(function(cache) {
       console.log('VendorCtrl::inside lookup.then', cache);
       $scope.vendor = cache.data;
-      console.log('11111');
     });
 
     $scope.prevRow = '';

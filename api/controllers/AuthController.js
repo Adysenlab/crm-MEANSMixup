@@ -5,7 +5,7 @@
 var passport = require('passport');
 module.exports = {
   login: function(req, res, next) {
-    console.log('in login of AuthContoller.js ');//,req)
+    console.log('AuthController::login ');
 
     passport.authenticate('local', function(err, user) {
       console.log('passport.authenticate  user:', user, err);
@@ -28,7 +28,7 @@ module.exports = {
             online: true,
             id: user.id,
             username: user.username,
-            action: 'login'
+            action: 'onlineChanged'
           });
 
           res.json(200, { 'role': user.role, 'username': user.username });
@@ -37,61 +37,24 @@ module.exports = {
     })(req, res, next);
   },
 
-  logout: function(req,res) {
+  logout: function(req, res, next) {
+    var oldUser = _.clone(req.user);
+    console.log('AuthController::logout ', oldUser);
+
     req.logout();
 
     // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged out
-    User.publishUpdate(user.id, {
-      online: true,
-      id: user.id,
-      username: user.username,
-      action: 'logout'
+    User.publishUpdate(oldUser.id, {
+      online: false,
+      id: oldUser.id,
+      username: oldUser.username,
+      action: 'onlineChanged'
     });
     res.send('logout successful');
   }
 
 };
 
-//  login: function(req, res){
-//    console.log ('auth ')
-//    passport.authenticate('local', function(err, user, info){
-//     console.log ('AuthController login user ',user,err)
-//      if ((err) || (!user)) res.send(err);
-//      req.logIn(user, function(err){
-//        if (err) res.send(err);
-//       // return res.send({ message: 'login successful' });
-//        return res.send( user);
-//      });
-//    })(req, res);
-//  },
-
-/* from mas rc2
- login: function(req, res, next) {
- passport.authenticate('local', function(err, user) {
-
- if(err)     { return next(err); }
- if(!user)   { return res.send(400); }
-
-
- req.logIn(user, function(err) {
- if(err) {
- return next(err);
- }
-
- if(req.body.rememberme) req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
- res.json(200, { "role": user.role, "username": user.username ,"adjusterid": user.adjusterid});
- });
- })(req, res, next);
- },
-
- logout: function(req, res) {
- console.log('in logout ');
- //passport.user='';
- req.socket.session = null;// clear cookue
- req.logout();
- res.send(200);
- }
- */
 
 /**
  * Sails controllers expose some logic automatically via blueprints.
