@@ -77,9 +77,55 @@ Start the Node/Express server:
 
 View the application at http://localhost:1337
 
-### Import and Convert
+# Import and Convert
+mongoimport --db dentalsave --collection dentoff --type csv --file Mongoexp.csv --headerline
 
-# Convert Detail Table as an embeded doc
+db.dentoff.ensureIndex({Sid1:1})
+
+Fix zipcodes after every run
+db.dentoff.find().forEach( function(dentoff) { 
+   //  printjson( '..'+dentoff.ZipCode + '..' + dentoff.ZipCode.length);//+  (function (dentoff.ZipCode) {}).length );
+  dentoff.ZipCode= dentoff.ZipCode+'';
+
+     if (dentoff.ZipCode.length == 4) {
+       // printjson( dentoff.ZipCode + ' '+ dentoff.ZipCode.length   )
+      dentoff.ZipCode='0'+dentoff.ZipCode;
+    
+    //db.dentoff.save(dentoff);
+      }
+      if (dentoff.ZIPCODE.length == 3) {
+     
+      dentoff.ZipCode='00'+dentoff.ZipCode;    
+}
+      db.dentoff.save(dentoff);
+      
+});
+
+db.dentoff.find().forEach( function(dentoff) { 
+     printjson( '..'+dentoff.ZipCode + '..' + dentoff.ZipCode.length+'====='+dentoff.LNG+','+ dentoff.LAT);//+  (function (dentoff.ZipCode) {}).length );
+  dentoff.ziplocation= {'type': 'Point','coordinates':[dentoff.LNG,dentoff.LAT] };//works
+     db.dentoff.save(dentoff);
+});
+
+db.dentoff.ensureIndex( { "ziplocation" : "2dsphere" } )
+======================================================
+
+Fix zipcodes 1x
+db.zipcodes.find().forEach( function(zipcodes) { 
+ zipcodes.ZIPCODE= zipcodes.ZIPCODE+'';
+if (zipcodes.ZIPCODE.length == 4) {
+      printjson( zipcodes.ZIPCODE + ' '+ zipcodes.ZIPCODE.length   )
+      zipcodes.ZIPCODE='0'+zipcodes.ZIPCODE;    
+}
+if (zipcodes.ZIPCODE.length == 3) {
+      printjson( zipcodes.ZIPCODE + ' '+ zipcodes.ZIPCODE.length   )
+      zipcodes.ZIPCODE='00'+zipcodes.ZIPCODE;    
+}
+db.zipcodes.save(zipcodes);
+});
+
+
+## Convert Detail Table as an embeded doc
 db.po.find({PONumber : {$exists : true}}).forEach( function(obj) { db.podetail.find({PONumber: {$exists : true}}).forEach( function(objd); 
 db.po.insert(objd); ; db.po.save(obj); } );
 db.po.find({PONumber : {$exists : true}}).forEach( function(obj) { db.podetail.find({PONumber :  obj.PONumber); 
