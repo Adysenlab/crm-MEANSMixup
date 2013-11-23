@@ -22,6 +22,8 @@ Repos used in this project
 #### https://github.com/fnakstad/angular-client-side-auth
 #### https://github.com/irlnathan/activityoverlord
 
+###Mongo Talk About Angular
+http://www.abington.psu.edu/about/campus-map
 
 Additional repos and references
 ##### http://ryanlanciaux.github.io/blog/2013/06/04/learning-angularjs/
