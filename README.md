@@ -77,3 +77,12 @@ Start the Node/Express server:
 
 View the application at http://localhost:1337
 
+### Import and Convert
+
+# Convert Detail Table as an embeded doc
+db.po.find({PONumber : {$exists : true}}).forEach( function(obj) { db.podetail.find({PONumber: {$exists : true}}).forEach( function(objd); 
+db.po.insert(objd); ; db.po.save(obj); } );
+db.po.find({PONumber : {$exists : true}}).forEach( function(obj) { db.podetail.find({PONumber :  obj.PONumber); 
+db.po.insert(objd); ; db.po.save(obj); } ););
+db.po.find({PONumber : {$exists : true}}).forEach( function(obj) { db.podetail.find({PONumber :  obj.PONumber)) {$exists : true}}).forEach( function(objd) 
+db.po.insert(objd); db.po.save(obj); });
