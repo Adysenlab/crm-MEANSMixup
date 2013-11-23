@@ -83,46 +83,50 @@ mongoimport --db dentalsave --collection dentoff --type csv --file Mongoexp.csv 
 db.dentoff.ensureIndex({Sid1:1})
 
 Fix zipcodes after every run
+======================================================
+
+Fix zipcodes 1x
+
 db.dentoff.find().forEach( function(dentoff) { 
-   //  printjson( '..'+dentoff.ZipCode + '..' + dentoff.ZipCode.length);//+  (function (dentoff.ZipCode) {}).length );
+   //  printjson( '..'+dentoff.ZipCode + '..' + dentoff.ZipCode.length);
   dentoff.ZipCode= dentoff.ZipCode+'';
 
      if (dentoff.ZipCode.length == 4) {
        // printjson( dentoff.ZipCode + ' '+ dentoff.ZipCode.length   )
       dentoff.ZipCode='0'+dentoff.ZipCode;
     
-    //db.dentoff.save(dentoff);
       }
       if (dentoff.ZIPCODE.length == 3) {
-     
+ 
       dentoff.ZipCode='00'+dentoff.ZipCode;    
-}
+      }
       db.dentoff.save(dentoff);
       
 });
-
+### create geoLocation
 db.dentoff.find().forEach( function(dentoff) { 
-     printjson( '..'+dentoff.ZipCode + '..' + dentoff.ZipCode.length+'====='+dentoff.LNG+','+ dentoff.LAT);//+  (function (dentoff.ZipCode) {}).length );
-  dentoff.ziplocation= {'type': 'Point','coordinates':[dentoff.LNG,dentoff.LAT] };//works
+     printjson( '..'+dentoff.ZipCode + '..' + dentoff.ZipCode.length+'====='+dentoff.LNG+','+ dentoff.LAT);
+     
+      dentoff.ziplocation= {'type': 'Point','coordinates':[dentoff.LNG,dentoff.LAT] };
      db.dentoff.save(dentoff);
 });
 
+### create geoIndex 
 db.dentoff.ensureIndex( { "ziplocation" : "2dsphere" } )
-======================================================
 
-Fix zipcodes 1x
-db.zipcodes.find().forEach( function(zipcodes) { 
- zipcodes.ZIPCODE= zipcodes.ZIPCODE+'';
-if (zipcodes.ZIPCODE.length == 4) {
-      printjson( zipcodes.ZIPCODE + ' '+ zipcodes.ZIPCODE.length   )
-      zipcodes.ZIPCODE='0'+zipcodes.ZIPCODE;    
-}
-if (zipcodes.ZIPCODE.length == 3) {
-      printjson( zipcodes.ZIPCODE + ' '+ zipcodes.ZIPCODE.length   )
-      zipcodes.ZIPCODE='00'+zipcodes.ZIPCODE;    
-}
-db.zipcodes.save(zipcodes);
-});
+### Search geoLocation
+ (1 mile = 1609.04 meters. below gets all records for 3 miles)
+ db.runCommand( { geoNear : 'dentoff' ,
+     near : { type : "Point" ,
+                 coordinates: [     -73.98, 
+                40.726
+         ] } ,
+         spherical : true,
+         limit:1000,
+         distanceMultiplier:1/1609.04,
+         maxDistance: 1609.04*3,
+        } )
+
 
 
 ## Convert Detail Table as an embeded doc
