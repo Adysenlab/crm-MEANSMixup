@@ -5,5 +5,8 @@
     "**/.*",
     "node_modules",
     "components"
-  ]
+  ],
+  "dependencies": {
+    "ngprogress": "~1.0.4"
+  }
 }

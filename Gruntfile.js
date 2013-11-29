@@ -61,26 +61,22 @@ module.exports = function (grunt) {
     // automatic listener for incoming messages from Socket.io.
 //    'linker/js/app.js',
 
-    'linker/js/routingConfig.js',
+      'linker/js/routingConfig.js',
+      'js/bower_components/angular/angular.js',
+      'js/bower_components/angular-route/angular-route.js',
+      'js/bower_components/angular-resource/angular-resource.js',
+      'js/bower_components/angular-cookies/angular-cookies.js' ,
+      'js/bower_components/angular-xeditable/dist/js/xeditable.js',
+      'js/bower_components/ngprogress/ngProgress.js',
+      'js/lib/angular-file-upload102/angular-file-upload.js',
 
-     // *->    put other dependencies here angular-1.2.0-rc.2  <-*
-    'js/lib/angular/angular-1.2.0-rc.2/angular.js',
-    'js/lib/angular/angular-1.2.0-rc.2/angular-route.js',
-    'js/lib/angular/angular-1.2.0-rc.2/angular-resource.js',
-    'js/lib/angular/angular-1.2.0-rc.2/angular-cookies.js',
-
-    'js/lib/angular/angular-1.2.0-rc.2/angular-animate.js',
-    'js/lib/angular-xeditable/dist/js/xeditable.js',
-
-//
-//    'js/lib/angular/angular-1.0.8/angular.js',
-//    'js/lib/angular/angular-1.0.8/angular-route.js',
-//    'js/lib/angular/angular-1.0.8/angular-resource.js',
-//    'js/lib/angular/angular-1.0.8/angular-cookies.js',
 
     'js/lib/angular-bootstrap/ui-bootstrap-tpls.js',
     'js/lib/angular/angular-table.js',
-    'js/lib/angular/ng-grid-2.0.7.min.js',
+    //'js/lib/angular/ng-grid-2.0.7.min.js',
+   'js/lib/angular/ng-grid-2.0.8.js',
+
+
     'js/lib/angular/ng-grid-layout-plugin.js',
     'js/lib/underscore.js',
     'js/lib/angular/angular-ui.js',
