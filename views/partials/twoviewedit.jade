@@ -1,0 +1,184 @@
+p
+    #inside
+    #header
+     style(type="text/css")
+        a.editable-click {
+            color: red;
+            border-bottom: dotted 2px green;
+
+            font-size:26px;
+        }
+        a.editable-click:hover {
+            color: #47a447;
+            border-bottom-color: #47a447;
+            font-size:26px;
+        }
+        .well2 {
+            /*background-image: -webkit-linear-gradient(top, whiteSmoke 0%,#EEE 100%);
+            background-color: #efefef;*/
+
+            background-color: #d1ff00;
+        }
+    #main-content
+
+
+
+        h2 Tenant Work Order
+         //{{two1.id}}  , action='uploadf',enctype="multipart/form-data"
+        form.form-horizontal(editable-form ,class="form-po",novalidate, name="formUpload", method='post')
+
+            .control-group(ng-class='{error: formUpload.name.$invalid}')
+            .control-group(style='height:15px',ng-show='param==0')
+                label.control-label
+                    i.icon-circle-arrow-down
+                    | Template
+                .controls
+                    select#account(ng-show='param==0',ng-model='two1.Template',style='width:225px', ng-options='Template.name for Template in templates',ng-change='setTemplate(two1.Template)')
+
+
+            .control-group(style='height:15px')
+                label.control-label
+                    i.icon-briefcase
+                    | Company
+                .controls
+
+                    select#vendor(ng-model='currentTenant',style='width:350px', ng-options='t.CompanyName for t in tenant', ng-change='setCurrentTenant(currentTenant)',required)
+            .control-group(style='height:15px')
+                label.control-label
+                    i.icon-circle-arrow-down
+                    | Default Tenant Cat
+                .controls
+                    select#account(ng-model='currentAccount',style='width:350px', ng-options='a.Desc for a in tenantcategory', ng-change='setCurrentAccount(currentAccount)')
+
+            .control-group(style='height:15px')
+                label.control-label
+                    i.icon-circle-arrow-down
+                    | Status
+                .controls
+                    select#account(ng-model='two1.Status',ng-disabled="{{isDisabled}}",style='width:225px', ng-options='Status for Status in statuses')
+                    |
+                    button.btn.btn-success(ng-disabled="{{isDisabled}}",ng-click='statusUpdate("approved")' ) approved
+
+                    |
+                    button.btn.btn-warning(ng-disabled="{{isDisabled}}",ng-click='statusUpdate("reject")') reject
+
+            .control-group(style='height:35px')
+                label.control-label
+                    i.icon-pencil
+                    | Comments
+
+                .controls
+
+                    textarea#inputComments(name='inputComments', rows='2',style='margin-top: 25px;', ng-model='two1.Comments',style='width:450px', placeholder='Comments',required)
+            .control-group(style='height:15px')
+                well-small.pull-left(ng-model='two1.Date')
+
+
+                    label.control-label
+                        i.icon-calendar
+                        | Date
+                    .controls
+                        input(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='two1.Date', is-open='opened',  max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)',required)
+                        button.btn(ng-click='open()')
+                            i.icon-calendar
+
+
+            .control-group(style='height:15px')
+
+                label.control-label
+                    i.icon-pencil
+                    | Open TWO PDF
+                .controls
+                    a(ng-href='/uploads/{{two1.PDF}}', target='_blank') {{two1.PDF}}
+                    | &nbsp;&nbsp;report:&nbsp;&nbsp;
+                    a(ng-href='/uploads/po{{two1.PDF}}', target='_blank') po{{two1.PDF}}
+
+
+
+    .control-group
+            h4 TWO Line Items
+
+            table.table.table-bordered.table-hover.table-condensed
+                tr(style='font-weight: bold;')
+
+                    //td(style='width: 15%;') Account
+                    td(style='width: 20%;') TenCatID
+                    td(style='width: 10%;') Quantity
+                    td(style='width: 25%;') Desc
+                    td(style='width: 10%;') Price
+                    td(style='width: 10%;') taxamt
+                    td(style='width: 10%;') LineItemTot
+                    td(style='width: 10%;') Edit
+
+                tr(ng-repeat='detail in two1.details')
+
+                    //td
+                        span(e-style="width:100%",editable-select='detail.AccountID', e-name='AccountID', e-form='rowform', e-ng-options='a.AccountID as a.Desc for a in account', e-required)
+                        | {{ showAccount(detail) }}
+
+                    td
+                        span(e-style="width:100%",editable-select='detail.TenCatID', e-name='TenCatID', e-form='rowform', e-ng-options='a.TenantCategory as a.Desc for a in tenantcategory', e-required)
+                        | {{ showTenCat(detail) }}
+
+                    td
+                        span(e-style="width:80%",editable-text='detail.Quantity', e-name='Quantity', e-form='rowform')
+                        | {{ detail.Quantity || 'empty' }}
+                    td
+                        span(e-style="width:95%",editable-textarea="detail.Desc" ,ng-maxlength="10",maxlength="10",e-maxlength='10',  e-rows="3" ,e-cols="95%", e-name='Desc', e-form='rowform',  e-required)
+                        | {{ detail.Desc || 'empty' }}
+                    td
+                        span(e-style="width:80%",editable-text='detail.UnitPrice', e-name='UnitPrice', e-form='rowform',  e-required)
+                        | {{ detail.UnitPrice ||  'empty' }}
+                    td
+                        span(e-style="width:80%", ng-model='detail.LineItemTax', e-name='LineItemTax', e-form='rowform',  e-required)
+                        | {{ detail.LineItemTax || 'empty' }}
+                    td
+                        span(e-style="width:80%",ng-model='detail.LineItemTot', e-name='LineItemTot', e-form='rowform', e-required)
+                        | {{ detail.LineItemTot | currency }}
+
+
+                    td(style='white-space: nowrap;')
+                        span(ng-hide="true", editable-text='detail.MODE=rowform.$visible===true') {{detail.MODE}}
+                        form.form-buttons.form-inline(editable-form='', name='rowform', onbeforesave='saveDetail($data, $index)', ng-show='rowform.$visible', ng-init='(inserted == detail) && rowform.$show()')
+                            button.btn.btn-primary(type='submit', ng-disabled='rowform.$waiting') save
+                            button.btn.btn-warning(type='button', ng-disabled='rowform.$waiting', ng-click='rowform.$hide()') cancel
+                        .buttons(ng-show='!rowform.$visible')
+                            button.btn.btn-primary(ng-click='rowform.$show()') edit
+                            button.btn.btn-danger(confirmed-click='removeDetail($index)',ng-confirm-click="Would you like to delete {{$index}} {{detail.Desc}}" ) del
+
+
+
+            .row
+            .control-group
+                .span4
+                    button.btn.btn-default( ng-click='addDetailItem()') Add row
+
+                    button.btn.btn-warning(ng-click='cancel()') Cancel
+                    button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || formUpload.$invalid') Save
+                    //button.btn.btn-primary(ng-click='savepdf(two1)') pdfCreate
+
+                    button.btn.btn-danger(ng-click='destroy()', ng-show='project.$id') Delete
+                    //input(type='submit', name='Submit', value='Upload' ,id="fileToUpload",onchange="fileSelected()" )
+
+
+                .span4
+                    .demoDetailPaneVert2
+                        .demoDetailInnerPane2
+
+                            div
+                                .span1.title SubTotal:
+                                .span2(style="text-align:right;font-size:17.5px", ng-model='two1.SubTotal', e-name='SubTotal', e-required) {{ two1.SubTotal |currency}}
+                            div
+                                .span1.title TaxPcnt:
+                                .span2(e-style="text-align:right;;font-size:17.5px;width:100px",editable-text='two1.TaxPcnt', e-name='TaxPcnt',  e-required) {{ two1.TaxPcnt }}
+                            div
+                                .span1.title TaxAmount:
+                                .span2(style="text-align:right;font-size:17.5px;",  ng-model='two1.TaxAmount', e-name='SubTotal', e-required) {{ two1.TaxAmount|currency }}
+                            //div
+                            //    .span1.title Freight:
+                            //    .span2(e-style="text-align:right;font-size:17.5px;width:100px",editable-text='two1.Freight', e-name='Freight',onaftersave='subtot()', e-required) {{ two1.Freight |currency}}
+                            div
+                                .span1.title Total:
+                                .span2(style="text-align:right;font-size:17.5px;",  ng-model='two1.Total', e-name='Total', e-required) {{ two1.Total | currency }}
+
+

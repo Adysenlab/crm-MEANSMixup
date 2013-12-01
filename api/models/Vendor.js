@@ -10,21 +10,25 @@ module.exports = {
 
   attributes: {
 
-    'VendorID' : 'string',
-    'VendorNumber' : 'string',
-    'CompanyName' : 'string',
-    'Address' : 'string',
-    'City' : 'string',
-    'State' : 'string',
-    'ZipCode' : 'string',
-    'Country' : 'string',
-    'Type' : 'integer',
-    'CompanyAddition' : 'string',
-    'Terms' : 'integer',
-    'AccountID' : 'integer',
-    'VendorAccountId' : 'integer',
-    'contacts' : 'array'
-  }
+  	/* e.g.
+  	nickname: 'string'
+  	*/
+
+  "VendorID" : "string",
+  "VendorNumber" : "string",
+  "CompanyName" :"string",
+  "Address" : "string",
+  "City" : "string",
+  "State" : "string",
+  "ZipCode" : "string",
+  "Country" : "string",
+  "Type" : "integer",
+  "CompanyAddition" : "string",
+  "Terms" : "integer",
+  "AccountID" : "integer",
+  "VendorAccountId" :"integer",
+  "contacts" : "array"
+}
 
 //    ,
 //    find:function (req,res){

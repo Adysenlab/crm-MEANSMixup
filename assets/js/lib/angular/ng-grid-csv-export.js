@@ -62,8 +62,19 @@ ngGridCsvExportPlugin = function(opts) {
         scope.catHashKeys = function() {
             hash = '';
             for (idx in scope.renderedRows) { hash += scope.renderedRows[idx].$$hashKey;  }
+//            return hash;
+//        };
+//        scope.$watch('catHashKeys()', showDs);
+//    };
             return hash;
         };
-        scope.$watch('catHashKeys()', showDs);
+            scope.$watch('catHashKeys()', showDs);
+              if (opts.customDataWatcher) {
+                   scope.$watch(opts.customDataWatcher, showDs);
+                } else {
+                   scope.$watch(scope.catHashKeys, showDs);
+               }
     };
+
+
 };

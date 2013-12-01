@@ -29,41 +29,44 @@
 //  "VendorAccountId" : 0,
 //  "contacts" : []
 //}
-var VendorController;
+  var VendorController;
 VendorController = {
-  create: function(req, res, next) {
-    console.log('VendorController::create... ');
-    Vendor.create({
-      AccountID: 0,
-      Address: req.param('Address'),
-      City: req.param('City'),
-      CompanyAddition: '',
-      CompanyName: req.param('CompanyName'),
-      Country: req.param('Country'),
-      State: req.param('State'),
-      Terms: 0,
-      Type: 0,
-      VendorAccountId: 0,
-      VendorID: '999999',//req.param("City"),
-      VendorNumber: '999999',
-      ZipCode: req.param('ZipCode'),
-      contacts: []
+   create: function(req, res, next) {
+  console.log('VendorController::create... ');
+  Vendor.create({
+    AccountID : 0,
+    Address : req.param("Address"),
+    City : req.param("City"),
+    CompanyAddition : "",
+    CompanyName : req.param("CompanyName"),
+    Country : req.param("Country"),
+    State : req.param("State"),
+    Terms : 0,
+    Type : 0,
+    VendorAccountId : 0,
+    VendorID : '999999',//req.param("City"),
+    VendorNumber: '999999',
+    ZipCode : req.param("ZipCode"),
+    contacts : []
+  })
+    .then(function (vendor) {
+      console.log("Vendor created::", vendor);
+      return res.json({ data: vendor });
     })
-      .then(function(vendor) {
-        console.log('Vendor created::', vendor);
-        return res.json({ data: vendor });
-      })
-      .catch (function(err) {
+    .catch(function (err) {
       // console.error('er ',err)
       // return next(err);
-    });
+    })
 
-  },
+},
+  sayHello: function (req, res) {
+    res.send('hello world!');
+  }
 
-  findAllWrapped: function(req, res, next) {
+  , findAllWrapped: function(req, res, next) {
     console.log('VendorController::findAllWrapped... ');
     Vendor.find()
-      .sort('VendorNumber ASC')
+      .sort('CompanyName ASC')
       .exec(function(err, vendors) {
         if (err) return next(err);
         return res.json({ data: vendors });

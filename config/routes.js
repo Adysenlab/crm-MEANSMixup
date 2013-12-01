@@ -47,7 +47,18 @@ module.exports.routes = {
   '/partials/:file': {
     controller: 'PartialsController',
     action: 'partials'
-  }
+    },
+
+
+    '/uploadf': {
+    controller: 'AuthController',
+        action: 'upload'
+},
+    '/uploads/:file' :
+    {
+        controller: 'AuthController',
+        action: 'pdfview'
+    }
 
 // this is how to route custom ,
 //  'post /user': {

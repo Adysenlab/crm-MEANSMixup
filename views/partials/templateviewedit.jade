@@ -1,0 +1,168 @@
+p
+    #inside
+    #header
+     style(type="text/css")
+        a.editable-click ©num{
+            color: red;
+            border-bottom: dotted 2px green;
+
+            font-size:26px;
+        }
+        a.editable-click:hover {
+            color: #47a447;
+            border-bottom-color: #47a447;
+            font-size:26px;
+        }
+    #main-content
+        //.well.well-small
+            h4 Default {{numPages}}
+                pagination(total-items='totalItems', page='currentPage')
+                pagination.pagination-small(boundary-links='true', total-items='totalItems', page='currentPage', previous-text='‹', next-text='›', first-text='«', last-text='»')
+                pagination(direction-links='false', boundary-links='true', total-items='totalItems', page='currentPage')
+                pagination(direction-links='false', total-items='totalItems', page='currentPage', num-pages='smallnumPages')
+                button.btn(ng-click='setPage(3)') Set current page to: 3
+                | The selected page no: {{currentPage}}
+                hr
+                h4 Pager
+                pager(total-items='totalItems', page='currentPage')
+                hr
+                h4 Limit the maximimum visible buttons
+                pagination.pagination-small(total-items='bigTotalItems', page='bigCurrentPage', max-size='maxSize', boundary-links='true')
+                pagination.pagination-small(total-items='bigTotalItems', page='bigCurrentPage', max-size='maxSize', boundary-links='true', rotate='false', num-pages='numPages')
+                pre.
+                  \nPage: {{bigCurrentPage}} / {{numPages}}
+
+
+
+        h2 Template View {{template1.POID}}
+        form.form-horizontal(editable-form ,class="form-po",novalidate, name="formTemplate", method='post', action='uploadf',enctype="multipart/form-data")
+
+            .control-group(ng-class='{error: formTemplate.name.$invalid}')
+
+
+            .control-group(style='height:15px')
+                label.control-label
+                    i.icon-briefcase
+                    | Company
+                .controls
+
+                    select#vendor(ng-model='currentVendor',style='width:350px', ng-options='v.CompanyName for v in vendor', ng-change='setCurrentVendor(currentVendor)',required)
+            .control-group(style='height:15px')
+                label.control-label
+                    i.icon-circle-arrow-down
+                    | Default Acct
+                .controls
+                    select#account(ng-model='currentAccount',style='width:350px', ng-options='a.Desc for a in account', ng-change='setCurrentAccount(currentAccount)')
+            .control-group(style='height:15px')
+                label.control-label
+                    i.icon-bell
+                    | Template Name
+                .controls
+                    input(type='text', name='name', data-ng-model='template1.name',    required)
+
+             // .control-group(style='height:15px')
+                label.control-label
+                    i.icon-circle-arrow-down
+                    | Status
+                .controls
+                    select#account(ng-model='template1.Status',style='width:225px', ng-options='Status for Status in statuses')
+
+
+            .control-group(style='height:35px')
+                label.control-label
+                    i.icon-pencil
+                    | Comments
+
+                .controls
+
+                    textarea#inputComments(name='inputComments', rows='2',style='margin-top: 25px;', ng-model='template1.Comments',style='width:450px', placeholder='Comments',required)
+            .control-group(style='height:15px')
+                well-small.pull-left(ng-model='template1.Date')
+
+
+                    label.control-label
+                        i.icon-calendar
+                        | Date
+                    .controls
+                        input(type='text', datepicker-popup='dd-MMMM-yyyy', ng-model='template1.Date', is-open='opened',  max='\'2015-06-22\'', datepicker-options='dateOptions', date-disabled='disabled(date, mode)',required)
+                        button.btn(ng-click='open()')
+                            i.icon-calendar
+
+
+        .control-group
+                h4 Line Items
+                table.table.table-bordered.table-hover.table-condensed
+                    tr(style='font-weight: bold;')
+
+                        td(style='width: 25%;') Account
+                        td(style='width: 10%;') Quantity
+                        td(style='width: 25%;') Desc
+                        td(style='width: 10%;') Price
+                        td(style='width: 10%;') taxamt
+                        td(style='width: 10%;') LineItemTot
+                        td(style='width: 10%;') Edit
+
+                    tr(ng-repeat='detail in template1.details')
+
+                        td
+                            span(e-style="width:100%",editable-select='detail.AccountID', e-name='AccountID', e-form='rowform', e-ng-options='a.AccountID as a.Desc for a in account', e-required)
+                            | {{ showAccount(detail) }}
+
+                        td
+                            span(e-style="width:80%",editable-text='detail.Quantity', e-name='Quantity', e-form='rowform')
+                            | {{ detail.Quantity || 'empty' }}
+                        td
+                            span(e-style="width:95%",editable-textarea="detail.Desc" ,e-rows="3" ,e-cols="95%", e-name='Desc', e-form='rowform',  e-required)
+                            | {{ detail.Desc || 'empty' }}
+                        td
+                            span(e-style="width:80%",editable-text='detail.UnitPrice', e-name='UnitPrice', e-form='rowform',  e-required)
+                            | {{ detail.UnitPrice ||  'empty' }}
+                        td
+                            span(e-style="width:80%", ng-model='detail.LineItemTax', e-name='LineItemTax', e-form='rowform',  e-required)
+                            | {{ detail.LineItemTax || 'empty' }}
+                        td
+                            span(e-style="width:80%",ng-model='detail.LineItemTot', e-name='LineItemTot', e-form='rowform', e-required)
+                            | {{ detail.LineItemTot | currency }}
+
+
+                        td(style='white-space: nowrap;')
+                            span(ng-hide="true", editable-text='detail.MODE=rowform.$visible===true') {{detail.MODE}}
+                            form.form-buttons.form-inline(editable-form='rowform', name='rowform', onbeforesave='saveDetail($data, $index)', ng-show='rowform.$visible', ng-init='(inserted == detail) && rowform.$show()')
+                                button.btn.btn-primary(type='submit', ng-disabled='rowform.$waiting') save
+                                button.btn.btn-warning(type='button', ng-disabled='rowform.$waiting', ng-click='rowform.$hide()') cancel
+                            .buttons(ng-show='!rowform.$visible')
+                                button.btn.btn-primary(ng-click='rowform.$show()') edit
+                                button.btn.btn-danger(confirmed-click='removeDetail($index)',ng-confirm-click="Would you like to delete {{$index}} {{detail.Desc}}" ) del
+
+
+
+         .row
+        .control-group
+              .span4
+                    button.btn.btn-default( ng-click='addDetailItem()') Add row
+
+                    button.btn.btn-warning(ng-click='cancel()') Cancel
+                    button.btn.btn-primary(ng-click='save()', ng-disabled='isClean() || formUpload.$invalid') Save
+                    button.btn.btn-danger(ng-click='destroy()', ng-show='project.$id') Delete
+                    //input(type='submit', name='Submit', value='Upload' ,id="fileToUpload",onchange="fileSelected()" )
+
+
+              .span4
+                .demoDetailPaneVert2
+                    .demoDetailInnerPane2
+
+                                div
+                                    .span1.title SubTotal:
+                                    .span2(style="text-align:right;font-size:17.5px", ng-model='template1.SubTotal', e-name='SubTotal', e-required) {{ template1.SubTotal |currency}}
+                                div
+                                    .span1.title TaxPcnt:
+                                    .span2(e-style="text-align:right;;font-size:17.5px;width:100px",editable-text='template1.TaxPcnt', e-name='TaxPcnt',  e-required) {{ template1.TaxPcnt }}
+                                div
+                                    .span1.title TaxAmount:
+                                    .span2(style="text-align:right;font-size:17.5px;",  ng-model='template1.TaxAmount', e-name='SubTotal', e-required) {{ template1.TaxAmount|currency }}
+                                div
+                                    .span1.title Freight:
+                                    .span2(e-style="text-align:right;font-size:17.5px;width:100px",editable-text='template1.Freight', e-name='Freight',onaftersave='subtot()', e-required) {{ template1.Freight |currency}}
+                                div
+                                    .span1.title Total:
+                                    .span2(style="text-align:right;font-size:17.5px;",  ng-model='template1.POTotal', e-name='POTotal', e-required) {{ template1.POTotal | currency }}

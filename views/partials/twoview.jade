@@ -1,0 +1,31 @@
+vendorview.jade
+p
+    #inside
+    #header
+        h2 Tenant Work Orders - Edit diabled
+
+
+    #main-content
+
+
+        input.search-query(style='width:100px', type='text', ng-model='gridOptions1.filterOptions.filterText', placeholder='Filter')
+        |
+        button.btn.btn-success(ng-click='status("approved")') approved
+        |
+        button.btn.btn-warning(ng-click='status("reject")') rejected
+        |
+        button.btn.btn-info(ng-click='status("create")') created
+
+
+        a.btn.btn-sm.btn-primary(ng-click='new()') New
+        i.icon-circle-arrow-right
+        a.btn.btn-info(ng-click='saveGrid()', tooltip="Save grid setting for user") Save Grid
+
+        div(style='width: 100%; height: 700px;',class="gridStyle", ng-grid='gridOptions1')
+
+
+
+    #footer
+
+        a.copyright(target='_blank', href='http://sailsjs.com') Built with Sails.js     ,ng-disabled='currentVendor.VendorID!="null"'
+

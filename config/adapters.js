@@ -52,8 +52,9 @@ module.exports.adapters = {
     port: 27017,
 //    user     : '',
 //    password : '',
-    database: 'crm',
-    schema: true
+    database: 'parktower'
+    //schema: false
+
   }
 
 };

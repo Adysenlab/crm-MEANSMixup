@@ -54,18 +54,23 @@ module.exports = function (grunt) {
     // Bring in the socket.io client
     'linker/js/socket.io.js',
 
-    // then beef it up with some convenience logic for talking to Sails.js
+//    // then beef it up with some convenience logic for talking to Sails.js
     'linker/js/sails.io.js',
 
     // A simpler boilerplate library for getting you up and running w/ an
     // automatic listener for incoming messages from Socket.io.
-//    'linker/js/app.js',
+
 
       'linker/js/routingConfig.js',
       'js/bower_components/angular/angular.js',
       'js/bower_components/angular-route/angular-route.js',
       'js/bower_components/angular-resource/angular-resource.js',
       'js/bower_components/angular-cookies/angular-cookies.js' ,
+
+
+
+
+
       'js/bower_components/angular-xeditable/dist/js/xeditable.js',
       'js/bower_components/ngprogress/ngProgress.js',
       'js/lib/angular-file-upload102/angular-file-upload.js',
@@ -93,10 +98,10 @@ module.exports = function (grunt) {
 
     'js/lib/tweenMax.min.js',
 
-    'js/lib/angular-socket-io/socket.js',
+      'js/lib/angular-socket-io/socket.js',
 
-    // All of the rest of your app scripts imported here
-    'linker/js/app/**/*.js'
+      // All of the rest of your app scripts imported here
+      'linker/js/app/**/*.js'
   ];
 
 

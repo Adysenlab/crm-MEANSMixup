@@ -1,24 +1,20 @@
 vendorview.jade
-p
-    #inside
-    #header
-        h2 Vendors 13594
-    //| - Jade VendorView
-
-
-    #main-content
-
+    p
+        #inside
+        #header
+            h2 Vendors 13594
+        //| - Jade VendorView
+                                                #main-content
         //h2 ng-grid
         input.search-query(style='width:100px', type='text', ng-model='gridOptions1.filterOptions.filterText', placeholder='Filter')
-
         a.btn.btn-sm.btn-primary(ng-click='popVendor("new")') New
-
+        i.icon-circle-arrow-right
+        a.btn.btn-info(ng-click='saveGrid()', tooltip="Save grid setting for user") Save Grid
         div(style='width: 100%; height: 350px;',class="gridStyle", ng-grid='gridOptions1')
-    hr
-    tabset
-        tab(heading='PO', height='300px')
-
-            .span11
+        hr
+        tabset
+            tab(heading='PO', height='300px')
+                .span11
                 table.table.table-striped(data-ng-hide="loading")
                     thead
                         col(style='width: 15%;')
@@ -40,5 +36,6 @@ p
                             td {{ po.VendorInvNum }}
                             td
                                 a.btn.btn-sm.btn-warning(ng-click='editPO(po)') Edit
-    #footer
-        a.copyright(target='_blank', href='http://sailsjs.com') Built with Sails.js
+        #footer
+            a.copyright(target='_blank', href='http://sailsjs.com') Built with Sails.js
+                    
